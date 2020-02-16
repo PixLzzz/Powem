@@ -1,1 +1,13 @@
-<p>login works!</p>
+<form [formGroup]="profileForm" (ngSubmit)="onSubmit()">
+  
+    <label>
+      email
+      <input type="text" formControlName="email">
+    </label>
+  
+    <label>
+      password
+      <input type="password" formControlName="password">
+    </label>
+    <button type="submit" [disabled]="!profileForm.valid">Submit</button>
+  </form>

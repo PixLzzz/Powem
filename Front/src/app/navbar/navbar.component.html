@@ -3,7 +3,11 @@
   
     <!-- This fills the remaining space of the current row -->
     <span class="example-fill-remaining-space"></span>
-  
-    <span routerLink="">Home</span>
+
+    
+    <span *ngIf="!isConnected" routerLink="/login">Log In </span>
+    <span *ngIf="isAdmin" routerLink="/addPoem">Ajouter </span>&nbsp;
+    <span *ngIf="isConnected" (click)="logOut()">Log Out</span>
+
   </mat-toolbar>
   <router-outlet></router-outlet>

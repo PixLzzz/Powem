@@ -1,0 +1,26 @@
+<div class="container-fluid">
+    <div style="color : blue;">
+        <h1>{{title}}</h1>
+    </div>
+
+
+    <div style="width: 300px ;">
+        <form (ngSubmit)="onSubmit()">
+            <div class="form-group">
+                <label for="Poem">Poème :</label>
+                <input type="text" class="form-control" placeholder="Enter title..." id="title" required [(ngModel)]="PoemTitle" name="title">
+                <input type="text" class="form-control" placeholder="Enter content..." id="content" required [(ngModel)]="PoemContent" name="content">
+            </div>
+            <div class="btn-group">
+                <button type="submit" class="btn btn-success">Submit</button>
+            </div>
+        </form>
+    </div>
+    <br>
+    <h2>CONTENT FROM FIREBASE</h2>
+    <div class="col-md-3">
+        <pre *ngFor="let Poem of Poems | async"> {{Poem.title}} {{Poem.content}} </pre>
+    </div>
+</div>
+
+
