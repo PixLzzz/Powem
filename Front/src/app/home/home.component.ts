@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import * as firebase from 'firebase/app';
+import { AngularFireDatabase } from '@angular/fire/database';
+import { Observable } from 'rxjs';
+import * as firebase from 'firebase';
 
 @Component({
   selector: 'app-home',
@@ -8,9 +10,10 @@ import * as firebase from 'firebase/app';
 })
 export class HomeComponent implements OnInit {
 
-
-  constructor(){
-   
+  Poems : Observable<any[]>;
+  
+  constructor(public db : AngularFireDatabase){
+    this.Poems = db.list('Poems').valueChanges(); 
   }
 
   ngOnInit(): void {

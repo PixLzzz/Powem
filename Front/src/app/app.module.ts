@@ -19,6 +19,7 @@ import * as firebase from 'firebase';
 import { AddPoemComponent } from './add-poem/add-poem.component';
 import {MatButtonModule} from '@angular/material/button';
 
+
     firebase.initializeApp(environment.firebase);
 
 @NgModule({
