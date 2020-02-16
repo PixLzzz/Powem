@@ -13,10 +13,11 @@ import { AngularFireDatabaseModule } from "@angular/fire/database";
 import { environment } from '../environments/environment';
 import { AngularFireAuthModule } from "@angular/fire/auth";
 import { AuthService } from './auth.service';
-
+import {MatCardModule} from '@angular/material/card';
+import {MatInputModule} from '@angular/material/input';
 import * as firebase from 'firebase';
 import { AddPoemComponent } from './add-poem/add-poem.component';
-
+import {MatButtonModule} from '@angular/material/button';
 
     firebase.initializeApp(environment.firebase);
 
@@ -36,7 +37,11 @@ import { AddPoemComponent } from './add-poem/add-poem.component';
     FormsModule, 
     AppRoutingModule,
     MatToolbarModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    MatCardModule,
+    MatInputModule,
+    MatButtonModule
+
   ],
   providers: [AuthService],
   bootstrap: [AppComponent]

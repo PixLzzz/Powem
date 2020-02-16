@@ -1,26 +1,35 @@
+
+<mat-card>
 <div class="container-fluid">
     <div style="color : blue;">
         <h1>{{title}}</h1>
     </div>
 
 
-    <div style="width: 300px ;">
-        <form (ngSubmit)="onSubmit()">
+    <div>
+        <form (ngSubmit)="onSubmit()" class="example-form">
             <div class="form-group">
-                <label for="Poem">Poème :</label>
-                <input type="text" class="form-control" placeholder="Enter title..." id="title" required [(ngModel)]="PoemTitle" name="title">
-                <input type="text" class="form-control" placeholder="Enter content..." id="content" required [(ngModel)]="PoemContent" name="content">
+                <label for="Poem">Poème :</label><br>
+                
+                <mat-form-field class="example-full-width titleLimit">
+                    <mat-label>Title</mat-label>
+                    <input matInput placeholder="Enter title..." id="title" required [(ngModel)]="PoemTitle" name="title" >
+                  </mat-form-field>
+
+
+                <mat-form-field class="example-full-width">
+                    <mat-label>Insert Content</mat-label>
+                    <textarea matInput placeholder="Enter content.." id="content" required [(ngModel)]="PoemContent" name="content"></textarea>
+                  </mat-form-field>
             </div>
-            <div class="btn-group">
-                <button type="submit" class="btn btn-success">Submit</button>
-            </div>
+                <button type="submit" mat-raised-button color="primary">Submit</button>
         </form>
     </div>
     <br>
-    <h2>CONTENT FROM FIREBASE</h2>
+
     <div class="col-md-3">
         <pre *ngFor="let Poem of Poems | async"> {{Poem.title}} {{Poem.content}} </pre>
     </div>
 </div>
 
-
+</mat-card>
