@@ -1,0 +1,30 @@
+.containerO{
+    width: 100%;
+    
+}
+
+.leftPos {
+     width: 30%;
+     margin-left: 5%;
+    float: left;
+}
+.middlePos {
+    margin-right: 5%;
+    float: right;
+    width: 58%;
+}
+.example-fill-remaining-space {
+    /* This fills the remaining space, by using flexbox. 
+       Every toolbar row uses a flexbox row layout. */
+    flex: 1 1 auto;
+  }
+  /* Structure */
+table {
+    width: 100%;
+  }
+  
+  .mat-form-field {
+    font-size: 14px;
+    width: 100%;
+  }
+  

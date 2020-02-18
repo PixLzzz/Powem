@@ -14,6 +14,7 @@ import { Router } from '@angular/router';
 export class LoginComponent implements OnInit {
   errorMessage = "";
   successMessage = "";
+  hide = true;
   profileForm = new FormGroup({
     email: new FormControl(''),
     password: new FormControl(''),

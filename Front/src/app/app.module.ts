@@ -18,7 +18,12 @@ import {MatInputModule} from '@angular/material/input';
 import * as firebase from 'firebase';
 import { AddPoemComponent } from './add-poem/add-poem.component';
 import {MatButtonModule} from '@angular/material/button';
-
+import { MatIconModule } from '@angular/material/icon';
+import { SinglePoemComponent } from './single-poem/single-poem.component';
+import {MatSelectModule} from '@angular/material/select';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import {MatListModule} from '@angular/material/list';
+import {MatTableModule} from '@angular/material/table';
 
     firebase.initializeApp(environment.firebase);
 
@@ -28,11 +33,16 @@ import {MatButtonModule} from '@angular/material/button';
     LoginComponent,
     HomeComponent,
     NavbarComponent,
-    AddPoemComponent
+    AddPoemComponent,
+    SinglePoemComponent
   ],
   imports: [
     AngularFireModule.initializeApp(environment.firebase),
     AngularFireDatabaseModule,
+    MatSelectModule,
+    BrowserAnimationsModule,
+    MatListModule,
+    MatTableModule,
     AngularFireAuthModule,
     BrowserModule,
     FormsModule, 
@@ -41,7 +51,8 @@ import {MatButtonModule} from '@angular/material/button';
     ReactiveFormsModule,
     MatCardModule,
     MatInputModule,
-    MatButtonModule
+    MatButtonModule,
+    MatIconModule
 
   ],
   providers: [AuthService],

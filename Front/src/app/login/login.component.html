@@ -1,13 +1,39 @@
-<form [formGroup]="profileForm" (ngSubmit)="onSubmit()">
+<mat-card>
   
-    <label>
-      email
-      <input type="text" formControlName="email">
-    </label>
   
-    <label>
-      password
-      <input type="password" formControlName="password">
-    </label>
-    <button type="submit" [disabled]="!profileForm.valid">Submit</button>
-  </form>
+  
+  <div>
+    <div class="container-fluid">
+        <br>
+        <div style="color : #3F51B5;">
+            <h1>Connexion :
+            </h1>
+        </div>
+      <form [formGroup]="profileForm" (ngSubmit)="onSubmit()" class="example-form">
+          <div class="form-group">
+              
+              <mat-form-field class="example-full-width">
+                  <mat-label>Email</mat-label>
+                  <input type="text" matInput placeholder="Enter title..." formControlName="email" >
+                </mat-form-field>
+
+
+              <mat-form-field class="example-full-width">
+                  <mat-label>Password</mat-label>
+                  <input matInput [type]="hide ? 'password' : 'text'" placeholder="Enter title..." formControlName="password" >
+                  <button mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hide">
+                  <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
+                  </button>
+
+
+                </mat-form-field>
+          </div>
+          <button type="submit" mat-raised-button color="primary" [disabled]="!profileForm.valid">Se Connecter</button>
+      </form>
+  </div>
+  <br>
+
+  
+</div>
+
+</mat-card>

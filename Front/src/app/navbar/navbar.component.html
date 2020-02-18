@@ -1,13 +1,13 @@
 <mat-toolbar color="primary">
-    <span routerLink="">PoweM</span>
+  <span routerLink="">PoweM</span>
+
+  <!-- This fills the remaining space of the current row -->
+  <span class="example-fill-remaining-space"></span>
+
   
-    <!-- This fills the remaining space of the current row -->
-    <span class="example-fill-remaining-space"></span>
+  <span *ngIf="!isConnected" routerLink="/login">Log In </span>
+  <span *ngIf="isConnected" routerLink="/addPoem">Ajouter </span>&nbsp;
+  <span *ngIf="isConnected" (click)="logOut()">Log Out</span>
 
-    
-    <span *ngIf="!isConnected" routerLink="/login">Log In </span>
-    <span *ngIf="isAdmin" routerLink="/addPoem">Ajouter </span>&nbsp;
-    <span *ngIf="isConnected" (click)="logOut()">Log Out</span>
-
-  </mat-toolbar>
-  <router-outlet></router-outlet>
+</mat-toolbar>
+<router-outlet></router-outlet>

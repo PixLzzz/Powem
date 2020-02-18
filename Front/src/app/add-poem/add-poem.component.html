@@ -1,7 +1,7 @@
 
 <mat-card>
 <div class="container-fluid">
-    <div style="color : blue;">
+    <div style="color :#3F51B5;">
         <h1>{{title}}</h1>
     </div>
 
@@ -10,15 +10,23 @@
         <form (ngSubmit)="onSubmit()" class="example-form">
             <div class="form-group">
                 <label for="Poem">Poème :</label><br>
-                
+                <mat-form-field>
+                    <mat-label>Catégorie</mat-label>
+                    <mat-select required [(ngModel)]="selectedValue" name="categories">
+                      <mat-option *ngFor="let cat of categories" [value]="cat.value">
+                        {{cat.viewValue}}
+                      </mat-option>
+                    </mat-select>
+                  </mat-form-field>
+                <br>
                 <mat-form-field class="example-full-width titleLimit">
-                    <mat-label>Title</mat-label>
+                    <mat-label>Titre</mat-label>
                     <input matInput placeholder="Enter title..." id="title" required [(ngModel)]="PoemTitle" name="title" >
                   </mat-form-field>
 
 
                 <mat-form-field class="example-full-width">
-                    <mat-label>Insert Content</mat-label>
+                    <mat-label>Contenu</mat-label>
                     <textarea matInput placeholder="Enter content.." id="content" required [(ngModel)]="PoemContent" name="content"></textarea>
                   </mat-form-field>
             </div>

@@ -11,6 +11,8 @@ import * as firebase from 'firebase';
 export class HomeComponent implements OnInit {
 
   Poems : Observable<any[]>;
+  displayedColumns: string[] = ['name', 'categories'];
+  
   
   constructor(public db : AngularFireDatabase){
     this.Poems = db.list('Poems').valueChanges(); 
@@ -18,6 +20,10 @@ export class HomeComponent implements OnInit {
 
   ngOnInit(): void {
     console.log(firebase.auth().currentUser)
+  }
+  applyFilter(event: Event) {
+    const filterValue = (event.target as HTMLInputElement).value;
+   // this.Poems.filter = filterValue.trim().toLowerCase();
   }
 
 }
