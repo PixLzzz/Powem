@@ -10,16 +10,16 @@
                 <input matInput (keyup)="applyFilter($event)" placeholder="Nom à rechercher">
               </mat-form-field>
               
-              <table mat-table *ngFor="let Poem of Poems | async" class="mat-elevation-z8">
-              
+              <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
+              <!--*ngFor="let Poem of Poems | async"-->
                 <ng-container matColumnDef="name">
                   <th mat-header-cell *matHeaderCellDef> Nom </th>
-                  <td mat-cell >{{Poem.title}} </td>
+                  <td mat-cell *matCellDef="let element">{{element.title}} </td>
                 </ng-container>
               
                 <ng-container matColumnDef="categories">
                   <th mat-header-cell *matHeaderCellDef> Catégorie </th>
-                  <td mat-cell > {{Poem.categories}} </td>
+                  <td mat-cell *matCellDef="let element"> {{element.categories}} </td>
                 </ng-container>
               
                 <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>

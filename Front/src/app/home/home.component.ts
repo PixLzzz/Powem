@@ -12,10 +12,12 @@ export class HomeComponent implements OnInit {
 
   Poems : Observable<any[]>;
   displayedColumns: string[] = ['name', 'categories'];
-  
+  dataSource = this.Poems;
+
   
   constructor(public db : AngularFireDatabase){
     this.Poems = db.list('Poems').valueChanges(); 
+    this.dataSource = this.Poems;
   }
 
   ngOnInit(): void {
@@ -23,7 +25,7 @@ export class HomeComponent implements OnInit {
   }
   applyFilter(event: Event) {
     const filterValue = (event.target as HTMLInputElement).value;
-   // this.Poems.filter = filterValue.trim().toLowerCase();
+   // this.dataSource.filter = filterValue.trim().toLowerCase();
   }
 
 }
