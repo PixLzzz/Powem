@@ -24,6 +24,9 @@ import {MatSelectModule} from '@angular/material/select';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import {MatListModule} from '@angular/material/list';
 import {MatTableModule} from '@angular/material/table';
+import {MatDividerModule} from '@angular/material/divider';
+import { FirebaseService } from './firebase.service';
+
 
     firebase.initializeApp(environment.firebase);
 
@@ -52,10 +55,11 @@ import {MatTableModule} from '@angular/material/table';
     MatCardModule,
     MatInputModule,
     MatButtonModule,
-    MatIconModule
+    MatIconModule,
+    MatDividerModule
 
   ],
-  providers: [AuthService],
+  providers: [AuthService,FirebaseService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

@@ -11,9 +11,10 @@ import * as firebase from 'firebase';
 export class AddPoemComponent implements OnInit {
 
   selectedValue: string;
+  id = 0;
   title = 'Ajouter un poème :';
-  PoemTitle = "";
-  PoemContent = '';
+  PoemTitle ;
+  PoemContent ;
   Poems : Observable<any[]>;
 
   categories: Category[] = [
@@ -31,10 +32,13 @@ export class AddPoemComponent implements OnInit {
   }
 
   onSubmit(){
-    this.db.list('Poems').push({title : this.PoemTitle ,content : this.PoemContent, categories : this.selectedValue});
-    this.PoemTitle = "" ;
-    this.PoemContent = '' ; 
-
+    this.id = this.id + 1;
+      firebase.database().ref('Poems/' + this.id).set({
+        id: this.id,
+        title: this.PoemTitle,
+        content: this.PoemContent,
+        category : this.selectedValue
+      });
   }
 
 }
