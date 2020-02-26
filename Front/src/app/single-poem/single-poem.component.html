@@ -1,11 +1,12 @@
 <mat-card>
-    <mat-card-header>
-      <mat-card-title>{{poem.title}}</mat-card-title>
-    </mat-card-header>
-
-    <mat-card-content>
-    <p>
-      {{poem.content}}
-    </p>
-  </mat-card-content>
+<div>
+  <div class="content">
+    <h5>{{ poem.category }}</h5>
+    <h1>{{ poem.title }}</h1>
+    <br>
+    <pre class="contentCore">{{ poem.content }}</pre>
+    <br><br>
+    <button mat-raised-button color="primary" (click)="onBack()">Retour</button>
+  </div>
+</div>
 </mat-card>

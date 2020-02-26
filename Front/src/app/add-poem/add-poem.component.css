@@ -15,6 +15,7 @@ mat-card{
 
   .titleLimit{
       width: 30%;
+      outline:0;
   }
 
 .example-button-row button,

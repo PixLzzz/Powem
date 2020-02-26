@@ -1,7 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import { AngularFireDatabase } from '@angular/fire/database';
-import { Observable } from 'rxjs';
+import { Observable, Subscription } from 'rxjs';
 import * as firebase from 'firebase';
+import { FirebaseService } from '../firebase.service';
+import { Poem } from '../models/poem.model';
+import { FormGroup, FormBuilder, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-add-poem',
@@ -10,35 +14,51 @@ import * as firebase from 'firebase';
 })
 export class AddPoemComponent implements OnInit {
 
+  poemForm: FormGroup;
+
   selectedValue: string;
   id = 0;
   title = 'Ajouter un poème :';
   PoemTitle ;
   PoemContent ;
   Poems : Observable<any[]>;
+  poems: Poem[];
+  poemsSubscription: Subscription;
 
-  categories: Category[] = [
+  category: Category[] = [
     {value: 'Amour', viewValue: 'Amour'},
     {value: 'Haine', viewValue: 'Haine'},
     {value: 'Jalousie', viewValue: 'Jalousie'}
   ];
 
-  constructor(public db : AngularFireDatabase){
-    this.Poems = db.list('Poems').valueChanges(); 
+  constructor(private formBuilder: FormBuilder, private firebaseService: FirebaseService,
+    private router: Router){
+    
   }
 
   ngOnInit(): void {
-    console.log(firebase.auth().currentUser)
+    this.initForm();
   }
 
-  onSubmit(){
-    this.id = this.id + 1;
-      firebase.database().ref('Poems/' + this.id).set({
-        id: this.id,
-        title: this.PoemTitle,
-        content: this.PoemContent,
-        category : this.selectedValue
-      });
+  initForm() {
+    this.poemForm = this.formBuilder.group({
+      title: ['', Validators.required],
+      content: ['', Validators.required]
+      
+    });
+  }
+  
+  onSavePoem() {
+    const title = this.poemForm.get('title').value;
+    const content = this.poemForm.get('content').value;
+    const category = this.selectedValue;
+    console.log(this.selectedValue);
+    const newPoem = new Poem();
+    newPoem.title = title;
+    newPoem.category = category;
+    newPoem.content = content;
+    this.firebaseService.createNewPoem(newPoem);
+    this.router.navigate(['']);
   }
 
 }

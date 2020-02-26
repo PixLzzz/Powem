@@ -4,3 +4,13 @@ mat-card{
     margin-right: auto;
     width: 50%;
 }
+
+.content{
+    padding: 5%;
+}
+
+.contentCore{
+    font-size: 14px;
+}
+
+button:focus {outline:0;}

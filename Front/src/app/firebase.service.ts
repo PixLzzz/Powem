@@ -3,13 +3,13 @@ import { Subject } from 'rxjs';
 import { Poem } from 'src/app/models/poem.model'
 import * as firebase from 'firebase';
 import { DataSnapshot } from '@angular/fire/database/interfaces';
+import { Observable } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
 })
 export class FirebaseService {
   poems: Array<Poem> = [];
-
   poemsSubject = new Subject<Poem[]>();
 
   constructor() {
@@ -47,34 +47,6 @@ export class FirebaseService {
     );
   }
 
-  getPoemContent(id : number){
-
-
-    return new Promise(
-      (resolve, reject) => {
-        firebase.database().ref('Poems/' + id).once('value').then(
-          (data: DataSnapshot) => {
-            resolve(data.val());
-          }, (error) => {
-            reject(error);
-          }
-        );
-      }
-    );
-
-
-/*
-    var contentPoem = firebase.database().ref('Poems/' + id );
-    contentPoem.on('value', function(snapshot) {
-    var test = snapshot.val().title;
-    var tests = snapshot.val().content;
-    
-    
-    console.log(test,tests);
-    });*/
-  }
-
-
   createNewPoem(newPoem: Poem) {
     console.log(newPoem);
     this.poems.push(newPoem);
@@ -82,7 +54,7 @@ export class FirebaseService {
     this.emitPoems();
   }
 
-  removeBook(poem: Poem) {
+  removePoem(poem: Poem) {
     const poemIndexToRemove = this.poems.findIndex(
       (poemEl) => {
         if(poemEl === poem) {
@@ -94,8 +66,5 @@ export class FirebaseService {
     this.savePoems();
     this.emitPoems();
   }
-
-
-
 
 }

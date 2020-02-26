@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { AngularFireDatabase } from '@angular/fire/database';
 import * as firebase from 'firebase';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { Observable } from 'rxjs';
 import { Poem } from '../models/poem.model';
 import { FirebaseService } from '../firebase.service';
@@ -10,29 +10,23 @@ import { FirebaseService } from '../firebase.service';
   templateUrl: './single-poem.component.html',
   styleUrls: ['./single-poem.component.css']
 })
-export class SinglePoemComponent implements OnInit {
+export class SinglePoemComponent implements OnInit { 
+  poem: Poem;
 
-  Poems : Observable<any[]>;
-  getId;
-  poem :Poem;
-  title : string;
-  category : string;
-  content : string;
-  dataSource = this.Poems;
-  constructor(private route: ActivatedRoute,public db : AngularFireDatabase, private firebaseService : FirebaseService ) { 
-    this.Poems = db.list('Poems').valueChanges();
-    this.dataSource = this.Poems;
-    
+  constructor(private route: ActivatedRoute, private fireService: FirebaseService,
+              private router: Router) {}
+
+  ngOnInit() {
+    this.poem = new Poem();
+    const id = this.route.snapshot.params['id'];
+    this.fireService.getSinglePoem(+id).then(
+      (poem: Poem) => {
+        this.poem = poem;
+      }
+    );
   }
 
-  ngOnInit(): void { 
-   this.getId = this.route.snapshot.params.id;
-   this.firebaseService.getPoemContent(this.getId).then(
-    (poem: Poem) => {
-      this.poem = poem;
-    }
-  );
-
-  };
-
+  onBack() {
+    this.router.navigate(['']);
+  }
 }

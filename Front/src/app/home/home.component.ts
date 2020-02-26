@@ -14,20 +14,18 @@ export class HomeComponent implements OnInit {
   Poems : Observable<any[]>;
   displayedColumns: string[] = ['name', 'categories'];
   dataSource = this.Poems;
+  size = 0;
 
   categories: string[] = ['Amour', 'Haine', 'Jalousie'];
   
   constructor(public db : AngularFireDatabase,private router: Router){
     this.Poems = db.list('Poems').valueChanges(); 
     this.dataSource = this.Poems;
+    this.size = Object.keys(this.Poems).length;
   }
-
+  
   ngOnInit(): void {
     console.log(firebase.auth().currentUser)
-  }
-  applyFilter(event: Event) {
-    const filterValue = (event.target as HTMLInputElement).value;
-    //this.dataSource.filter = filterValue.trim().toLowerCase();
   }
 
 }

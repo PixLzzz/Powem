@@ -26,6 +26,7 @@ import {MatListModule} from '@angular/material/list';
 import {MatTableModule} from '@angular/material/table';
 import {MatDividerModule} from '@angular/material/divider';
 import { FirebaseService } from './firebase.service';
+import { PoemListComponent } from './poem-list/poem-list.component';
 
 
     firebase.initializeApp(environment.firebase);
@@ -37,7 +38,8 @@ import { FirebaseService } from './firebase.service';
     HomeComponent,
     NavbarComponent,
     AddPoemComponent,
-    SinglePoemComponent
+    SinglePoemComponent,
+    PoemListComponent
   ],
   imports: [
     AngularFireModule.initializeApp(environment.firebase),

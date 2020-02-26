@@ -19,9 +19,7 @@
     flex: 1 1 auto;
   }
   /* Structure */
-table {
-    width: 100%;
-  }
+
   
   .mat-form-field {
     font-size: 14px;
@@ -30,4 +28,5 @@ table {
   
   a{
      text-decoration: none; color: #3F51B5;
+     
   }
