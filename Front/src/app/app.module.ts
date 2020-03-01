@@ -27,6 +27,8 @@ import {MatTableModule} from '@angular/material/table';
 import {MatDividerModule} from '@angular/material/divider';
 import { FirebaseService } from './firebase.service';
 import { PoemListComponent } from './poem-list/poem-list.component';
+import {MatSlideToggleModule} from '@angular/material/slide-toggle';
+
 
 
     firebase.initializeApp(environment.firebase);
@@ -58,7 +60,8 @@ import { PoemListComponent } from './poem-list/poem-list.component';
     MatInputModule,
     MatButtonModule,
     MatIconModule,
-    MatDividerModule
+    MatDividerModule,
+    MatSlideToggleModule
 
   ],
   providers: [AuthService,FirebaseService],

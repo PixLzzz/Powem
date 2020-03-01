@@ -3,6 +3,7 @@ import { Poem } from '../models/poem.model';
 import { Subscription } from 'rxjs';
 import { FirebaseService } from '../firebase.service';
 import { Router } from '@angular/router';
+import { MatTableDataSource } from '@angular/material/table';
 
 @Component({
   selector: 'app-poem-list',
@@ -13,15 +14,16 @@ export class PoemListComponent implements OnInit {
   poems: Poem[];
   poemsSubscription: Subscription;
   displayedColumns: string[] = ['name', 'categories'];
-  
+  dataSource = new MatTableDataSource(this.poems);
   constructor(private firebaseService: FirebaseService, private router: Router) {}
 
   ngOnInit() {
     this.poemsSubscription = this.firebaseService.poemsSubject.subscribe(
       (poems: Poem[]) => {
         this.poems = poems;
+        this.dataSource = new MatTableDataSource(this.poems);
+        console.log(this.poems)
       }
-      
     );
     this.firebaseService.emitPoems();
     
@@ -45,7 +47,8 @@ export class PoemListComponent implements OnInit {
 
   applyFilter(event: Event) {
     const filterValue = (event.target as HTMLInputElement).value;
-    //this.poems.filter = filterValue.trim().toLowerCase();
+    this.dataSource.filter = filterValue.trim().toLowerCase();
+    console.log(this.dataSource)
   }
 
 }

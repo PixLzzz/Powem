@@ -1,12 +1,52 @@
 <mat-card>
 <div>
   <div class="content">
-    <h5>{{ poem.category }}</h5>
-    <h1>{{ poem.title }}</h1>
+    <div>
+      <h5>{{ poem.category }}</h5> <div class="modifyer"><mat-slide-toggle (change)="onChange()">Modifier</mat-slide-toggle></div>
+    </div>
+  
     <br>
-    <pre class="contentCore">{{ poem.content }}</pre>
-    <br><br>
-    <button mat-raised-button color="primary" (click)="onBack()">Retour</button>
+    <br>
+    <!--AFFICHAGE STANDARD-->
+    <div *ngIf="isCheck==false">
+
+      <h1>{{ poem.title }}</h1>
+      <br>
+      <pre class="contentCore">{{ poem.content }}</pre>
+      <br><br>
+      <button mat-raised-button color="primary" (click)="onBack()">Retour</button>
+    </div>
+    <!--SI MODIFICATION-->
+    <div *ngIf="isCheck==true">
+
+      <form [formGroup]="poemForm" (ngSubmit)="updatePoem()" class="example-form">
+        <mat-form-field class="example-full-width titleLimit mat-headline">
+          <mat-label>Titre</mat-label>
+          <input matInput  id="title"  formControlName="title">
+        </mat-form-field>
+        <br>
+        <br>
+        <mat-form-field class="example-full-width">
+          <mat-label>Contenu</mat-label>
+          <textarea matInput rows="20" cols="60"  id="content" formControlName="content"></textarea>
+        </mat-form-field>
+  
+        <br>
+        <button class="btn btn-success" [disabled]="poemForm.invalid"
+              type="submit">Enregistrer
+      </button>
+
+      
+      </form>
+      <br>
+
+    </div>
+    
+   
   </div>
 </div>
 </mat-card>
+<br>
+<br>
+<br>
+<br>
