@@ -26,9 +26,13 @@ export class AddPoemComponent implements OnInit {
   poemsSubscription: Subscription;
 
   category: Category[] = [
-    {value: 'Amour', viewValue: 'Amour'},
-    {value: 'Haine', viewValue: 'Haine'},
-    {value: 'Jalousie', viewValue: 'Jalousie'}
+    {value: 'Essais', viewValue: 'Essais'},
+    {value: 'Coups de cœur', viewValue: 'Coups de cœur'},
+    {value: 'En chemin', viewValue: 'En chemin'},
+    {value: 'Être', viewValue: 'Être'},
+    {value: 'Société', viewValue: 'Société'},
+    {value: 'Spiritualité', viewValue: 'Spiritualité'},
+    {value: 'Tendresse', viewValue: 'Tendresse'}
   ];
 
   constructor(private formBuilder: FormBuilder, private firebaseService: FirebaseService,

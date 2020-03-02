@@ -14,7 +14,7 @@ export class HomeComponent implements OnInit {
   displayedColumns: string[] = ['name', 'categories'];
 
 
-  categories: string[] = ['Amour', 'Haine', 'Jalousie'];
+  categories: string[] = ['Essais', 'Coups de cœur', 'En chemin' , 'Être' , 'Société' , 'Spiritualité' , 'Tendresse'];
   
   constructor(public db : AngularFireDatabase,private router: Router){
 

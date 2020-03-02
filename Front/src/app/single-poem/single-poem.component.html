@@ -14,7 +14,10 @@
       <br>
       <pre class="contentCore">{{ poem.content }}</pre>
       <br><br>
-      <button mat-raised-button color="primary" (click)="onBack()">Retour</button>
+      <button mat-raised-button color="primary" (click)="onBack()">Retour</button> 
+      <button mat-icon-button style="color: crimson;" (click)="deletePoem(poem)">
+        <mat-icon>delete</mat-icon>
+      </button>
     </div>
     <!--SI MODIFICATION-->
     <div *ngIf="isCheck==true">

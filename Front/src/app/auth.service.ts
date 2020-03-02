@@ -1,12 +1,13 @@
 import { Injectable, NgZone } from '@angular/core';
 import * as firebase from 'firebase/app';
 import { AngularFireAuth } from '@angular/fire/auth';
-import { Router } from '@angular/router';
+import { Router, CanActivate } from '@angular/router';
+import { Observable } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
 })
-export class AuthService {
+export class AuthService implements CanActivate{
   userData: any;
   constructor(public afAuth: AngularFireAuth, // Inject Firebase auth service
     public router: Router, 
@@ -32,6 +33,23 @@ export class AuthService {
         }, err => reject(err))
       })
     }
-  
+
+
+    canActivate(): Observable<boolean> | Promise<boolean> | boolean {
+      return new Promise(
+        (resolve, reject) => {
+          firebase.auth().onAuthStateChanged(
+            (user) => {
+              if(user) {
+                resolve(true);
+              } else {
+                this.router.navigate(['/login']);
+                resolve(false);
+              }
+            }
+          );
+        }
+      );
+    } 
 
 }

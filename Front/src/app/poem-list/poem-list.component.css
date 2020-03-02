@@ -8,3 +8,7 @@ table {
       color: royalblue;
     cursor: pointer;
   }
+
+  .mat-column-actions{
+      width: 3% !important;
+  }

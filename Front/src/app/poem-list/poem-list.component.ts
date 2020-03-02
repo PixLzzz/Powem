@@ -13,7 +13,7 @@ import { MatTableDataSource } from '@angular/material/table';
 export class PoemListComponent implements OnInit {
   poems: Poem[];
   poemsSubscription: Subscription;
-  displayedColumns: string[] = ['name', 'categories'];
+  displayedColumns: string[] = ['name', 'categories', 'actions'];
   dataSource = new MatTableDataSource(this.poems);
   constructor(private firebaseService: FirebaseService, private router: Router) {}
 
@@ -33,7 +33,7 @@ export class PoemListComponent implements OnInit {
     this.router.navigate(['/addPoem', 'new']);
   }
 
-  onDeletePoem(poem: Poem) {
+  onDeletePoem(poem : Poem){
     this.firebaseService.removePoem(poem);
   }
 

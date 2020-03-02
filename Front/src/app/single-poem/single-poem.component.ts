@@ -48,6 +48,10 @@ export class SinglePoemComponent implements OnInit {
     );
   }
 
+  deletePoem(poem : Poem){
+    this.fireService.removePoem(poem);
+    this.router.navigate(['']);
+  }
 
   updatePoem() {
     const title = this.poemForm.get('title').value;
