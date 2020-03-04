@@ -14,19 +14,18 @@ export class PoemListComponent implements OnInit {
   poems: Poem[];
   poemsSubscription: Subscription;
   displayedColumns: string[] = ['name', 'categories', 'actions'];
-  dataSource = new MatTableDataSource(this.poems);
-  constructor(private firebaseService: FirebaseService, private router: Router) {}
+  dataSource;
+  constructor(private firebaseService: FirebaseService, private router: Router) {
+  }
 
   ngOnInit() {
     this.poemsSubscription = this.firebaseService.poemsSubject.subscribe(
       (poems: Poem[]) => {
         this.poems = poems;
-        this.dataSource = new MatTableDataSource(this.poems);
-        console.log(this.poems)
+        
       }
     );
     this.firebaseService.emitPoems();
-    
   }
 
   onNewPoem() {
@@ -45,8 +44,9 @@ export class PoemListComponent implements OnInit {
     this.poemsSubscription.unsubscribe();
   }
 
-  applyFilter(event: Event) {
-    const filterValue = (event.target as HTMLInputElement).value;
+  applyFilter(filterValue: string) {
+    this.dataSource = new MatTableDataSource(this.poems);
+    console.log(this.poems);
     this.dataSource.filter = filterValue.trim().toLowerCase();
     console.log(this.dataSource)
   }
