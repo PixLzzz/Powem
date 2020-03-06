@@ -6,6 +6,8 @@ import { Observable } from 'rxjs';
 import { Poem } from '../models/poem.model';
 import { FirebaseService } from '../firebase.service';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
+import { DialogComponent } from '../dialog/dialog.component';
+import { MatDialog } from '@angular/material/dialog';
 @Component({
   selector: 'app-single-poem',
   templateUrl: './single-poem.component.html',
@@ -15,9 +17,11 @@ export class SinglePoemComponent implements OnInit {
   poem: Poem;
   poemForm: FormGroup;
   isCheck = false;
+  animal: string;
+  name: string;
 
   constructor(private route: ActivatedRoute, private fireService: FirebaseService,
-              private router: Router,private formBuilder: FormBuilder) {}
+              private router: Router,private formBuilder: FormBuilder,public dialog: MatDialog) {}
 
   ngOnInit() {
     this.poem = new Poem();
@@ -64,7 +68,7 @@ export class SinglePoemComponent implements OnInit {
       content: content,
       category: category
     };
-  
+
     // Write the new post's data simultaneously in the posts list and the user's post list.
     var updates = {};
     updates['/Poems/' + id] = postData;
@@ -76,4 +80,18 @@ export class SinglePoemComponent implements OnInit {
 
 
   }
+
+  openDialog(): void {
+    const dialogRef = this.dialog.open(DialogComponent, {
+      width: '250px',
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      console.log(result);
+      if(result==1){
+        this.deletePoem(this.poem);
+      }
+    });
+  }
+
 }

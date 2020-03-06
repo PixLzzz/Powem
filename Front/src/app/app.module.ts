@@ -28,6 +28,8 @@ import {MatDividerModule} from '@angular/material/divider';
 import { FirebaseService } from './firebase.service';
 import { PoemListComponent } from './poem-list/poem-list.component';
 import {MatSlideToggleModule} from '@angular/material/slide-toggle';
+import {MatDialogModule} from '@angular/material/dialog';
+import { DialogComponent } from './dialog/dialog.component';
 
 
 
@@ -41,7 +43,8 @@ import {MatSlideToggleModule} from '@angular/material/slide-toggle';
     NavbarComponent,
     AddPoemComponent,
     SinglePoemComponent,
-    PoemListComponent
+    PoemListComponent,
+    DialogComponent
   ],
   imports: [
     AngularFireModule.initializeApp(environment.firebase),
@@ -61,7 +64,8 @@ import {MatSlideToggleModule} from '@angular/material/slide-toggle';
     MatButtonModule,
     MatIconModule,
     MatDividerModule,
-    MatSlideToggleModule
+    MatSlideToggleModule,
+    MatDialogModule
 
   ],
   providers: [AuthService,FirebaseService],

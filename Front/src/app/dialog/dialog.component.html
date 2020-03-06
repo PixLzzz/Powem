@@ -1,0 +1,7 @@
+<div mat-dialog-content>
+  <p>Êtes vous sûr de bien vouloir supprimer ce poème ?</p>
+</div>
+<div mat-dialog-actions>
+  <button mat-button (click)="onNoClick()" style="outline: 0;">Annuler</button>
+  <button mat-button [mat-dialog-close]="poem" cdkFocusInitial style="outline: 0;">Supprimer</button>
+</div>
