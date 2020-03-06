@@ -4,6 +4,7 @@ import { Subscription } from 'rxjs';
 import { FirebaseService } from '../firebase.service';
 import { Router } from '@angular/router';
 import { MatTableDataSource } from '@angular/material/table';
+import { database } from 'firebase';
 
 @Component({
   selector: 'app-poem-list',
@@ -14,7 +15,7 @@ export class PoemListComponent implements OnInit {
   poems: Poem[];
   poemsSubscription: Subscription;
   displayedColumns: string[] = ['name', 'categories', 'actions'];
-  dataSource;
+  dataSource ;
   constructor(private firebaseService: FirebaseService, private router: Router) {
   }
 
@@ -22,7 +23,7 @@ export class PoemListComponent implements OnInit {
     this.poemsSubscription = this.firebaseService.poemsSubject.subscribe(
       (poems: Poem[]) => {
         this.poems = poems;
-        
+        this.dataSource = new MatTableDataSource(this.poems);
       }
     );
     this.firebaseService.emitPoems();
@@ -46,9 +47,8 @@ export class PoemListComponent implements OnInit {
 
   applyFilter(filterValue: string) {
     this.dataSource = new MatTableDataSource(this.poems);
-    console.log(this.poems);
     this.dataSource.filter = filterValue.trim().toLowerCase();
-    console.log(this.dataSource)
+
   }
 
 }
