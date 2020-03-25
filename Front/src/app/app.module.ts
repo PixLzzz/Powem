@@ -30,6 +30,7 @@ import { PoemListComponent } from './poem-list/poem-list.component';
 import {MatSlideToggleModule} from '@angular/material/slide-toggle';
 import {MatDialogModule} from '@angular/material/dialog';
 import { DialogComponent } from './dialog/dialog.component';
+import { SkillServiceService } from './skill-service.service';
 
 
 
@@ -68,7 +69,7 @@ import { DialogComponent } from './dialog/dialog.component';
     MatDialogModule
 
   ],
-  providers: [AuthService,FirebaseService],
+  providers: [AuthService,FirebaseService,SkillServiceService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
