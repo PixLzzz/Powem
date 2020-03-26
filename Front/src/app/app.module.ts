@@ -6,6 +6,10 @@ import { AppComponent } from './app.component';
 import { LoginComponent } from './login/login.component';
 import { HomeComponent } from './home/home.component';
 import { NavbarComponent } from './navbar/navbar.component';
+import { AddSkillComponent } from './add-skill/add-skill.component';
+import { SkillListComponent } from './skill-list/skill-list.component';
+
+
 import { FormsModule,ReactiveFormsModule } from '@angular/forms'
 // Firebase services + enviorment module
 import { AngularFireModule } from "@angular/fire";
@@ -45,7 +49,10 @@ import { SkillServiceService } from './skill-service.service';
     AddPoemComponent,
     SinglePoemComponent,
     PoemListComponent,
-    DialogComponent
+    DialogComponent,
+    AddSkillComponent,
+    SkillListComponent,
+    
   ],
   imports: [
     AngularFireModule.initializeApp(environment.firebase),

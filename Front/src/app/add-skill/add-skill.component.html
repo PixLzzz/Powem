@@ -1,1 +1,32 @@
-<p>add-skill works!</p>
+<mat-card>
+    <div class="container-fluid">
+        <div style="color :#3F51B5;">
+            <h1>{{title}}</h1>
+        </div>
+    
+  
+        <form [formGroup]="skillForm" (ngSubmit)="onSaveSkill()">
+  
+  
+        <mat-form-field class="example-full-width titleLimit">
+          <mat-label>Titre</mat-label>
+          <input type="text" matInput placeholder="Enter title..." id="title"  formControlName="title" >
+        </mat-form-field>
+  
+  
+        <mat-form-field class="example-full-width">
+          <mat-label>Contenu</mat-label>
+          <textarea matInput placeholder="Enter content.." id="content" formControlName="content"></textarea>
+        </mat-form-field>
+  
+  
+        <button class="btn btn-success" [disabled]="skillForm.invalid"
+                type="submit">Enregistrer
+        </button>
+  
+      </form>
+    </div>
+  
+    
+  </mat-card>
+   

@@ -7,10 +7,12 @@ import { SinglePoemComponent } from './single-poem/single-poem.component';
 import { PoemListComponent } from './poem-list/poem-list.component';
 import { AuthService } from './auth.service';
 import { AddSkillComponent } from './add-skill/add-skill.component';
+import { SkillListComponent } from './skill-list/skill-list.component';
 
 
 const routes: Routes = [
   {path : 'home' , component : HomeComponent},
+  {path : 'skillList' , component : SkillListComponent},
   {path : 'login' ,component : LoginComponent},
   { path : 'addPoem' , canActivate: [AuthService] ,component : AddPoemComponent},
   {path : 'singlePoem/:id' , canActivate: [AuthService] ,component : SinglePoemComponent},
