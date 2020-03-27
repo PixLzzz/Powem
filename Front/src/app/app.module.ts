@@ -35,6 +35,7 @@ import {MatSlideToggleModule} from '@angular/material/slide-toggle';
 import {MatDialogModule} from '@angular/material/dialog';
 import { DialogComponent } from './dialog/dialog.component';
 import { SkillServiceService } from './skill-service.service';
+import { SingleSkillComponent } from './single-skill/single-skill.component';
 
 
 
@@ -52,6 +53,7 @@ import { SkillServiceService } from './skill-service.service';
     DialogComponent,
     AddSkillComponent,
     SkillListComponent,
+    SingleSkillComponent
     
   ],
   imports: [

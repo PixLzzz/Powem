@@ -1,1 +1,59 @@
-<p>single-skill works!</p>
+<mat-card>
+    <div>
+      <div class="content">
+        <div>
+           <div class="modifyer"><mat-slide-toggle (change)="onChange()">Modifier</mat-slide-toggle></div>
+        </div>
+      
+        <br>
+        <br>
+        <!--AFFICHAGE STANDARD-->
+        <div *ngIf="isCheck==false">
+    
+          <h1>{{ skill.title }}</h1>
+          <br>
+          <pre class="contentCore">{{ skill.content }}</pre>
+          <br><br>
+          <button mat-raised-button color="primary" (click)="onBack()">Retour</button> 
+          <div class="modifyer">
+          <button mat-icon-button  style="color: crimson;" (click)="openDialog()">
+            <mat-icon>delete</mat-icon>
+          </button>
+        </div>
+        </div>
+        <!--SI MODIFICATION-->
+        <div *ngIf="isCheck==true">
+    
+          <form [formGroup]="skillForm" (ngSubmit)="updateSkill()" class="example-form">
+            <mat-form-field class="example-full-width titleLimit mat-headline">
+              <mat-label>Titre</mat-label>
+              <input matInput  id="title"  formControlName="title">
+            </mat-form-field>
+            <br>
+            <br>
+            <mat-form-field class="example-full-width">
+              <mat-label>Contenu</mat-label>
+              <textarea matInput rows="20" cols="60"  id="content" formControlName="content"></textarea>
+            </mat-form-field>
+      
+            <br>
+            <button class="btn btn-success" [disabled]="skillForm.invalid"
+                  type="submit">Enregistrer
+          </button>
+    
+          
+          </form>
+          <br>
+    
+        </div>
+        
+       
+      </div>
+    </div>
+    </mat-card>
+    <br>
+    <br>
+    <br>
+    <br>
+    
+    

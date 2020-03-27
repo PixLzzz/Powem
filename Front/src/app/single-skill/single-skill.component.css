@@ -1,0 +1,73 @@
+mat-card{
+    margin-top: 5%;
+    margin-left: auto;
+    margin-right: auto;
+    width: 50%;
+}
+
+.content{
+    padding: 5%;
+}
+
+.contentCore{
+    font-size: 14px;
+}
+
+button:focus {outline:0;}
+
+h5{
+    float: left;
+}
+
+.modifyer{
+float: right;
+}
+
+
+mat-card{
+    margin-top: 5%;
+    margin-left: auto;
+    margin-right: auto;
+    width: 50%;
+}
+
+.example-form {
+    width: 100%;
+
+    font: 400 14px/20px Roboto, "Helvetica Neue", sans-serif;
+  }
+  
+  .example-full-width {
+    width: 100%;
+    font: 400 14px/20px Roboto, "Helvetica Neue", sans-serif;
+  }
+
+  .titleLimit{
+      width: 30%;
+      outline:0;
+  }
+
+.example-button-row button,
+.example-button-row a {
+  margin-right: 8px;
+}
+button{
+  outline: 0;
+}
+
+.input-headline {
+    font-size: 28px;
+    line-height: 32px;
+    font-weight: 400;
+}
+
+.example-fill-remaining-space {
+  /* This fills the remaining space, by using flexbox. 
+     Every toolbar row uses a flexbox row layout. */
+  flex: 1 1 auto;
+}
+
+.toRight{
+  float: right!important;
+  margin-left: auto;
+}
