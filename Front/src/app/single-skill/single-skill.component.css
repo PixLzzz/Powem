@@ -1,13 +1,30 @@
 mat-card{
-    margin-top: 5%;
+
     margin-left: auto;
     margin-right: auto;
-    width: 50%;
+    
 }
 
-.content{
-    padding: 5%;
+.container0{
+  width: 100%;
 }
+.leftPos {
+  width: 68%;
+  margin-left: 5%;
+ float: left;
+ margin-top: 3%;
+}
+.rightPos {
+ margin-right: 5%;
+ float: right;
+ width: 20%;
+ margin-top: 3%;
+}
+
+.containerFiles{
+  width: 100%;
+}
+
 
 .contentCore{
     font-size: 14px;
@@ -24,12 +41,6 @@ float: right;
 }
 
 
-mat-card{
-    margin-top: 5%;
-    margin-left: auto;
-    margin-right: auto;
-    width: 50%;
-}
 
 .example-form {
     width: 100%;
@@ -42,10 +53,6 @@ mat-card{
     font: 400 14px/20px Roboto, "Helvetica Neue", sans-serif;
   }
 
-  .titleLimit{
-      width: 30%;
-      outline:0;
-  }
 
 .example-button-row button,
 .example-button-row a {
@@ -67,7 +74,11 @@ button{
   flex: 1 1 auto;
 }
 
-.toRight{
-  float: right!important;
-  margin-left: auto;
+
+
+ul,  
+li {  
+      margin: 0;  
+      padding: 0;  
+      list-style: none;  
 }

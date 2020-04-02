@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import { Injectable, OnInit } from '@angular/core';
 import { Subject } from 'rxjs';
 import { Skill } from './models/skill.model';
 import * as firebase from 'firebase';
@@ -7,9 +7,9 @@ import { DataSnapshot } from '@angular/fire/database/interfaces';
 @Injectable({
   providedIn: 'root'
 })
-export class SkillServiceService {
+export class SkillServiceService implements OnInit {
 
-
+  
 
   skills: Array<Skill> = [];
   skillsSubject = new Subject<Skill[]>();
@@ -17,6 +17,8 @@ export class SkillServiceService {
   constructor() {
     this.getSkills();
    }
+  ngOnInit() {
+  }
 
   emitSkills(){
     this.skillsSubject.next(this.skills);
@@ -68,4 +70,28 @@ export class SkillServiceService {
     this.saveSkills();
     this.emitSkills();
   }
+
+  uploadFile(file: File) {
+    return new Promise(
+      (resolve, reject) => {
+        const almostUniqueFileName = Date.now().toString();
+        const upload = firebase.storage().ref()
+          .child('test/' + almostUniqueFileName + file.name).put(file);
+        upload.on(firebase.storage.TaskEvent.STATE_CHANGED,
+          () => {
+            console.log('Chargement…');
+          },
+          (error) => {
+            console.log('Erreur de chargement ! : ' + error);
+            reject();
+          },
+          () => {
+            resolve(upload.snapshot.ref.getDownloadURL());
+          }
+        );
+      }
+    );
+}
+
+
 }

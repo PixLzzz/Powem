@@ -9,7 +9,8 @@ import { NavbarComponent } from './navbar/navbar.component';
 import { AddSkillComponent } from './add-skill/add-skill.component';
 import { SkillListComponent } from './skill-list/skill-list.component';
 
-
+import {MatProgressBarModule} from '@angular/material/progress-bar';
+import { HttpClientModule } from '@angular/common/http';
 import { FormsModule,ReactiveFormsModule } from '@angular/forms'
 // Firebase services + enviorment module
 import { AngularFireModule } from "@angular/fire";
@@ -36,6 +37,13 @@ import {MatDialogModule} from '@angular/material/dialog';
 import { DialogComponent } from './dialog/dialog.component';
 import { SkillServiceService } from './skill-service.service';
 import { SingleSkillComponent } from './single-skill/single-skill.component';
+import { UploadService } from './upload.service';
+import { UploadListComponent } from './uploads/upload-list/upload-list.component';
+import { UploadFormComponent } from './uploads/upload-form/upload-form.component';
+import { DropzoneDirective } from './dropzone.directive';
+import { AngularFirestore } from '@angular/fire/firestore';
+import { AngularFireStorage } from '@angular/fire/storage';
+
 
 
 
@@ -53,7 +61,10 @@ import { SingleSkillComponent } from './single-skill/single-skill.component';
     DialogComponent,
     AddSkillComponent,
     SkillListComponent,
-    SingleSkillComponent
+    SingleSkillComponent,
+    UploadListComponent,
+    UploadFormComponent,
+    DropzoneDirective
     
   ],
   imports: [
@@ -75,10 +86,12 @@ import { SingleSkillComponent } from './single-skill/single-skill.component';
     MatIconModule,
     MatDividerModule,
     MatSlideToggleModule,
-    MatDialogModule
+    MatDialogModule,
+    HttpClientModule,
+    MatProgressBarModule
 
   ],
-  providers: [AuthService,FirebaseService,SkillServiceService],
+  providers: [AuthService,FirebaseService,SkillServiceService,AngularFireStorage,AngularFirestore,UploadService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

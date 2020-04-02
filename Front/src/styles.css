@@ -3,3 +3,24 @@
 html, body { height: 100%; 
     background-color: #eff1f3 !important;}
 body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+.dropzone { 
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column; 
+    border: 2px dashed #f16624;
+    border-radius: 5px;
+    background: white;
+  }
+  
+  progress::-webkit-progress-value {
+    transition: width 0.1s ease;
+  }
+  .dropzone.hovering {
+    border: 2px solid #f16624;
+    color: #dadada !important;
+}
+
+.file-label {
+    font-size: 1.2em;
+}

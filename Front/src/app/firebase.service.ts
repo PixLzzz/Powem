@@ -4,6 +4,7 @@ import { Poem } from 'src/app/models/poem.model'
 import * as firebase from 'firebase';
 import { DataSnapshot } from '@angular/fire/database/interfaces';
 import { Observable } from 'rxjs';
+import {HttpClientModule, HttpClient} from '@angular/common/http'
 
 @Injectable({
   providedIn: 'root'
@@ -12,7 +13,7 @@ export class FirebaseService {
   poems: Array<Poem> = [];
   poemsSubject = new Subject<Poem[]>();
 
-  constructor() {
+  constructor(private http: HttpClient,) {
     this.getPoems();
    }
 
@@ -66,5 +67,7 @@ export class FirebaseService {
     this.savePoems();
     this.emitPoems();
   }
+
+  
 
 }

@@ -1,6 +1,7 @@
+<div class="container0">
+  <div class="leftPos">
 <mat-card>
     <div>
-      <div class="content">
         <div>
            <div class="modifyer"><mat-slide-toggle (change)="onChange()">Modifier</mat-slide-toggle></div>
         </div>
@@ -8,6 +9,7 @@
         <br>
         <br>
         <!--AFFICHAGE STANDARD-->
+        
         <div *ngIf="isCheck==false">
     
           <h1>{{ skill.title }}</h1>
@@ -47,13 +49,41 @@
     
         </div>
         
-       
-      </div>
     </div>
     </mat-card>
-    <br>
-    <br>
-    <br>
+  </div>
+ 
+<div class="rightPos">
+  <mat-card>
+    Ajouter un fichier :
     <br>
     
+    <app-upload-form></app-upload-form>
+    </mat-card>
+  <br>
+    <mat-card>
+      <div class="containerFiles">
+
+          <div class="leftPosFiles">
+            <div class="make" *ngFor="let file of filess">
+              {{file}}
+            </div>
+          </div>
+
+          <div class="rightPosFiles">
+            <div *ngFor="let f of filesOUrl">
+              <a [href]="f" target="_blank" rel="noopener"><mat-icon>cloud_download</mat-icon></a>
+            </div>
+          </div>
+
+      </div>
+           
+    </mat-card>
+</div>
+</div>
+
+    <br>
+    <br>
+    <br>
+    <br>
     

@@ -7,22 +7,53 @@ import { MatDialog } from '@angular/material/dialog';
 import * as firebase from 'firebase';
 import { DialogComponent } from '../dialog/dialog.component';
 
+import { ViewChild, ElementRef  } from '@angular/core';
+import { HttpEventType, HttpErrorResponse } from '@angular/common/http';
+import { of, Subscription } from 'rxjs';  
+import { catchError, map } from 'rxjs/operators';  
+import { UploadService } from  '../upload.service';
+import { Files } from '../models/files.model';
+import { MatTableDataSource } from '@angular/material/table';
+
+
+
 @Component({
   selector: 'app-single-skill',
   templateUrl: './single-skill.component.html',
   styleUrls: ['./single-skill.component.css']
 })
 export class SingleSkillComponent implements OnInit {
-
+  @ViewChild("fileUpload", {static: false}) fileUpload: ElementRef;files  = [];  
   skill: Skill;
   skillForm: FormGroup;
   isCheck = false;
   name: string;
+  filesOUrl : Array<String> = [];
+  filesO: Array<Files> = [];
+  filess: String []= [];
+  fileToUpload: File = null;
+  fileSubscription : Subscription;
+  fileForm: FormGroup;
+  fileIsUploading = false;
+  fileUrl: string;
+  fileUploaded = false;
+  displayedColumns: string[] = ['name', 'actions'];
+  dataFiles : Array<Files> = [];
 
   constructor(private route: ActivatedRoute, private skillService: SkillServiceService,
-              private router: Router,private formBuilder: FormBuilder,public dialog: MatDialog) {}
+              private router: Router,private formBuilder: FormBuilder,public dialog: MatDialog,private uploadService: UploadService) {}
 
   ngOnInit() {
+    this.getDocuments();
+    this.filesOUrl = this.uploadService.fileUrl;
+    this.filesO = this.uploadService.filesO;
+    this.filess = this.uploadService.filesss;
+    /*this.fileSubscription = this.uploadService.filesSub.subscribe(
+      (files: String[]) => {
+        this.filess = files;
+        console.log(files);
+      }
+    );*/
     this.skill = new Skill();
     const id = this.route.snapshot.params['id'];
     this.skillService.getSingleSkill(+id).then(
@@ -90,4 +121,28 @@ export class SingleSkillComponent implements OnInit {
       }
     });
   }
+
+  getDocuments(){
+    this.uploadService.getDocs();
+    //this.uploadService.getDocsTest();
+    
+  }
+
+  onUploadFile(file: File) {
+    this.fileIsUploading = true;
+    this.skillService.uploadFile(file).then(
+      (url: string) => {
+        this.fileUrl = url;
+        this.fileIsUploading = false;
+        this.fileUploaded = true;
+      }
+    );
+}
+
+detectFiles(event) {
+  this.onUploadFile(event.target.files[0]);
+}
+
+  
+
 }
