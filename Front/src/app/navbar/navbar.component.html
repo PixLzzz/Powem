@@ -7,8 +7,8 @@
 
   
   <span *ngIf="!isConnected" routerLink="/login">Log In </span>
-  <span *ngIf="isConnected" routerLink="/addSkill">Ajouter Skill</span>
-  <span *ngIf="isConnected" routerLink="/addPoem">Ajouter Poème </span>&nbsp;
+  <span *ngIf="isConnected" routerLink="/addPoem">Ajouter Poème </span>
+  <span *ngIf="isConnected" routerLink="/addSkill">Ajouter Skill</span>&nbsp;
   <span *ngIf="isConnected" (click)="logOut()">Log Out</span>
 
 </mat-toolbar>

@@ -27,33 +27,22 @@ export class SingleSkillComponent implements OnInit {
   skill: Skill;
   skillForm: FormGroup;
   isCheck = false;
-  name: string;
-  filesOUrl : Array<String> = [];
-  filesO: Array<Files> = [];
-  filess: String []= [];
-  fileToUpload: File = null;
+  filess: Files []= [];
   fileSubscription : Subscription;
-  fileForm: FormGroup;
-  fileIsUploading = false;
-  fileUrl: string;
-  fileUploaded = false;
-  displayedColumns: string[] = ['name', 'actions'];
-  dataFiles : Array<Files> = [];
+
 
   constructor(private route: ActivatedRoute, private skillService: SkillServiceService,
               private router: Router,private formBuilder: FormBuilder,public dialog: MatDialog,private uploadService: UploadService) {}
 
   ngOnInit() {
     this.getDocuments();
-    this.filesOUrl = this.uploadService.fileUrl;
-    this.filesO = this.uploadService.filesO;
-    this.filess = this.uploadService.filesss;
-    /*this.fileSubscription = this.uploadService.filesSub.subscribe(
-      (files: String[]) => {
+ 
+    this.fileSubscription = this.uploadService.filesSubject.subscribe(
+      (files: Files[]) => {
         this.filess = files;
         console.log(files);
       }
-    );*/
+    );
     this.skill = new Skill();
     const id = this.route.snapshot.params['id'];
     this.skillService.getSingleSkill(+id).then(
@@ -128,21 +117,6 @@ export class SingleSkillComponent implements OnInit {
     
   }
 
-  onUploadFile(file: File) {
-    this.fileIsUploading = true;
-    this.skillService.uploadFile(file).then(
-      (url: string) => {
-        this.fileUrl = url;
-        this.fileIsUploading = false;
-        this.fileUploaded = true;
-      }
-    );
-}
 
-detectFiles(event) {
-  this.onUploadFile(event.target.files[0]);
-}
-
-  
 
 }

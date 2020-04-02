@@ -63,17 +63,10 @@
   <br>
     <mat-card>
       <div class="containerFiles">
+      
+          <div *ngFor="let f of filess">
 
-          <div class="leftPosFiles">
-            <div class="make" *ngFor="let file of filess">
-              {{file}}
-            </div>
-          </div>
-
-          <div class="rightPosFiles">
-            <div *ngFor="let f of filesOUrl">
-              <a [href]="f" target="_blank" rel="noopener"><mat-icon>cloud_download</mat-icon></a>
-            </div>
+              <a [href]="f.url" target="_blank" rel="noopener">{{f.name}}   &nbsp;<mat-icon>cloud_download</mat-icon></a>
           </div>
 
       </div>
