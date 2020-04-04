@@ -17,6 +17,7 @@ export class UploadService implements OnInit{
   constructor(private db: AngularFirestore) {
     
    }
+   
   ngOnInit(){
     
 
@@ -27,57 +28,60 @@ export class UploadService implements OnInit{
   }
 
 
-  getSingleFile(id: number) {
-    return new Promise(
-      (resolve, reject) => {
-        firebase.database().ref('/Skills/' + id).once('value').then(
-          (data: DataSnapshot) => {
-            resolve(data.val());
-          }, (error) => {
-            reject(error);
-          }
-        );
-      }
-    );
-  }
-
-
-  getDocs(){
-
+  async getDocs(id : number){
+    var name = "";
     var storage = firebase.app().storage("gs://powem-98484.appspot.com");
-      const ref =  storage.ref('/test');
-      for(let x = 0; x <this.files.length; x++){
+
+    console.log(id)
+      var storageRef = storage.ref();
+        var listRef = storageRef.child('test/'+ id);
+        // Fetch the first page of 100.
+        var firstPage = await listRef.list({ maxResults: 100});
+        // Use the result.
+        console.log(firstPage.items)
+        firstPage.items.forEach(element => {
+          
+          
+        var urls =  element.getDownloadURL().then((url) => {
+          name = element.name;
+          var buff = new Files(name,url) ;
+          this.files.push(buff);
+          
+        });
+        
+        console.log(this.files)
+        });
+        
+        if (firstPage.nextPageToken) {
+          var secondPage = await listRef.list({
+            maxResults: 100,
+            pageToken: firstPage.nextPageToken,
+          });
+          // processItems(secondPage.items)
+          // processPrefixes(secondPage.prefixes)
+        }
+    
+      /*for(let x = 0; x <this.files.length; x++){
         this.files.pop();
       }
-      
       ref.listAll().then((res) => {
         res.items.forEach((item) => 
-          this.azerty(item),
-        );
-        /*res.items.forEach((item) =>{
-          item.getDownloadURL().then((url)=>{
-            this.azerto(url);
-          })
-        })*/
-
-      }).catch(function(error) {
-        // Uh-oh, an error occurred!
-        console.log(error);
-      });
+          this.getIntoFiles(item),
+        );*/
       
 
-  }
+  };
 
-  azerty(aaa){
+  getIntoFiles(file){
     var buffUrl;
-    aaa.getDownloadURL().then((url)=>{
+    file.getDownloadURL().then((url)=>{
 
      buffUrl = url;
     }).then(()=>{
-      var buff = new Files(aaa.name.slice(14) , buffUrl);
+      var buff = new Files(file.name, buffUrl);
       this.files.push(buff);
-      
       this.emitFiles();
+      console.log(file)
     })
     
     

@@ -13,9 +13,9 @@
 <h3>Uploads</h3>
 
 <div *ngFor="let file of files">
-  <app-upload-list [file]="file"></app-upload-list>
+  <app-upload-list [id]="id" [file]="file"></app-upload-list>
 </div>
 
 <div *ngFor="let fileB of filesBis">
-  <app-upload-list [fileB]="fileB"></app-upload-list>
+  <app-upload-list [id]="id" [fileB]="fileB"></app-upload-list>
 </div>

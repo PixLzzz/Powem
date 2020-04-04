@@ -29,14 +29,16 @@ export class SingleSkillComponent implements OnInit {
   isCheck = false;
   filess: Files []= [];
   fileSubscription : Subscription;
-
+  id : number;
 
   constructor(private route: ActivatedRoute, private skillService: SkillServiceService,
               private router: Router,private formBuilder: FormBuilder,public dialog: MatDialog,private uploadService: UploadService) {}
 
   ngOnInit() {
-    this.getDocuments();
- 
+    var x = this.route.snapshot.paramMap.get("id");
+    this.getDocuments(x);
+    this.id = +x;
+    this.filess = this.uploadService.files;
     this.fileSubscription = this.uploadService.filesSubject.subscribe(
       (files: Files[]) => {
         this.filess = files;
@@ -111,9 +113,10 @@ export class SingleSkillComponent implements OnInit {
     });
   }
 
-  getDocuments(){
-    this.uploadService.getDocs();
-    //this.uploadService.getDocsTest();
+  getDocuments(id){
+    this.uploadService.getDocs(id);
+    console.log(id)
+
     
   }
 

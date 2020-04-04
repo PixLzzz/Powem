@@ -43,6 +43,7 @@ import { UploadFormComponent } from './uploads/upload-form/upload-form.component
 import { DropzoneDirective } from './dropzone.directive';
 import { AngularFirestore } from '@angular/fire/firestore';
 import { AngularFireStorage } from '@angular/fire/storage';
+import { PoemComponent } from './poem/poem.component';
 
 
 
@@ -64,7 +65,8 @@ import { AngularFireStorage } from '@angular/fire/storage';
     SingleSkillComponent,
     UploadListComponent,
     UploadFormComponent,
-    DropzoneDirective
+    DropzoneDirective,
+    PoemComponent
     
   ],
   imports: [

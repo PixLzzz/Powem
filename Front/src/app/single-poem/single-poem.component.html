@@ -2,7 +2,7 @@
 <div>
   <div class="content">
     <div>
-      <h5>{{ poem.category }}</h5> <div class="modifyer"><mat-slide-toggle (change)="onChange()">Modifier</mat-slide-toggle></div>
+      <h5>{{ poem.category }}</h5> <div class="modifyer"><mat-slide-toggle [checked]="isCheck" (change)="onChange()">Modifier</mat-slide-toggle></div>
     </div>
   
     <br>

@@ -62,7 +62,7 @@ export class AddPoemComponent implements OnInit {
     newPoem.category = category;
     newPoem.content = content;
     this.firebaseService.createNewPoem(newPoem);
-    this.router.navigate(['']);
+    this.router.navigate(['poem']);
   }
 
 }

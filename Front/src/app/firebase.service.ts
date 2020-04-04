@@ -34,6 +34,8 @@ export class FirebaseService {
       );
   }
 
+
+
   getSinglePoem(id: number) {
     return new Promise(
       (resolve, reject) => {
@@ -68,6 +70,20 @@ export class FirebaseService {
     this.emitPoems();
   }
 
+
+  getSingleSite() {
+    return new Promise(
+      (resolve, reject) => {
+        firebase.database().ref('/Site/').once('value').then(
+          (data: DataSnapshot) => {
+            resolve(data.val());
+          }, (error) => {
+            reject(error);
+          }
+        );
+      }
+    );
+  }
   
 
 }

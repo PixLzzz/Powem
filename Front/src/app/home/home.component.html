@@ -1,22 +1,51 @@
-<br><br>
-<div class="containerO">
-    <div class="leftPos">
-        <mat-card>
-          <p>Filtrer par catégorie :</p>
+<div class="content">
+    <mat-card>
 
-          <mat-divider></mat-divider>
+
+        <div class="contentSite">
+            <div>
+              <div class="modifyer"><mat-slide-toggle [checked]="isCheck" (change)="onChange()">Modifier</mat-slide-toggle></div>
+            </div>
           
-          <mat-selection-list #list [(ngModel)]="selectedOptions" (ngModelChange)="onNgModelChange($event)">
-            <mat-list-option *ngFor="let cat of categories" [value]="cat">
-              {{cat}}
-            </mat-list-option>
-        </mat-selection-list>
-
-        </mat-card>
-    </div>
-    <div class="middlePos">
-            <app-poem-list [selectedOption]="selectedOption"></app-poem-list>
+            <br>
+            <br>
+            <!--AFFICHAGE STANDARD-->
+            <div *ngIf="isCheck==false">
+        
+              <h1>{{site.title}}</h1>
+              <br>
+              <pre class="contentCore">{{ site.content }}</pre>
+              <br><br>
+            </div>
+            <!--SI MODIFICATION-->
+            <div *ngIf="isCheck==true">
+        
+              <form [formGroup]="siteForm" (ngSubmit)="updateSite()" class="example-form">
+                <mat-form-field class="example-full-width titleLimit mat-headline">
+                  <mat-label>Titre</mat-label>
+                  <input matInput  id="title"  formControlName="title">
+                </mat-form-field>
+                <br>
+                <br>
+                <mat-form-field class="example-full-width">
+                  <mat-label>Contenu</mat-label>
+                  <textarea matInput rows="20" cols="60"  id="content" formControlName="content"></textarea>
+                </mat-form-field>
+          
+                <br>
+                <button class="btn btn-success" [disabled]="siteForm.invalid"
+                      type="submit">Enregistrer
+              </button>
+        
+              
+              </form>
+              <br>
+        
+            </div>
             
-    </div>
+           
+          </div>
+    
+    
+    </mat-card>
 </div>
-

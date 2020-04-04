@@ -16,7 +16,7 @@ export class UploadListComponent implements OnInit {
   @Input() fileB: File;
 
   task: AngularFireUploadTask;
-
+  @Input() id : number;
   percentage: Observable<number>;
   snapshot: Observable<any>;
   downloadURL: string;
@@ -24,15 +24,16 @@ export class UploadListComponent implements OnInit {
   constructor(private storage: AngularFireStorage, private db: AngularFirestore) { }
 
   ngOnInit() {
-    this.startUpload();
+    this.startUpload(this.id);
    this.allFiles();
 
   }
 
-  startUpload() {
+  startUpload(id) {
 
     // The storage path
-    const path = `test/${Date.now()}_${this.file.name}`;
+    const fileName = `${this.file.name}`;    
+    const path = 'test/'+id+ '/' +fileName;
     console.log(path)
     // Reference to storage bucket
     const ref = this.storage.ref(path);

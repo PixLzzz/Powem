@@ -3,7 +3,7 @@
 <mat-card>
     <div>
         <div>
-           <div class="modifyer"><mat-slide-toggle (change)="onChange()">Modifier</mat-slide-toggle></div>
+           <div class="modifyer"><mat-slide-toggle [checked]="isCheck" (change)="onChange()">Modifier</mat-slide-toggle></div>
         </div>
       
         <br>
@@ -58,16 +58,24 @@
     Ajouter un fichier :
     <br>
     
-    <app-upload-form></app-upload-form>
+    <app-upload-form [id]="id"></app-upload-form>
     </mat-card>
   <br>
     <mat-card>
       <div class="containerFiles">
-      
-          <div *ngFor="let f of filess">
+      <div *ngIf="filess">
 
-              <a [href]="f.url" target="_blank" rel="noopener">{{f.name}}   &nbsp;<mat-icon>cloud_download</mat-icon></a>
-          </div>
+        <div *ngFor="let f of filess">
+
+          <a [href]="f.url" target="_blank" rel="noopener">{{f.name}}   &nbsp;<mat-icon>cloud_download</mat-icon></a>
+      </div>
+
+      </div>
+      <div *ngIf="filess.length<1">
+
+        <a>No files yet</a>
+      </div>
+         
 
       </div>
            

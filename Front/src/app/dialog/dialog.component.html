@@ -3,5 +3,5 @@
 </div>
 <div mat-dialog-actions>
   <button mat-button (click)="onNoClick()" style="outline: 0;">Annuler</button>
-  <button mat-button [mat-dialog-close]="poem" cdkFocusInitial style="outline: 0;">Supprimer</button>
+  <button mat-button (click)="onDelete()" [mat-dialog-close]="1" cdkFocusInitial style="outline: 0;">Supprimer</button>
 </div>

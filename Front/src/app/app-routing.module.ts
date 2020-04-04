@@ -9,10 +9,12 @@ import { AuthService } from './auth.service';
 import { AddSkillComponent } from './add-skill/add-skill.component';
 import { SkillListComponent } from './skill-list/skill-list.component';
 import { SingleSkillComponent } from './single-skill/single-skill.component';
+import { PoemComponent } from './poem/poem.component';
 
 
 const routes: Routes = [
   {path : 'home' , component : HomeComponent},
+  {path : 'poem' , component : PoemComponent},
   {path : 'skillList' , component : SkillListComponent},
   {path : 'login' ,component : LoginComponent},
   { path : 'addPoem' , canActivate: [AuthService] ,component : AddPoemComponent},

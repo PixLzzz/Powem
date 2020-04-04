@@ -1,0 +1,22 @@
+<br><br>
+<div class="containerO">
+    <div class="leftPos">
+        <mat-card>
+          <p>Filtrer par catégorie :</p>
+
+          <mat-divider></mat-divider>
+          
+          <mat-selection-list #list [(ngModel)]="selectedOptions" (ngModelChange)="onNgModelChange($event)">
+            <mat-list-option *ngFor="let cat of categories" [value]="cat">
+              {{cat}}
+            </mat-list-option>
+        </mat-selection-list>
+
+        </mat-card>
+    </div>
+    <div class="middlePos">
+            <app-poem-list [selectedOption]="selectedOption"></app-poem-list>
+            
+    </div>
+</div>
+

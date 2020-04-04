@@ -18,3 +18,11 @@ table {
       margin-right: 20%;
       margin-top: 5%;
   }
+
+  .singleSkill{
+      width: 30%;
+  }
+
+  .allSkills{
+      display: inline !important;
+  }

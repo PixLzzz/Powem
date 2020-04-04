@@ -38,7 +38,7 @@ export class SinglePoemComponent implements OnInit {
   }
 
   onBack() {
-    this.router.navigate(['']);
+    this.router.navigate(['poem']);
   }
   onChange(){
     this.isCheck = !(this.isCheck);
@@ -54,7 +54,7 @@ export class SinglePoemComponent implements OnInit {
 
   deletePoem(poem : Poem){
     this.fireService.removePoem(poem);
-    this.router.navigate(['']);
+    this.router.navigate(['poem']);
   }
 
   updatePoem() {

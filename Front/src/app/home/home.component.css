@@ -1,32 +1,15 @@
-.containerO{
-    width: 100%;
-    
+.content {
+    width: 50%;
+    margin-top: 5%;
+    margin-left: auto;
+    margin-right: auto;
 }
 
-.leftPos {
-     width: 30%;
-     margin-left: 5%;
-    float: left;
-}
-.middlePos {
-    margin-right: 5%;
-    float: right;
-    width: 58%;
-}
-.example-fill-remaining-space {
-    /* This fills the remaining space, by using flexbox. 
-       Every toolbar row uses a flexbox row layout. */
-    flex: 1 1 auto;
-  }
-  /* Structure */
-
-  
-  .mat-form-field {
-    font-size: 14px;
+.contentSite{
     width: 100%;
-  }
-  
-  a{
-     text-decoration: none; color: #3F51B5;
-     
-  }
+}
+
+.mat-form-field{
+    display: block;
+    width: 100%!important;
+}
