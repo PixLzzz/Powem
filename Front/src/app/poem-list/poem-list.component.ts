@@ -73,8 +73,8 @@ export class PoemListComponent implements OnInit {
 
     dialogRef.afterClosed().subscribe(result => {
       console.log(result);
-      if(result){
-        this.onDeletePoem(result);
+      if(result==1){
+        this.onDeletePoem(poem);
       }
     });
   }

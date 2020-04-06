@@ -81,15 +81,17 @@ export class SinglePoemComponent implements OnInit {
 
   }
 
-  openDialog(): void {
+  openDialog(poem : Poem): void {
     const dialogRef = this.dialog.open(DialogComponent, {
       width: '250px',
+      data: poem
     });
 
     dialogRef.afterClosed().subscribe(result => {
       console.log(result);
       if(result==1){
-        this.deletePoem(this.poem);
+        this.deletePoem(poem);
+        console.log(poem)
       }
     });
   }

@@ -60,6 +60,7 @@ export class FirebaseService {
   removePoem(poem: Poem) {
     const poemIndexToRemove = this.poems.findIndex(
       (poemEl) => {
+        console.log(poemEl)
         if(poemEl === poem) {
           return true;
         }
