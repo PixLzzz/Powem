@@ -13,7 +13,6 @@ import { Files } from './models/files.model';
 export class UploadService implements OnInit{
   cpt = 0;
   files: Array<Files> = [];
-  filesSubject = new Subject<Files[]>();
   constructor(private db: AngularFirestore) {
     
    }
@@ -23,33 +22,33 @@ export class UploadService implements OnInit{
 
   }
 
-  emitFiles(){
-    this.filesSubject.next(this.files);
-  }
-
 
   async getDocs(id : number){
+
+    this.files.splice(0,this.files.length);
+    console.log(this.files)
     var name = "";
     var storage = firebase.app().storage("gs://powem-98484.appspot.com");
-
-    console.log(id)
       var storageRef = storage.ref();
         var listRef = storageRef.child('test/'+ id);
         // Fetch the first page of 100.
         var firstPage = await listRef.list({ maxResults: 100});
         // Use the result.
-        console.log(firstPage.items)
         firstPage.items.forEach(element => {
           
           
         var urls =  element.getDownloadURL().then((url) => {
           name = element.name;
+          var length = name.length;
+          if(length>35){
+            name = name.slice(0,35);
+            name = name + "...";
+          }
+          console.log(name)
           var buff = new Files(name,url) ;
           this.files.push(buff);
           
         });
-        
-        console.log(this.files)
         });
         
         if (firstPage.nextPageToken) {
@@ -68,29 +67,9 @@ export class UploadService implements OnInit{
         res.items.forEach((item) => 
           this.getIntoFiles(item),
         );*/
-      
-
+  
   };
-
-  getIntoFiles(file){
-    var buffUrl;
-    file.getDownloadURL().then((url)=>{
-
-     buffUrl = url;
-    }).then(()=>{
-      var buff = new Files(file.name, buffUrl);
-      this.files.push(buff);
-      this.emitFiles();
-      console.log(file)
-    })
-    
     
   }
 
 
-
-
-
-
-
-}

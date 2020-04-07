@@ -35,16 +35,15 @@ export class SingleSkillComponent implements OnInit {
               private router: Router,private formBuilder: FormBuilder,public dialog: MatDialog,private uploadService: UploadService) {}
 
   ngOnInit() {
-    var x = this.route.snapshot.paramMap.get("id");
-    this.getDocuments(x);
-    this.id = +x;
+    for(let i = 0 ; i< this.filess.length ; i++){
+      this.filess.splice(0,1);
+    }
+    console.log(this.filess) //vaut 0
+    
+    var tempId = this.route.snapshot.paramMap.get("id");
+    this.getDocuments(tempId);
+    this.id = +tempId;
     this.filess = this.uploadService.files;
-    this.fileSubscription = this.uploadService.filesSubject.subscribe(
-      (files: Files[]) => {
-        this.filess = files;
-        console.log(files);
-      }
-    );
     this.skill = new Skill();
     const id = this.route.snapshot.params['id'];
     this.skillService.getSingleSkill(+id).then(
@@ -115,9 +114,6 @@ export class SingleSkillComponent implements OnInit {
 
   getDocuments(id){
     this.uploadService.getDocs(id);
-    console.log(id)
-
-    
   }
 
 
