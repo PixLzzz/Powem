@@ -20,9 +20,23 @@ table {
   }
 
   .singleSkill{
-      width: 30%;
+      
+    
   }
 
   .allSkills{
-      display: inline !important;
+      
+  }
+
+ 
+  .container { 
+    grid-gap: 10px 10px; 
+  }
+
+  .singleSkill{
+    background-color: rgb(231, 231, 230);
+    padding: 10%;
+  }
+  mat-grid-tile{
+      
   }

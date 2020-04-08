@@ -5,7 +5,6 @@ import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { MatDialog } from '@angular/material/dialog';
 import * as firebase from 'firebase';
-import { DialogComponent } from '../dialog/dialog.component';
 
 import { ViewChild, ElementRef  } from '@angular/core';
 import { HttpEventType, HttpErrorResponse } from '@angular/common/http';
@@ -14,6 +13,8 @@ import { catchError, map } from 'rxjs/operators';
 import { UploadService } from  '../upload.service';
 import { Files } from '../models/files.model';
 import { MatTableDataSource } from '@angular/material/table';
+import { DialogSkillComponent } from '../dialog-skill/dialog-skill.component';
+import { DialogFileComponent } from '../dialog-file/dialog-file.component';
 
 
 
@@ -38,8 +39,6 @@ export class SingleSkillComponent implements OnInit {
     for(let i = 0 ; i< this.filess.length ; i++){
       this.filess.splice(0,1);
     }
-    console.log(this.filess) //vaut 0
-    
     var tempId = this.route.snapshot.paramMap.get("id");
     this.getDocuments(tempId);
     this.id = +tempId;
@@ -55,6 +54,7 @@ export class SingleSkillComponent implements OnInit {
         }); 
       }
     );
+
   }
 
   onBack() {
@@ -73,8 +73,14 @@ export class SingleSkillComponent implements OnInit {
   }
 
   deleteSkill(skill : Skill){
-    this.skillService.removeSkill(skill);
-    this.router.navigate(['']);
+    this.skillService.removeSkill(skill,this.id);
+    this.router.navigate(['skillList']);
+  }
+  deleteFile(name : string){
+    this.uploadService.removeFile(name,this.id);
+    this.getDocuments(this.id);
+    this.filess = this.uploadService.files;
+
   }
 
   updateSkill() {
@@ -100,7 +106,7 @@ export class SingleSkillComponent implements OnInit {
   }
 
   openDialog(): void {
-    const dialogRef = this.dialog.open(DialogComponent, {
+    const dialogRef = this.dialog.open(DialogSkillComponent, {
       width: '250px',
     });
 
@@ -108,6 +114,19 @@ export class SingleSkillComponent implements OnInit {
       console.log(result);
       if(result==1){
         this.deleteSkill(this.skill);
+      }
+    });
+  }
+
+  openDialogFile(name): void {
+    const dialogRef = this.dialog.open(DialogFileComponent, {
+      width: '250px',
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      console.log(result);
+      if(result==1){
+        this.deleteFile(name);
       }
     });
   }

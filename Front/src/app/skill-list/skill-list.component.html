@@ -1,13 +1,8 @@
-  <div class="allSkills">
+
+
+  <mat-grid-list cols="3" rowHeight="6:4">
     <div *ngFor="let skill of skills; let i = index">
-      <div class="singleSkill">
-        <mat-card>
-          <mat-card-header>
-            <mat-card-title>
-              <a (click)="onViewSkill(i)">{{skill.title}}</a>
-            </mat-card-title>
-          </mat-card-header>
-        </mat-card>
-      </div>
-    </div>
+    <mat-grid-tile (click)="onViewSkill(i)" class="singleSkill"><a>{{skill.title}}</a></mat-grid-tile>
+
   </div>
+  </mat-grid-list>

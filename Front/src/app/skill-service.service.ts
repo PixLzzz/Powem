@@ -58,7 +58,7 @@ export class SkillServiceService implements OnInit {
     this.emitSkills();
   }
 
-  removeSkill(skill: Skill) {
+  async removeSkill(skill: Skill,id) {
     const skillIndexToRemove = this.skills.findIndex(
       (skillEl) => {
         if(skillEl === skill) {
@@ -69,6 +69,22 @@ export class SkillServiceService implements OnInit {
     this.skills.splice(skillIndexToRemove, 1);
     this.saveSkills();
     this.emitSkills();
+
+    var storage = firebase.app().storage("gs://powem-98484.appspot.com");
+    var storageRef = storage.ref();
+      var listRef = storageRef.child('test/'+ id);
+
+    // Delete the file
+    var firstPage = await listRef.list({ maxResults: 100});
+    // Use the result.
+    firstPage.items.forEach(element => {
+      element.delete().then(function() {
+        console.log("gg")
+      }).catch(function(error) {
+        console.log(error)
+      });
+    });
+    
   }
 
 

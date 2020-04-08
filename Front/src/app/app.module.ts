@@ -8,7 +8,7 @@ import { HomeComponent } from './home/home.component';
 import { NavbarComponent } from './navbar/navbar.component';
 import { AddSkillComponent } from './add-skill/add-skill.component';
 import { SkillListComponent } from './skill-list/skill-list.component';
-
+import {MatGridListModule} from '@angular/material/grid-list';
 import {MatProgressBarModule} from '@angular/material/progress-bar';
 import { HttpClientModule } from '@angular/common/http';
 import { FormsModule,ReactiveFormsModule } from '@angular/forms'
@@ -44,6 +44,8 @@ import { DropzoneDirective } from './dropzone.directive';
 import { AngularFirestore } from '@angular/fire/firestore';
 import { AngularFireStorage } from '@angular/fire/storage';
 import { PoemComponent } from './poem/poem.component';
+import { DialogSkillComponent } from './dialog-skill/dialog-skill.component';
+import { DialogFileComponent } from './dialog-file/dialog-file.component';
 
 
 
@@ -66,7 +68,9 @@ import { PoemComponent } from './poem/poem.component';
     UploadListComponent,
     UploadFormComponent,
     DropzoneDirective,
-    PoemComponent
+    PoemComponent,
+    DialogSkillComponent,
+    DialogFileComponent
     
   ],
   imports: [
@@ -90,7 +94,8 @@ import { PoemComponent } from './poem/poem.component';
     MatSlideToggleModule,
     MatDialogModule,
     HttpClientModule,
-    MatProgressBarModule
+    MatProgressBarModule,
+    MatGridListModule
 
   ],
   providers: [AuthService,FirebaseService,SkillServiceService,AngularFireStorage,AngularFirestore,UploadService],

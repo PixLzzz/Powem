@@ -41,7 +41,7 @@ export class SkillListComponent implements OnInit {
   }
 
   onDeleteSkill(skill : Skill){
-    this.skillService.removeSkill(skill);
+    //this.skillService.removeSkill(skill);
   }
 
   onViewSkill(id: number) {
@@ -58,7 +58,7 @@ export class SkillListComponent implements OnInit {
 
   }
 
-  openDialog(skill : Skill): void {
+  /*openDialog(skill : Skill): void {
     const dialogRef = this.dialog.open(DialogComponent, {
       width: '250px',
       data: skill
@@ -70,7 +70,7 @@ export class SkillListComponent implements OnInit {
         this.onDeleteSkill(result);
       }
     });
-  }
+  }*/
 
 
 }

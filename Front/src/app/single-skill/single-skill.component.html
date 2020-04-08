@@ -67,7 +67,11 @@
 
         <div *ngFor="let f of filess">
 
-          <a [href]="f.url" target="_blank" rel="noopener">{{f.name}}   &nbsp;<mat-icon>cloud_download</mat-icon></a>
+          <a [href]="f.url" target="_blank" rel="noopener">{{f.name}}   <button mat-icon-button  style="color: #3F51B5;">
+            <mat-icon>get_app</mat-icon>
+          </button></a> <button mat-icon-button  style="color: crimson;" (click)="openDialogFile(f.name)">
+            <mat-icon>delete</mat-icon>
+          </button>
       </div>
 
       </div>

@@ -11,6 +11,7 @@ import { Files } from './models/files.model';
   providedIn: 'root'
 })
 export class UploadService implements OnInit{
+ 
   cpt = 0;
   files: Array<Files> = [];
   constructor(private db: AngularFirestore) {
@@ -20,6 +21,20 @@ export class UploadService implements OnInit{
   ngOnInit(){
     
 
+  }
+
+
+  async removeFile(name: string, id: number) {
+    var storage = firebase.app().storage("gs://powem-98484.appspot.com");
+    var storageRef = storage.ref();
+    var desertRef = storageRef.child('test/'+ id + '/' + name);
+
+    // Delete the file
+    desertRef.delete().then(function() {
+        console.log("gg")
+      }).catch(function(error) {
+        console.log(error)
+      });
   }
 
 
@@ -39,12 +54,6 @@ export class UploadService implements OnInit{
           
         var urls =  element.getDownloadURL().then((url) => {
           name = element.name;
-          var length = name.length;
-          if(length>35){
-            name = name.slice(0,35);
-            name = name + "...";
-          }
-          console.log(name)
           var buff = new Files(name,url) ;
           this.files.push(buff);
           
@@ -59,14 +68,6 @@ export class UploadService implements OnInit{
           // processItems(secondPage.items)
           // processPrefixes(secondPage.prefixes)
         }
-    
-      /*for(let x = 0; x <this.files.length; x++){
-        this.files.pop();
-      }
-      ref.listAll().then((res) => {
-        res.items.forEach((item) => 
-          this.getIntoFiles(item),
-        );*/
   
   };
     
