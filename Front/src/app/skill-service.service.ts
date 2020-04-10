@@ -59,6 +59,7 @@ export class SkillServiceService implements OnInit {
   }
 
   async removeSkill(skill: Skill,id) {
+    var cpt= 0;
     const skillIndexToRemove = this.skills.findIndex(
       (skillEl) => {
         if(skillEl === skill) {
@@ -84,8 +85,41 @@ export class SkillServiceService implements OnInit {
         console.log(error)
       });
     });
-    
+    //this.reOrder(id);
   }
 
+  getSingleSkillHome(){
+    return new Promise(
+      (resolve, reject) => {
+        firebase.database().ref('/SkillHome/').once('value').then(
+          (data: DataSnapshot) => {
+            resolve(data.val());
+          }, (error) => {
+            reject(error);
+          }
+        );
+      }
+    );
+  }
+
+ /* async reOrder(index){
+    var storage = firebase.app().storage("gs://powem-98484.appspot.com");
+    var storageRef = storage.ref();
+      var listRef = storageRef.child('test/');
+  
+
+    // Find all the prefixes and items.
+    listRef.listAll().then((res)=> {
+      res.prefixes.forEach((folderRef)=>{
+        if(folderRef.name >= index){
+          
+        }
+        console.log(folderRef.name); 
+      });
+    }).catch(function(error) {
+      // Uh-oh, an error occurred!
+    });
+  }
+*/
 
 }

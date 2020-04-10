@@ -86,5 +86,19 @@ export class FirebaseService {
     );
   }
   
+  getSinglePoemHome(){
+    return new Promise(
+      (resolve, reject) => {
+        firebase.database().ref('/PoemHome/').once('value').then(
+          (data: DataSnapshot) => {
+            resolve(data.val());
+          }, (error) => {
+            reject(error);
+          }
+        );
+      }
+    );
+  }
+  
 
 }

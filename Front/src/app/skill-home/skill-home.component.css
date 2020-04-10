@@ -1,0 +1,15 @@
+.content {
+    width: 50%;
+    margin-top: 5%;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.contentSite{
+    width: 100%;
+}
+
+.mat-form-field{
+    display: block;
+    width: 100%!important;
+}

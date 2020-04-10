@@ -10,9 +10,14 @@ import { AddSkillComponent } from './add-skill/add-skill.component';
 import { SkillListComponent } from './skill-list/skill-list.component';
 import { SingleSkillComponent } from './single-skill/single-skill.component';
 import { PoemComponent } from './poem/poem.component';
+import { PoemHomeComponent } from './poem-home/poem-home.component';
+import { SkillHomeComponent } from './skill-home/skill-home.component';
 
 
 const routes: Routes = [
+  {path : 'home' , component : HomeComponent},
+  {path : 'poemHome' , component : PoemHomeComponent},
+  {path : 'skillHome' , component : SkillHomeComponent},
   {path : 'home' , component : HomeComponent},
   {path : 'poem' , component : PoemComponent},
   {path : 'skillList' , component : SkillListComponent},

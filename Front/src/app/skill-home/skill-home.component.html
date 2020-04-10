@@ -1,0 +1,51 @@
+<div class="content">
+    <mat-card>
+
+
+        <div class="contentSite">
+            <div>
+              <div class="modifyer"><mat-slide-toggle [checked]="isCheck" (change)="onChange()">Modifier</mat-slide-toggle></div>
+            </div>
+          
+            <br>
+            <br>
+            <!--AFFICHAGE STANDARD-->
+            <div *ngIf="isCheck==false">
+        
+              <h1>{{skillHome.title}}</h1>
+              <br>
+              <pre class="contentCore">{{ skillHome.content }}</pre>
+              <br><br>
+            </div>
+            <!--SI MODIFICATION-->
+            <div *ngIf="isCheck==true">
+        
+              <form [formGroup]="skillHomeForm" (ngSubmit)="updateSkillHome()" class="example-form">
+                <mat-form-field class="example-full-width titleLimit mat-headline">
+                  <mat-label>Titre</mat-label>
+                  <input matInput  id="title"  formControlName="title">
+                </mat-form-field>
+                <br>
+                <br>
+                <mat-form-field class="example-full-width">
+                  <mat-label>Contenu</mat-label>
+                  <textarea matInput rows="20" cols="60"  id="content" formControlName="content"></textarea>
+                </mat-form-field>
+          
+                <br>
+                <button class="btn btn-success" [disabled]="skillHomeForm.invalid"
+                      type="submit">Enregistrer
+              </button>
+        
+              
+              </form>
+              <br>
+        
+            </div>
+            
+           
+          </div>
+    
+    
+    </mat-card>
+</div>

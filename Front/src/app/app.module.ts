@@ -46,6 +46,8 @@ import { AngularFireStorage } from '@angular/fire/storage';
 import { PoemComponent } from './poem/poem.component';
 import { DialogSkillComponent } from './dialog-skill/dialog-skill.component';
 import { DialogFileComponent } from './dialog-file/dialog-file.component';
+import { PoemHomeComponent } from './poem-home/poem-home.component';
+import { SkillHomeComponent } from './skill-home/skill-home.component';
 
 
 
@@ -70,7 +72,9 @@ import { DialogFileComponent } from './dialog-file/dialog-file.component';
     DropzoneDirective,
     PoemComponent,
     DialogSkillComponent,
-    DialogFileComponent
+    DialogFileComponent,
+    PoemHomeComponent,
+    SkillHomeComponent
     
   ],
   imports: [
