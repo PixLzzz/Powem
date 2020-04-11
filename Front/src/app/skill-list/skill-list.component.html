@@ -1,8 +1,23 @@
 
-
+<div class="mainContent">
   <mat-grid-list cols="3" rowHeight="6:4">
-    <div *ngFor="let skill of skills; let i = index">
-    <mat-grid-tile (click)="onViewSkill(i)" class="singleSkill"><a>{{skill.title}}</a></mat-grid-tile>
+    <div class="eachSkills" *ngFor="let skill of skills; let i = index">
+    <mat-grid-tile class="singleSkill">
+      <div class="contentSkill">
+        <mat-card>
+          <mat-card-header>
+            <mat-card-title>{{skill.title}}</mat-card-title>
+            <mat-card-subtitle>Description</mat-card-subtitle>
+          </mat-card-header>
+          <mat-card-content>
+            <button mat-raised-button (click)="onViewSkill(i)" color="primary">Voir plus</button>
+          </mat-card-content>
+        
+      </mat-card>
+      </div>
 
+    </mat-grid-tile>
   </div>
   </mat-grid-list>
+
+</div>

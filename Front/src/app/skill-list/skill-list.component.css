@@ -14,18 +14,7 @@ table {
   }
   
   .mat-card{
-      margin-left: 20%;
-      margin-right: 20%;
-      margin-top: 5%;
-  }
-
-  .singleSkill{
-      
-    
-  }
-
-  .allSkills{
-      
+    width: 100%;
   }
 
  
@@ -34,9 +23,27 @@ table {
   }
 
   .singleSkill{
-    background-color: rgb(231, 231, 230);
-    padding: 10%;
   }
   mat-grid-tile{
       
+  }
+
+  .eachSkills{
+    margin: 5%;
+
+  }
+
+  .contentSkill{
+    width: 80%;
+  
+  }
+
+  .mainContent{
+    margin-left: 10%;
+    margin-right: 10%;
+  }
+  button:focus {outline:0;}
+
+  button{
+    margin-left: 5%;
   }
