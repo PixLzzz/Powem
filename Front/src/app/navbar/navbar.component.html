@@ -1,17 +1,17 @@
 <mat-toolbar color="primary">
-  <span routerLink="">Home</span>
-  <span routerLink="/poemHome">Poèmes</span>
-  <span routerLink="/poem">Liste de Poèmes</span>
-  <span routerLink="/skillHome">Skills</span>
-  <span routerLink="/skillList">Liste de Skills</span>
+  <span routerLink="/home" routerLinkActive="active-link">Home</span>
+  <span routerLink="/poemHome" routerLinkActive="active-link">Poèmes</span>
+  <span routerLink="/poem" routerLinkActive="active-link">Liste de Poèmes</span>
+  <span routerLink="/skillHome" routerLinkActive="active-link">Skills</span>
+  <span routerLink="/skillList" routerLinkActive="active-link">Liste de Skills</span>
 
   <!-- This fills the remaining space of the current row -->
   <span class="example-fill-remaining-space"></span>
 
   
-  <span *ngIf="!isConnected" routerLink="/login">Log In </span>
-  <span *ngIf="isConnected" routerLink="/addPoem">Ajouter Poème </span>
-  <span *ngIf="isConnected" routerLink="/addSkill">Ajouter Skill</span>&nbsp;
+  <span *ngIf="!isConnected" routerLink="/login" routerLinkActive="active-link">Log In </span>
+  <span *ngIf="isConnected" routerLink="/addPoem" routerLinkActive="active-link">Ajouter Poème </span>
+  <span *ngIf="isConnected" routerLink="/addSkill" routerLinkActive="active-link">Ajouter Skill</span>&nbsp;
   <span *ngIf="isConnected" (click)="logOut()">Log Out</span>
 
 </mat-toolbar>

@@ -2,7 +2,7 @@
 
 html, body { height: 100%; 
     background-color: #eff1f3 !important;}
-body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+body { margin: 0; }
 .dropzone { 
     display: flex;
     align-items: center;
@@ -23,4 +23,23 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
 
 .file-label {
     font-size: 1.2em;
+}
+
+* { font-family: Bellerose; }
+
+pre{
+  font-family: Bellerose; 
+  font-size: medium;
+}
+
+.mat-cell{
+  font-size: medium;
+}
+
+.active-link{
+  color:#3F51B5 ;
+  background-color: whitesmoke;
+  border-radius: 5%;
+  padding: 0.7%;
+  box-shadow: blue;
 }
