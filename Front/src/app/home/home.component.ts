@@ -20,9 +20,10 @@ export class HomeComponent implements OnInit {
   isCheck = false;
   site: Skill;
   siteForm: FormGroup;
+  user;
   
   ngOnInit(): void {
-
+    this.user = firebase.auth().currentUser;
     this.site = new Skill();
     this.fireService.getSingleSite().then(
       (site: Skill) => {

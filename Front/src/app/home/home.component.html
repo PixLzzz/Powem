@@ -3,12 +3,14 @@
 
 
         <div class="contentSite">
-            <div>
+          
+            <div *ngIf="user">
               <div class="modifyer"><mat-slide-toggle [checked]="isCheck" (change)="onChange()">Modifier</mat-slide-toggle></div>
+              <br>
+              <br>
             </div>
           
-            <br>
-            <br>
+
             <!--AFFICHAGE STANDARD-->
             <div *ngIf="isCheck==false">
         
@@ -19,7 +21,7 @@
             </div>
             <!--SI MODIFICATION-->
             <div *ngIf="isCheck==true">
-        
+              
               <form [formGroup]="siteForm" (ngSubmit)="updateSite()" class="example-form">
                 <mat-form-field class="example-full-width titleLimit mat-headline">
                   <mat-label>Titre</mat-label>

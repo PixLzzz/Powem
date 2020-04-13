@@ -3,12 +3,13 @@
 
 
         <div class="contentSite">
-            <div>
+            <div *ngIf="user">
               <div class="modifyer"><mat-slide-toggle [checked]="isCheck" (change)="onChange()">Modifier</mat-slide-toggle></div>
+              <br>
+              <br>
             </div>
           
-            <br>
-            <br>
+
             <!--AFFICHAGE STANDARD-->
             <div *ngIf="isCheck==false">
         

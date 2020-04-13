@@ -13,3 +13,7 @@
     display: block;
     width: 100%!important;
 }
+
+.contentCore{
+    white-space: pre-wrap;
+}

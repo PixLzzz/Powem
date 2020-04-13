@@ -23,6 +23,9 @@ h5{
 float: right;
 }
 
+.contentCore{
+  white-space: pre-wrap;
+}
 
 mat-card{
 

@@ -33,6 +33,7 @@ export class NavbarComponent implements OnInit {
   logOut(){
     firebase.auth().signOut().then(function() {
       console.log("Sign-out successful.")
+      window.location.reload();
     }).catch(function(error) {
       console.log("error")
     });

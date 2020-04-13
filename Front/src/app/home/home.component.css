@@ -13,3 +13,10 @@
     display: block;
     width: 100%!important;
 }
+
+pre{
+    overflow: auto;
+}
+.contentCore{
+        white-space: pre-wrap;
+}

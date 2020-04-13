@@ -11,7 +11,7 @@ import * as firebase from 'firebase';
 })
 export class SkillHomeComponent implements OnInit {
 
-  
+  user;
   constructor(private skillService : SkillServiceService,private formBuilder: FormBuilder){
 
   }
@@ -20,7 +20,7 @@ export class SkillHomeComponent implements OnInit {
   skillHomeForm: FormGroup;
   
   ngOnInit(): void {
-
+    this.user = firebase.auth().currentUser;
     this.skillHome = new Skill();
     this.skillService.getSingleSkillHome().then(
       (skillHome: Skill) => {

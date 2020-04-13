@@ -11,7 +11,7 @@ import * as firebase from 'firebase';
 })
 export class PoemHomeComponent implements OnInit {
 
- 
+  user;
   constructor(private fireService : FirebaseService,private formBuilder: FormBuilder){
 
   }
@@ -20,7 +20,7 @@ export class PoemHomeComponent implements OnInit {
   poemHomeForm: FormGroup;
   
   ngOnInit(): void {
-
+    this.user = firebase.auth().currentUser;
     this.poemHome = new Skill();
     this.fireService.getSinglePoemHome().then(
       (site: Skill) => {
