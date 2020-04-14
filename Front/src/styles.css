@@ -25,10 +25,10 @@ body { margin: 0; }
     font-size: 1.2em;
 }
 
-* { font-family: 'Arial'; }
+* { font-family: 'Helvetica Neue'; }
 
 pre{
-  font-family: 'Arial'; 
+  font-family: 'Helvetica Neue'; 
   font-size: medium;
 }
 
@@ -42,7 +42,7 @@ pre{
 }
 
 .mat-typography h1{
-  font-family: 'Arial'; 
+  font-family: 'Helvetica Neue'; 
 }
 
 .active-link{
