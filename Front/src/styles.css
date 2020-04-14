@@ -25,10 +25,10 @@ body { margin: 0; }
     font-size: 1.2em;
 }
 
-* { font-family: 'Palatino'; }
+* { font-family: 'Arial'; }
 
 pre{
-  font-family: 'Palatino'; 
+  font-family: 'Arial'; 
   font-size: medium;
 }
 
@@ -42,7 +42,7 @@ pre{
 }
 
 .mat-typography h1{
-  font-family: 'Palatino'; 
+  font-family: 'Arial'; 
 }
 
 .active-link{
