@@ -23,6 +23,7 @@ export class HomeComponent implements OnInit {
   user;
   
   ngOnInit(): void {
+    
     this.user = firebase.auth().currentUser;
     this.site = new Skill();
     this.fireService.getSingleSite().then(

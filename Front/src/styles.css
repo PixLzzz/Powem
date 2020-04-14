@@ -36,6 +36,11 @@ pre{
   font-size: medium;
 }
 
+.mat-toolbar{
+  font-size: medium;
+
+}
+
 .active-link{
   color:#3F51B5 ;
   background-color: whitesmoke;
@@ -43,4 +48,10 @@ pre{
   padding-left: 1%;
   padding-right: 1%;
   box-shadow: blue;
+}
+
+.imgHome{
+  background-image: url("../img/sky.jpg");
+  background-position: center;
+  background-repeat: repeat!important; 
 }
