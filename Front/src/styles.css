@@ -25,10 +25,10 @@ body { margin: 0; }
     font-size: 1.2em;
 }
 
-* { font-family: 'Comic Sans Ms'; }
+* { font-family: 'Palatino'; }
 
 pre{
-  font-family: 'Comic Sans Ms'; 
+  font-family: 'Palatino'; 
   font-size: medium;
 }
 
@@ -39,6 +39,10 @@ pre{
 .mat-toolbar{
   font-size: medium;
 
+}
+
+.mat-typography h1{
+  font-family: 'Palatino'; 
 }
 
 .active-link{
