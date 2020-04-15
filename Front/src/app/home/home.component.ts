@@ -1,4 +1,4 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, ViewChild } from '@angular/core';
 import { AngularFireDatabase } from '@angular/fire/database';
 import * as firebase from 'firebase';
 import { Router } from '@angular/router';
@@ -6,6 +6,7 @@ import { Poem } from '../models/poem.model';
 import { Skill } from '../models/skill.model';
 import { FormGroup, Validators, FormBuilder } from '@angular/forms';
 import { FirebaseService } from '../firebase.service';
+import { AuthService } from '../auth.service';
 
 @Component({
   selector: 'app-home',
@@ -14,16 +15,28 @@ import { FirebaseService } from '../firebase.service';
 })
 export class HomeComponent implements OnInit {
 
-  constructor(private fireService : FirebaseService,private formBuilder: FormBuilder){
+  constructor(private fireService : FirebaseService,private formBuilder: FormBuilder, private authService : AuthService){
 
   }
   isCheck = false;
   site: Skill;
   siteForm: FormGroup;
   user;
-  
+  /*
+  ckeConfig: any;
+  mycontent: string;
+  log: string = '';
+  @ViewChild("myckeditor") ckeditor: any;
+  */
+
   ngOnInit(): void {
-    
+    /*
+    this.ckeConfig = {
+      allowedContent: false,
+      extraPlugins: 'divarea',
+      forcePasteAsPlainText: true
+    };
+    */
     this.user = firebase.auth().currentUser;
     this.site = new Skill();
     this.fireService.getSingleSite().then(
@@ -36,6 +49,16 @@ export class HomeComponent implements OnInit {
       }
     );
   }
+/*
+  onNChange($event: any): void {
+    console.log("onChange");
+    //this.log += new Date() + "<br />";
+  }
+
+  onPaste($event: any): void {
+    console.log("onPaste");
+    //this.log += new Date() + "<br />";
+  }*/
 
   onChange(){
     this.isCheck = !(this.isCheck);

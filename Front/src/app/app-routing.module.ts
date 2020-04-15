@@ -12,6 +12,8 @@ import { SingleSkillComponent } from './single-skill/single-skill.component';
 import { PoemComponent } from './poem/poem.component';
 import { PoemHomeComponent } from './poem-home/poem-home.component';
 import { SkillHomeComponent } from './skill-home/skill-home.component';
+import { ContactComponent } from './contact/contact.component';
+
 
 
 const routes: Routes = [
@@ -27,6 +29,7 @@ const routes: Routes = [
   {path : 'singleSkill/:id' , canActivate: [AuthService] ,component : SingleSkillComponent},
   {path : 'poemList' , canActivate: [AuthService] ,component : PoemListComponent},
   {path : 'addSkill', canActivate: [AuthService] , component : AddSkillComponent},
+  {path : 'contact' , component: ContactComponent},
   { path: '', redirectTo: 'home', pathMatch: 'full' },
   { path: '**', redirectTo: 'home' }
 ];

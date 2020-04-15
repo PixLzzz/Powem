@@ -1,0 +1,28 @@
+  <mat-card class="example-card">
+    <mat-card-header>
+        <div mat-card-avatar class="example-header-image"><mat-icon>contact_support</mat-icon></div>
+      <mat-card-title>Demande de contact</mat-card-title>
+      <mat-card-subtitle>Une remarque ? Une suggestion ? N'hesitez pas à m'écrire.</mat-card-subtitle>
+    </mat-card-header>
+
+    <mat-card-content>
+        <form [formGroup]="form" (ngSubmit)="onSubmit()">
+            <mat-form-field class="titleLimit">
+                <input matInput type="text" placeholder="Name" formControlName="name">
+            </mat-form-field>
+            <br>
+            <mat-form-field class="titleLimit">
+                <input matInput type="text" placeholder="Email" formControlName="email">
+            </mat-form-field><br>
+
+            <mat-form-field class="example-full-width" >
+                <mat-label>Contenu</mat-label>
+                <textarea class="textAreaSize" matInput placeholder="Message" formControlName="message"></textarea>
+              </mat-form-field>
+            <br>
+            <button  mat-raised-button color="primary" type="submit" [disabled]="form.invalid">Envoyer</button>
+
+        </form>
+        
+    </mat-card-content>
+  </mat-card>

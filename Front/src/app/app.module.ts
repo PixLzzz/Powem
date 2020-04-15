@@ -12,8 +12,9 @@ import {MatGridListModule} from '@angular/material/grid-list';
 import {MatProgressBarModule} from '@angular/material/progress-bar';
 import { HttpClientModule } from '@angular/common/http';
 import { FormsModule,ReactiveFormsModule } from '@angular/forms'
+import {MatSnackBarModule} from '@angular/material/snack-bar';
 // Firebase services + enviorment module
-import { AngularFireModule } from "@angular/fire";
+import { AngularFireModule } from 'angularfire2';
 import { AngularFireDatabaseModule } from "@angular/fire/database";
 import { environment } from '../environments/environment';
 import { AngularFireAuthModule } from "@angular/fire/auth";
@@ -48,7 +49,9 @@ import { DialogSkillComponent } from './dialog-skill/dialog-skill.component';
 import { DialogFileComponent } from './dialog-file/dialog-file.component';
 import { PoemHomeComponent } from './poem-home/poem-home.component';
 import { SkillHomeComponent } from './skill-home/skill-home.component';
-
+import { CKEditorModule } from 'ng2-ckeditor';
+import { ContactComponent } from './contact/contact.component';
+import { MailSnackbarComponent } from './mail-snackbar/mail-snackbar.component';
 
 
 
@@ -74,7 +77,9 @@ import { SkillHomeComponent } from './skill-home/skill-home.component';
     DialogSkillComponent,
     DialogFileComponent,
     PoemHomeComponent,
-    SkillHomeComponent
+    SkillHomeComponent,
+    ContactComponent,
+    MailSnackbarComponent
     
   ],
   imports: [
@@ -99,7 +104,9 @@ import { SkillHomeComponent } from './skill-home/skill-home.component';
     MatDialogModule,
     HttpClientModule,
     MatProgressBarModule,
-    MatGridListModule
+    MatGridListModule,
+    CKEditorModule,
+    MatSnackBarModule
 
   ],
   providers: [AuthService,FirebaseService,SkillServiceService,AngularFireStorage,AngularFirestore,UploadService],

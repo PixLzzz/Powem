@@ -12,6 +12,8 @@ import {HttpClientModule, HttpClient} from '@angular/common/http'
 export class FirebaseService {
   poems: Array<Poem> = [];
   poemsSubject = new Subject<Poem[]>();
+  cats : Array<String> = [];
+  catSubject = new Subject<String[]>();
 
   constructor(private http: HttpClient,) {
     this.getPoems();
@@ -19,6 +21,11 @@ export class FirebaseService {
 
   emitPoems(){
     this.poemsSubject.next(this.poems);
+  }
+
+  emitCats(cat){
+    this.catSubject.next(cat);
+    console.log(cat);
   }
 
   savePoems() {

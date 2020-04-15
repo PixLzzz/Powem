@@ -15,7 +15,9 @@ import { MatDialog } from '@angular/material/dialog';
 })
 export class PoemListComponent implements OnInit {
   poems: Poem[];
+  cats : String[];
   poemsSubscription: Subscription;
+  catSubscription : Subscription;
   displayedColumns: string[] = ['name', 'categories', 'actions'];
   dataSource ;
   onChange;
@@ -30,9 +32,22 @@ export class PoemListComponent implements OnInit {
         this.dataSource = new MatTableDataSource(this.poems);
       }
     );
+
+    this.catSubscription = this.firebaseService.catSubject.subscribe(
+      (cats: String[]) => {
+        this.dataSource = new MatTableDataSource(this.poems);
+        this.cats = cats;
+        console.log(cats);
+        this.cats.forEach(x => {
+          this.dataSource.filter = x.trim().toLowerCase();
+        })
+        
+      }
+    );
    /* this.onChange = this.selectedOption.subscribe(() => {
       this.catFilter();
  })*/
+  console.log(this.selectedOption)
     this.firebaseService.emitPoems();
   }
 
