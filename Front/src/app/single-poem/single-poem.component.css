@@ -1,12 +1,12 @@
 mat-card{
-    margin-top: 5%;
     margin-left: auto;
     margin-right: auto;
     width: 60%;
+    box-shadow: rgba(0, 0, 0, 0.3) 0px 4px 20px!important;
 }
 
 .content{
-    padding: 5%;
+    padding-top: 8%;
 }
 
 .contentCore{
@@ -73,4 +73,8 @@ button{
 .toRight{
   float: right!important;
   margin-left: auto;
+}
+
+.padd{
+  padding: 5%;
 }

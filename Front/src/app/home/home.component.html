@@ -1,7 +1,9 @@
-<div class="content">
-    <mat-card>
 
-
+ 
+  <div class="parallax"></div>
+  <div class="titleHome">
+    <h1>{{site.title}}</h1>
+  </div>
         <div class="contentSite">
           
             <div *ngIf="user">
@@ -13,9 +15,6 @@
 
             <!--AFFICHAGE STANDARD-->
             <div *ngIf="isCheck==false">
-        
-              <h1>{{site.title}}</h1>
-              <br>
               <pre class="contentCore">{{ site.content }}</pre>
               <br><br>
             </div>
@@ -47,12 +46,8 @@
             
            
           </div>
+          <div class="parallax"></div>
     
-    
-    </mat-card>
-
-    <br> <br>
-</div>
 <!--
 <form role="form" #myForm="ngForm" accept-charset="UTF-8" novalidate>
   <div class="form-group has-feedback" 

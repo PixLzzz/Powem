@@ -1,22 +1,19 @@
+<div class="parallaxSkillHome">
+  <div class="titleSkillHome">
+    <h1>{{skillHome.title}}</h1>
+  </div>
 <div class="content">
-    <mat-card>
 
 
         <div class="contentSite">
             <div *ngIf="user">
               <div class="modifyer"><mat-slide-toggle [checked]="isCheck" (change)="onChange()">Modifier</mat-slide-toggle></div>
-              <br>
-              <br>
             </div>
           
 
             <!--AFFICHAGE STANDARD-->
             <div *ngIf="isCheck==false">
-        
-              <h1>{{skillHome.title}}</h1>
-              <br>
               <pre class="contentCore">{{ skillHome.content }}</pre>
-              <br><br>
             </div>
             <!--SI MODIFICATION-->
             <div *ngIf="isCheck==true">
@@ -46,7 +43,7 @@
             
            
           </div>
-    
-    
-    </mat-card>
+        </div>
+       
 </div>
+<br><br><br>

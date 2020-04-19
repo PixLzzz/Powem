@@ -1,8 +1,8 @@
 mat-card{
-    margin-top: 10%;
     margin-left: auto;
     margin-right: auto;
     width: 50%;
+    box-shadow: rgba(0, 0, 0, 0.3) 0px 4px 20px!important;
 }
 
 .example-form {
@@ -24,4 +24,8 @@ mat-card{
 }
 button{
   outline: 0;
+}
+
+.content{
+  padding-top: 10%;
 }

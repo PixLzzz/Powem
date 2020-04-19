@@ -2,15 +2,13 @@
   <div class="leftPos">
 <mat-card>
     <div>
-        <div>
+        <div *ngIf="user">
            <div class="modifyer"><mat-slide-toggle [checked]="isCheck" (change)="onChange()">Modifier</mat-slide-toggle></div>
         </div>
       
-        <br>
-        <br>
         <!--AFFICHAGE STANDARD-->
         
-        <div *ngIf="isCheck==false">
+        <div *ngIf="isCheck==false" class="padd">
     
           <h1>{{ skill.title }}</h1>
           <br>
@@ -54,7 +52,7 @@
   </div>
  
 <div class="rightPos">
-  <mat-card>
+  <mat-card *ngIf="user">
     Ajouter un fichier :
     <br>
     
@@ -69,7 +67,7 @@
 
           <a [href]="f.url" target="_blank" rel="noopener">{{f.name}}   <button mat-icon-button  style="color: #3F51B5;">
             <mat-icon>get_app</mat-icon>
-          </button></a> <button mat-icon-button  style="color: crimson;" (click)="openDialogFile(f.name)">
+          </button></a> <button  *ngIf="user" mat-icon-button  style="color: crimson;" (click)="openDialogFile(f.name)">
             <mat-icon>delete</mat-icon>
           </button>
       </div>

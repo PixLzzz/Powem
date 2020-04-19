@@ -1,12 +1,11 @@
-.content {
-    width: 50%;
-    margin-top: 5%;
-    margin-left: auto;
-    margin-right: auto;
-}
-
 .contentSite{
-    width: 100%;
+    box-shadow: rgba(0, 0, 0, 0.3) 0px 4px 20px;
+    background-color: white ;
+    margin-left: 20%;
+    margin-right: 20%;
+    padding: 5%;
+    position: absolute;
+    margin-top: 15%;
 }
 
 .mat-form-field{
@@ -16,4 +15,38 @@
 
 .contentCore{
     white-space: pre-wrap;
+    min-width: 100%;
+    width: 100%!important;
 }
+
+  .parallaxSkillHome {
+    /* The image used */
+    background-image: url('../../../img/skill.jpg');
+  
+    /* Full height */
+    height: 50%; 
+
+    
+    /* Create the parallax scrolling effect */
+    background-attachment: fixed;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+  }
+
+    h1{
+
+        text-shadow: 1px 1px 2px black;
+        font-size: 32px !important;
+  }
+
+  .titleSkillHome{
+      position: absolute;
+      width: 100%;
+      margin-top: 8%;
+
+    text-align: center;
+      color: white;
+      
+      
+  }

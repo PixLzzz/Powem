@@ -12,3 +12,12 @@ table {
   .mat-column-actions{
       width: 3% !important;
   }
+  .mat-card{
+    box-shadow: rgba(0, 0, 0, 0.3) 0px 4px 20px;
+    margin-left: 20%;
+    margin-right: 20%;
+  }
+
+  .mat-dialog{
+    width: 100%;
+  }

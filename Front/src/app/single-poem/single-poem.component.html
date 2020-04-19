@@ -1,19 +1,18 @@
-<mat-card>
+<div class="content">
+  <mat-card>
 <div>
-  <div class="content">
+ 
     <div>
       <h5>{{ poem.category }}</h5> <div class="modifyer"><mat-slide-toggle [checked]="isCheck" (change)="onChange()">Modifier</mat-slide-toggle></div>
     </div>
   
     <br>
-    <br>
-    <!--AFFICHAGE STANDARD-->
-    <div *ngIf="isCheck==false">
 
+    <!--AFFICHAGE STANDARD-->
+    <div *ngIf="isCheck==false" class="padd">
       <h1>{{ poem.title }}</h1>
       <br>
       <pre class="contentCore">{{ poem.content }}</pre>
-      <br><br>
       <button mat-raised-button color="primary" (click)="onBack()">Retour</button> 
       <div class="modifyer">
       <!--<button mat-icon-button  style="color: crimson;" (click)="openDialog(poem)">
@@ -49,8 +48,9 @@
     
    
   </div>
-</div>
+
 </mat-card>
+</div>
 <br>
 <br>
 <br>

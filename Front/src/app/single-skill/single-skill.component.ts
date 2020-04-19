@@ -15,6 +15,7 @@ import { Files } from '../models/files.model';
 import { MatTableDataSource } from '@angular/material/table';
 import { DialogSkillComponent } from '../dialog-skill/dialog-skill.component';
 import { DialogFileComponent } from '../dialog-file/dialog-file.component';
+import { AuthService } from '../auth.service';
 
 
 
@@ -31,14 +32,16 @@ export class SingleSkillComponent implements OnInit {
   filess: Files []= [];
   fileSubscription : Subscription;
   id : number;
+  user;
 
   constructor(private route: ActivatedRoute, private skillService: SkillServiceService,
-              private router: Router,private formBuilder: FormBuilder,public dialog: MatDialog,private uploadService: UploadService) {}
+              private router: Router,private formBuilder: FormBuilder,public dialog: MatDialog,private uploadService: UploadService, private auth : AuthService) {}
 
   ngOnInit() {
     for(let i = 0 ; i< this.filess.length ; i++){
       this.filess.splice(0,1);
     }
+    this.user = this.auth.afAuth.user;
     var tempId = this.route.snapshot.paramMap.get("id");
     this.getDocuments(tempId);
     this.id = +tempId;

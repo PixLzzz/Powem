@@ -48,3 +48,7 @@ input.example-right-align {
 button{
   outline: 0;
 }
+
+.content{
+  padding-top: 10%;
+}

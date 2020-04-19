@@ -15,6 +15,9 @@ table {
   
   .mat-card{
     width: 100%;
+    box-shadow: rgba(0, 0, 0, 0.3) 0px 4px 20px;
+    height: 100%!important;
+    min-height: 100%;
   }
 
  
@@ -22,28 +25,30 @@ table {
     grid-gap: 10px 10px; 
   }
 
-  .singleSkill{
-  }
-  mat-grid-tile{
-      
-  }
-
-  .eachSkills{
-    margin: 5%;
-
-  }
 
   .contentSkill{
     width: 80%;
-  
+    text-align: center;
+    
   }
 
   .mainContent{
     margin-left: 10%;
     margin-right: 10%;
+    padding-top: 6%;
   }
   button:focus {outline:0;}
 
   button{
     margin-left: 5%;
+  }
+
+  h1{
+    font-size: x-large;
+    font-weight: 700;
+    cursor: pointer;
+  }
+
+  h1:hover{
+    color:#3F51B5;
   }
