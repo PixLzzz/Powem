@@ -68,3 +68,17 @@
       
       
   }
+
+
+element.style {
+  width: 400px !important;
+}
+
+#cdk-overlay-0{
+  width: 400px !important;
+}
+
+
+.cdk-overlay-pane {
+  width: 400px !important;
+}

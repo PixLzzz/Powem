@@ -21,3 +21,8 @@ table {
   .mat-dialog{
     width: 100%;
   }
+
+
+.cdk-overlay-pane {
+  width: 400px !important;
+}

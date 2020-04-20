@@ -110,7 +110,7 @@ export class SingleSkillComponent implements OnInit {
 
   openDialog(): void {
     const dialogRef = this.dialog.open(DialogSkillComponent, {
-      width: '250px',
+      width: '350px',
     });
 
     dialogRef.afterClosed().subscribe(result => {
@@ -123,7 +123,7 @@ export class SingleSkillComponent implements OnInit {
 
   openDialogFile(name): void {
     const dialogRef = this.dialog.open(DialogFileComponent, {
-      width: '250px',
+      width: '350px',
     });
 
     dialogRef.afterClosed().subscribe(result => {

@@ -82,7 +82,7 @@ export class PoemListComponent implements OnInit {
 
   openDialog(poem : Poem): void {
     const dialogRef = this.dialog.open(DialogComponent, {
-      width: '250px',
+      width: '350px',
       data: poem
     });
 
