@@ -35,17 +35,20 @@ export class AddSkillComponent implements OnInit {
   initForm() {
     this.skillForm = this.formBuilder.group({
       title: ['', Validators.required],
-      content: ['', Validators.required]
+      content: ['', Validators.required],
+      description: ['', Validators.required]
       
     });
   }
   
   onSaveSkill() {
     const title = this.skillForm.get('title').value;
+    const description = this.skillForm.get('description').value;
     const content = this.skillForm.get('content').value;
     const newSkill = new Skill();
     newSkill.title = title;
     newSkill.content = content;
+    newSkill.description =description;
     this.skillService.createNewSkill(newSkill);
     this.router.navigate(['/skillList']);
   }

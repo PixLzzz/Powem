@@ -4,6 +4,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Skill } from '../models/skill.model';
 import * as firebase from 'firebase';
 import { AuthService } from '../auth.service';
+import { Home } from '../models/home.model';
 
 @Component({
   selector: 'app-skill-home',
@@ -17,15 +18,15 @@ export class SkillHomeComponent implements OnInit {
 
   }
   isCheck = false;
-  skillHome: Skill;
+  skillHome: Home;
   skillHomeForm: FormGroup;
   
   ngOnInit(): void {
     
-    this.user= this.auth.afAuth.user;
-    this.skillHome = new Skill();
+    this.user= firebase.auth().currentUser;
+    this.skillHome = new Home();
     this.skillService.getSingleSkillHome().then(
-      (skillHome: Skill) => {
+      (skillHome: Home) => {
         this.skillHome = skillHome;
         this.skillHomeForm = this.formBuilder.group({
           title: [this.skillHome.title, Validators.required],
@@ -62,7 +63,7 @@ export class SkillHomeComponent implements OnInit {
 
   renew(){
     this.skillService.getSingleSkillHome().then(
-      (skillHome: Skill) => {
+      (skillHome: Home) => {
         this.skillHome = skillHome;
       }
     );

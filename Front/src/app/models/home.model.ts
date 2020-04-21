@@ -1,5 +1,4 @@
-export class Skill {
+export class Home {
     public title: string;
-    public description: string;
     public content : string;
     }

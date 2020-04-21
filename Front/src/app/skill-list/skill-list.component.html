@@ -4,10 +4,10 @@
     <div class="eachSkills" *ngFor="let skill of skills; let i = index">
     <mat-grid-tile class="singleSkill">
       <div class="contentSkill">
-        <div mat-card-avatar class="example-header-image"><mat-icon>contact_support</mat-icon></div>
+        <!--<div mat-card-avatar class="example-header-image"><mat-icon>contact_support</mat-icon></div>-->
         <br>
             <h1 (click)="onViewSkill(i)">{{skill.title}}</h1>
-            <p>Description</p>
+            <p>{{skill.description}}</p>
       </div>
 
     </mat-grid-tile>

@@ -7,6 +7,7 @@ import { Skill } from '../models/skill.model';
 import { FormGroup, Validators, FormBuilder } from '@angular/forms';
 import { FirebaseService } from '../firebase.service';
 import { AuthService } from '../auth.service';
+import { Home } from '../models/home.model';
 
 @Component({
   selector: 'app-home',
@@ -19,7 +20,7 @@ export class HomeComponent implements OnInit {
 
   }
   isCheck = false;
-  site: Skill;
+  site: Home;
   siteForm: FormGroup;
   user;
   /*
@@ -38,9 +39,9 @@ export class HomeComponent implements OnInit {
     };
     */
     this.user = firebase.auth().currentUser;
-    this.site = new Skill();
+    this.site = new Home();
     this.fireService.getSingleSite().then(
-      (site: Skill) => {
+      (site: Home) => {
         this.site = site;
         this.siteForm = this.formBuilder.group({
           title: [this.site.title, Validators.required],
@@ -87,7 +88,7 @@ export class HomeComponent implements OnInit {
 
   renew(){
     this.fireService.getSingleSite().then(
-      (site: Skill) => {
+      (site: Home) => {
         this.site = site;
       }
     );

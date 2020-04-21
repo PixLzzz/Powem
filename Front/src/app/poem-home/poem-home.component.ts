@@ -3,6 +3,7 @@ import { FirebaseService } from '../firebase.service';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Skill } from '../models/skill.model';
 import * as firebase from 'firebase';
+import { Home } from '../models/home.model';
 
 @Component({
   selector: 'app-poem-home',
@@ -16,14 +17,14 @@ export class PoemHomeComponent implements OnInit {
 
   }
   isCheck = false;
-  poemHome: Skill;
+  poemHome: Home;
   poemHomeForm: FormGroup;
   
   ngOnInit(): void {
     this.user = firebase.auth().currentUser;
-    this.poemHome = new Skill();
+    this.poemHome = new Home();
     this.fireService.getSinglePoemHome().then(
-      (site: Skill) => {
+      (site: Home) => {
         this.poemHome = site;
         this.poemHomeForm = this.formBuilder.group({
           title: [this.poemHome.title, Validators.required],
@@ -60,7 +61,7 @@ export class PoemHomeComponent implements OnInit {
 
   renew(){
     this.fireService.getSinglePoemHome().then(
-      (poemHome: Skill) => {
+      (poemHome: Home) => {
         this.poemHome = poemHome;
       }
     );
