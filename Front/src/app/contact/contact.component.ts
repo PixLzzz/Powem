@@ -45,4 +45,5 @@ export class ContactComponent implements OnInit {
       duration: this.durationInSeconds * 1000,
     });
   }
+
 }

@@ -27,12 +27,10 @@ export class AuthService implements CanActivate{
     // Sign in with email/password
     static doRegister(value){
       return new Promise<any>((resolve, reject) => {
-        firebase.auth().setPersistence(firebase.auth.Auth.Persistence.SESSION).then(() => {
-         firebase.auth().signInWithEmailAndPassword(value.email, value.password)
+        firebase.auth().signInWithEmailAndPassword(value.email, value.password)
         .then(res => {
           resolve(res);
         }, err => reject(err))
-      });
       })
     }
 

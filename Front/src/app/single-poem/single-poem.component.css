@@ -7,6 +7,11 @@ mat-card{
 
 .content{
     padding-top: 8%;
+ background-size:100% auto;; width:auto;
+    background-image:url('../../../img/poem3.jpg');
+
+    
+
 }
 
 .contentCore{

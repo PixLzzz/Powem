@@ -3,7 +3,7 @@ mat-card{
     margin-right: auto;
     width: 50%;
     box-shadow: rgba(0, 0, 0, 0.3) 0px 4px 20px!important;
-    padding: 2%;
+    padding: 5%;
 }
   
 .example-full-width {
@@ -22,7 +22,12 @@ mat-card{
   }
 
 .content{
-    padding-top: 10%;
+    
+        padding-top: 8%;
+        height:100%; background-size:cover; width:auto;
+        background-image:url('../../../img/contact.jpg');
+        background-position:50% 50%;
+
 }
 
 .mat-card-content{

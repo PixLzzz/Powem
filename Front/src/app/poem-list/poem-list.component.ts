@@ -7,6 +7,7 @@ import { MatTableDataSource } from '@angular/material/table';
 import { database } from 'firebase';
 import { DialogComponent } from '../dialog/dialog.component';
 import { MatDialog } from '@angular/material/dialog';
+import * as firebase from 'firebase';
 
 @Component({
   selector: 'app-poem-list',
@@ -21,11 +22,13 @@ export class PoemListComponent implements OnInit {
   displayedColumns: string[] = ['name', 'categories', 'actions'];
   dataSource ;
   onChange;
+  user;
   @Input() selectedOption : any;
   constructor(private firebaseService: FirebaseService, private router: Router,public dialog: MatDialog) {
   }
 
   ngOnInit() {
+    this.user = firebase.auth().currentUser;
     this.poemsSubscription = this.firebaseService.poemsSubject.subscribe(
       (poems: Poem[]) => {
         this.poems = poems;
