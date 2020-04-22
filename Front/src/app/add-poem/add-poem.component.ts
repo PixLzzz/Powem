@@ -16,6 +16,9 @@ export class AddPoemComponent implements OnInit {
 
   poemForm: FormGroup;
 
+  fileIsUploading = false;
+  fileUrl: string;
+  fileUploaded = false;
   selectedValue: string;
   id = 0;
   title = 'Ajouter un poème :';
@@ -51,6 +54,17 @@ export class AddPoemComponent implements OnInit {
       
     });
   }
+
+  onUploadFile(file: File) {
+    this.fileIsUploading = true;
+    this.firebaseService.uploadFile(file).then(
+      (url: string) => {
+        this.fileUrl = url;
+        this.fileIsUploading = false;
+        this.fileUploaded = true;
+      }
+    );
+}
   
   onSavePoem() {
     const title = this.poemForm.get('title').value;
@@ -61,8 +75,15 @@ export class AddPoemComponent implements OnInit {
     newPoem.title = title;
     newPoem.category = category;
     newPoem.content = content;
+    if(this.fileUrl && this.fileUrl !== '') {
+      newPoem.photo = this.fileUrl;
+    }
     this.firebaseService.createNewPoem(newPoem);
     this.router.navigate(['poem']);
+  }
+
+  detectFiles(event) {
+    this.onUploadFile(event.target.files[0]);
   }
 
 }

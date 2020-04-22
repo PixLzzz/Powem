@@ -65,6 +65,17 @@ export class FirebaseService {
   }
 
   removePoem(poem: Poem) {
+    if(poem.photo) {
+      const storageRef = firebase.storage().refFromURL(poem.photo);
+      storageRef.delete().then(
+        () => {
+          console.log('Photo removed!');
+        },
+        (error) => {
+          console.log('Could not remove photo! : ' + error);
+        }
+      );
+    }
     const poemIndexToRemove = this.poems.findIndex(
       (poemEl) => {
         console.log(poemEl)
@@ -107,5 +118,28 @@ export class FirebaseService {
     );
   }
   
+
+  uploadFile(file: File) {
+    return new Promise(
+      (resolve, reject) => {
+        const almostUniqueFileName = Date.now().toString();
+        const upload = firebase.storage().ref()
+          .child('images/' + almostUniqueFileName + file.name).put(file);
+        upload.on(firebase.storage.TaskEvent.STATE_CHANGED,
+          () => {
+            console.log('Chargement…');
+          },
+          (error) => {
+            console.log('Erreur de chargement ! : ' + error);
+            reject();
+          },
+          () => {
+            resolve(upload.snapshot.ref.getDownloadURL());
+          }
+        );
+      }
+    );
+}
+
 
 }

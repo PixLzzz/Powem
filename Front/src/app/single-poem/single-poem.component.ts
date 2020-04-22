@@ -19,6 +19,9 @@ export class SinglePoemComponent implements OnInit {
   isCheck = false;
   animal: string;
   name: string;
+  fileIsUploading = false;
+  fileUrl: string;
+  fileUploaded = false;
 
   constructor(private route: ActivatedRoute, private fireService: FirebaseService,
               private router: Router,private formBuilder: FormBuilder,public dialog: MatDialog) {}
@@ -61,17 +64,41 @@ export class SinglePoemComponent implements OnInit {
     const title = this.poemForm.get('title').value;
     const content = this.poemForm.get('content').value;
     const category = this.poem.category;
-    const id = this.route.snapshot.params['id'];
-    // A post entry.
-    var postData = {
-      title: title,
-      content: content,
-      category: category
-    };
 
+    const newPoem = new Poem();
+    newPoem.title = title;
+    newPoem.category = category;
+    newPoem.content = content;
+    if(this.fileUrl && this.fileUrl !== '') {
+      newPoem.photo = this.fileUrl;
+    }
+
+
+    const id = this.route.snapshot.params['id'];
+    
+    // A post entry.
+    if(this.fileUrl && this.fileUrl !== ''){
+      var postDatas = {
+        title: title,
+        content: content,
+        category: category,
+        photo : newPoem.photo
+      };
+    }else{
+      var postData = {
+        title: title,
+        content: content,
+        category: category
+      }
+    }
+      
     // Write the new post's data simultaneously in the posts list and the user's post list.
     var updates = {};
-    updates['/Poems/' + id] = postData;
+    if(this.fileUrl && this.fileUrl !== ''){
+      updates['/Poems/' + id] = postDatas;
+    }else{
+      updates['/Poems/' + id] = postData;
+    }
   
     firebase.database().ref().update(updates);
 
@@ -95,5 +122,25 @@ export class SinglePoemComponent implements OnInit {
       }
     });
   }
+
+  detectFiles(event) {
+    this.onUploadFile(event.target.files[0]);
+  }
+
+
+  onUploadFile(file: File) {
+    this.fileIsUploading = true;
+    this.fireService.uploadFile(file).then(
+      (url: string) => {
+        this.fileUrl = url;
+        this.fileIsUploading = false;
+        this.fileUploaded = true;
+      }
+    );
+
+  }
+
+
+    
 
 }

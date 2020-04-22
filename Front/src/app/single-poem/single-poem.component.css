@@ -13,7 +13,18 @@ mat-card{
     
 
 }
+.filePics + label {
+  font-size: 1.25em;
+  font-weight: 700;
+  color: white;
+  background-color: black;
+  display: inline-block;
+}
 
+.filePics:focus + label,
+.filePics + label:hover {
+  background-color: red;
+}
 .contentCore{
     font-size: 14px;
 }

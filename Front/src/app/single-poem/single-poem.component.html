@@ -11,6 +11,8 @@
     <!--AFFICHAGE STANDARD-->
     <div *ngIf="isCheck==false" class="padd">
       <h1>{{ poem.title }}</h1>
+
+      <img style="max-width:400px;" *ngIf="poem.photo" [src]="poem.photo">
       <br>
       <pre class="contentCore">{{ poem.content }}</pre>
       <button mat-raised-button color="primary" (click)="onBack()">Retour</button> 
@@ -23,6 +25,14 @@
     <!--SI MODIFICATION-->
     <div *ngIf="isCheck==true">
 
+      <br>
+      <h4>Ajouter une photo</h4>
+      <input type="file" (change)="detectFiles($event)"
+             class="filePics" accept="image/*">
+      <p class="text-success" *ngIf="fileUploaded">Fichier chargé !</p>
+      <br>
+      <br>
+      <br>
       <form [formGroup]="poemForm" (ngSubmit)="updatePoem()" class="example-form">
         <mat-form-field class="example-full-width titleLimit mat-headline">
           <mat-label>Titre</mat-label>
