@@ -15,7 +15,10 @@ import { Router } from '@angular/router';
 export class AddSkillComponent implements OnInit {
 
   skillForm: FormGroup;
-
+  fileIsUploading = false;
+  fileUrl: string;
+  fileUploaded = false;
+  selectedValue: string;
   id = 0;
   title = 'Ajouter un skill :';
   SkillTitle ;
@@ -40,6 +43,17 @@ export class AddSkillComponent implements OnInit {
       
     });
   }
+
+  onUploadFile(file: File) {
+    this.fileIsUploading = true;
+    this.skillService.uploadFile(file).then(
+      (url: string) => {
+        this.fileUrl = url;
+        this.fileIsUploading = false;
+        this.fileUploaded = true;
+      }
+    );
+}
   
   onSaveSkill() {
     const title = this.skillForm.get('title').value;
@@ -49,8 +63,15 @@ export class AddSkillComponent implements OnInit {
     newSkill.title = title;
     newSkill.content = content;
     newSkill.description =description;
+    if(this.fileUrl && this.fileUrl !== '') {
+      newSkill.photo = this.fileUrl;
+    }
     this.skillService.createNewSkill(newSkill);
     this.router.navigate(['/skillList']);
+  }
+
+  detectFiles(event) {
+    this.onUploadFile(event.target.files[0]);
   }
 
 }

@@ -84,6 +84,15 @@ export class SinglePoemComponent implements OnInit {
         category: category,
         photo : newPoem.photo
       };
+      this.fireService.removePics(this.poem);
+    }else if(this.poem.photo){
+      var postDatasBis = {
+        title: title,
+        content: content,
+        category :category,
+        photo : this.poem.photo
+      };
+      
     }else{
       var postData = {
         title: title,
@@ -96,6 +105,8 @@ export class SinglePoemComponent implements OnInit {
     var updates = {};
     if(this.fileUrl && this.fileUrl !== ''){
       updates['/Poems/' + id] = postDatas;
+    }else if(this.poem.photo){
+      updates['/Poems/' + id] = postDatasBis;
     }else{
       updates['/Poems/' + id] = postData;
     }
@@ -104,6 +115,7 @@ export class SinglePoemComponent implements OnInit {
 
     this.renew();
     this.onChange();
+    this.fileUploaded = false;
 
 
   }
@@ -137,6 +149,36 @@ export class SinglePoemComponent implements OnInit {
         this.fileUploaded = true;
       }
     );
+
+  }
+
+  rmPics(){
+    const title = this.poemForm.get('title').value;
+    const content = this.poemForm.get('content').value;
+    const id = this.route.snapshot.params['id'];
+    const category = this.poem.category;
+    const newPoem = new Poem();
+    newPoem.title = title;
+    newPoem.content = content;
+    newPoem.category = category;
+
+      var postData = {
+        title: title,
+        content: content,
+        category : category
+      }
+      
+    // Write the new post's data simultaneously in the posts list and the user's post list.
+    var updates = {};
+
+      updates['/Poems/' + id] = postData;
+  
+    firebase.database().ref().update(updates);
+
+    this.fireService.removePics(this.poem)
+    this.renew();
+    this.onChange();
+    this.fileUploaded = false;
 
   }
 

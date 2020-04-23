@@ -26,6 +26,9 @@
     <div *ngIf="isCheck==true">
 
       <br>
+          <button  mat-raised-button color="warn" (click)="rmPics()">Clear photo </button>
+          <br>
+          <br>
       <h4>Ajouter une photo</h4>
       <input type="file" (change)="detectFiles($event)"
              class="filePics" accept="image/*">

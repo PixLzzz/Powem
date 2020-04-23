@@ -11,7 +11,8 @@
         <div *ngIf="isCheck==false" class="padd">
     
           <h1>{{ skill.title }}</h1>
-          <br>
+          <img style="max-width:400px;" *ngIf="skill.photo" [src]="skill.photo">
+      <br>
           <pre class="contentCore">{{ skill.content }}</pre>
           <br><br>
           <button mat-raised-button color="primary" (click)="onBack()">Retour</button> 
@@ -23,7 +24,17 @@
         </div>
         <!--SI MODIFICATION-->
         <div *ngIf="isCheck==true">
-    
+          <br>
+          <button  mat-raised-button color="warn" (click)="rmPics()">Clear photo </button>
+          <br>
+          <br>
+          <h4>Ajouter une photo</h4>
+          <input type="file" (change)="detectFiles($event)"
+                 class="filePics" accept="image/*">
+          <p class="text-success" *ngIf="fileUploaded">Fichier chargé !</p>
+          <br>
+          <br>
+          <br>
           <form [formGroup]="skillForm" (ngSubmit)="updateSkill()" class="example-form">
             <mat-form-field class="example-full-width titleLimit mat-headline">
               <mat-label>Titre</mat-label>

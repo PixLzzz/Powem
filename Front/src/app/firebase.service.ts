@@ -141,5 +141,19 @@ export class FirebaseService {
     );
 }
 
+removePics(poem : Poem){
+  if(poem.photo) {
+    const storageRef = firebase.storage().refFromURL(poem.photo);
+    storageRef.delete().then(
+      () => {
+        console.log('Photo removed!');
+      },
+      (error) => {
+        console.log('Could not remove photo! : ' + error);
+      }
+    );
+  }
+}
+
 
 }

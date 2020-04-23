@@ -60,6 +60,17 @@ export class SkillServiceService implements OnInit {
 
   async removeSkill(skill: Skill,id) {
     var cpt= 0;
+    if(skill.photo) {
+      const storageRef = firebase.storage().refFromURL(skill.photo);
+      storageRef.delete().then(
+        () => {
+          console.log('Photo removed!');
+        },
+        (error) => {
+          console.log('Could not remove photo! : ' + error);
+        }
+      );
+    }
     const skillIndexToRemove = this.skills.findIndex(
       (skillEl) => {
         if(skillEl === skill) {
@@ -102,24 +113,43 @@ export class SkillServiceService implements OnInit {
     );
   }
 
- /* async reOrder(index){
-    var storage = firebase.app().storage("gs://powem-98484.appspot.com");
-    var storageRef = storage.ref();
-      var listRef = storageRef.child('test/');
-  
 
-    // Find all the prefixes and items.
-    listRef.listAll().then((res)=> {
-      res.prefixes.forEach((folderRef)=>{
-        if(folderRef.name >= index){
-          
+
+  uploadFile(file: File) {
+    return new Promise(
+      (resolve, reject) => {
+        const almostUniqueFileName = Date.now().toString();
+        const upload = firebase.storage().ref()
+          .child('imagesSkill/' + almostUniqueFileName + file.name).put(file);
+        upload.on(firebase.storage.TaskEvent.STATE_CHANGED,
+          () => {
+            console.log('Chargement…');
+          },
+          (error) => {
+            console.log('Erreur de chargement ! : ' + error);
+            reject();
+          },
+          () => {
+            resolve(upload.snapshot.ref.getDownloadURL());
+          }
+        );
+      }
+    );
+}
+
+
+  removePics(skill : Skill){
+    if(skill.photo) {
+      const storageRef = firebase.storage().refFromURL(skill.photo);
+      storageRef.delete().then(
+        () => {
+          console.log('Photo removed!');
+        },
+        (error) => {
+          console.log('Could not remove photo! : ' + error);
         }
-        console.log(folderRef.name); 
-      });
-    }).catch(function(error) {
-      // Uh-oh, an error occurred!
-    });
+      );
+    }
   }
-*/
 
 }

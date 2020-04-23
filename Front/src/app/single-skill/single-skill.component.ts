@@ -33,6 +33,9 @@ export class SingleSkillComponent implements OnInit {
   fileSubscription : Subscription;
   id : number;
   user;
+  fileIsUploading = false;
+  fileUrl: string;
+  fileUploaded = false;
 
   constructor(private route: ActivatedRoute, private skillService: SkillServiceService,
               private router: Router,private formBuilder: FormBuilder,public dialog: MatDialog,private uploadService: UploadService, private auth : AuthService) {}
@@ -90,20 +93,55 @@ export class SingleSkillComponent implements OnInit {
     const title = this.skillForm.get('title').value;
     const content = this.skillForm.get('content').value;
     const id = this.route.snapshot.params['id'];
-    // A post entry.
-    var postData = {
-      title: title,
-      content: content,
-    };
+    const description = this.skill.description;
+    const newSkill = new Skill();
+    newSkill.title = title;
+    newSkill.content = content;
+    newSkill.description = description;
+    if(this.fileUrl && this.fileUrl !== '') {
+      newSkill.photo = this.fileUrl;
+    }
 
+    // A post entry.
+    if(this.fileUrl && this.fileUrl !== ''){
+      var postDatas = {
+        title: title,
+        content: content,
+        description : description,
+        photo : newSkill.photo
+      };
+      this.skillService.removePics(this.skill);
+    }else if(this.skill.photo){
+      var postDatasBis = {
+        title: title,
+        content: content,
+        description : description,
+        photo : this.skill.photo
+      };
+      
+    }else{
+      var postData = {
+        title: title,
+        content: content,
+        description : description
+      }
+    }
+      
     // Write the new post's data simultaneously in the posts list and the user's post list.
     var updates = {};
-    updates['/Skills/' + id] = postData;
+    if(this.fileUrl && this.fileUrl !== ''){
+      updates['/Skills/' + id] = postDatas;
+    }else if(this.skill.photo){
+      updates['/Skills/' + id] = postDatasBis;
+    }else{
+      updates['/Skills/' + id] = postData;
+    }
   
     firebase.database().ref().update(updates);
 
     this.renew();
     this.onChange();
+    this.fileUploaded = false;
 
 
   }
@@ -134,10 +172,56 @@ export class SingleSkillComponent implements OnInit {
     });
   }
 
+  detectFiles(event) {
+    this.onUploadFile(event.target.files[0]);
+  }
+  
+
+  onUploadFile(file: File) {
+    this.fileIsUploading = true;
+    this.skillService.uploadFile(file).then(
+      (url: string) => {
+        this.fileUrl = url;
+        this.fileIsUploading = false;
+        this.fileUploaded = true;
+      }
+    );
+
+  }
+
+
   getDocuments(id){
     this.uploadService.getDocs(id);
   }
 
 
+  rmPics(){
+    const title = this.skillForm.get('title').value;
+    const content = this.skillForm.get('content').value;
+    const id = this.route.snapshot.params['id'];
+    const description = this.skill.description;
+    const newSkill = new Skill();
+    newSkill.title = title;
+    newSkill.content = content;
+    newSkill.description = description;
+
+      var postData = {
+        title: title,
+        content: content,
+        description : description
+      }
+      
+    // Write the new post's data simultaneously in the posts list and the user's post list.
+    var updates = {};
+
+      updates['/Skills/' + id] = postData;
+  
+    firebase.database().ref().update(updates);
+
+    this.skillService.removePics(this.skill)
+    this.renew();
+    this.onChange();
+    this.fileUploaded = false;
+  }
 
 }

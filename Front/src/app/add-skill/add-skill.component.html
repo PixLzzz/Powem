@@ -26,7 +26,13 @@
           <textarea matInput placeholder="Enter content.." id="content" formControlName="content"></textarea>
         </mat-form-field>
   
-  
+        <h4>Ajouter une photo</h4>
+      <input type="file" (change)="detectFiles($event)"
+             class="filePics" accept="image/*">
+      <p class="text-success" *ngIf="fileUploaded">Fichier chargé !</p>
+      <br>
+      <br>
+      <br>
         <button class="btn btn-success" [disabled]="skillForm.invalid"
                 type="submit">Enregistrer
         </button>
