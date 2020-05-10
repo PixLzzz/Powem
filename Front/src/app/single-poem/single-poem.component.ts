@@ -84,7 +84,6 @@ export class SinglePoemComponent implements OnInit {
         category: category,
         photo : newPoem.photo
       };
-      this.fireService.removePics(this.poem);
     }else if(this.poem.photo){
       var postDatasBis = {
         title: title,

@@ -110,7 +110,6 @@ export class SingleSkillComponent implements OnInit {
         description : description,
         photo : newSkill.photo
       };
-      this.skillService.removePics(this.skill);
     }else if(this.skill.photo){
       var postDatasBis = {
         title: title,
