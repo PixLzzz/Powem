@@ -1,0 +1,73 @@
+<div class="content">
+    <mat-card>
+  <div>
+   
+      <div>
+        <h5>{{ other.category }}</h5> <div class="modifyer"><mat-slide-toggle [checked]="isCheck" (change)="onChange()">Modifier</mat-slide-toggle></div>
+      </div>
+    
+      <br>
+  
+      <!--AFFICHAGE STANDARD-->
+      <div *ngIf="isCheck==false" class="padd">
+        <h1>{{ other.title }}</h1>
+  
+        <img style="max-width:400px;" *ngIf="other.photo" [src]="other.photo">
+        <br>
+        <pre class="contentCore">{{ other.content }}</pre>
+        <button mat-raised-button color="primary" (click)="onBack()">Retour</button> 
+        <div class="modifyer">
+        <!--<button mat-icon-button  style="color: crimson;" (click)="openDialog(poem)">
+          <mat-icon>delete</mat-icon>
+        </button>-->
+      </div>
+      </div>
+      <!--SI MODIFICATION-->
+      <div *ngIf="isCheck==true">
+  
+        <br>
+            <button  mat-raised-button color="warn" (click)="rmPics()">Clear photo </button>
+            <br>
+            <br>
+        <h4>Ajouter une photo</h4>
+        <input type="file" (change)="detectFiles($event)"
+               class="filePics" accept="image/*">
+        <p class="text-success" *ngIf="fileUploaded">Fichier chargé !</p>
+        <br>
+        <br>
+        <br>
+        <form [formGroup]="otherForm" (ngSubmit)="updateOther()" class="example-form">
+          <mat-form-field class="example-full-width titleLimit mat-headline">
+            <mat-label>Titre</mat-label>
+            <input matInput  id="title"  formControlName="title">
+          </mat-form-field>
+          <br>
+          <br>
+          <mat-form-field class="example-full-width">
+            <mat-label>Contenu</mat-label>
+            <textarea matInput rows="20" cols="60"  id="content" formControlName="content"></textarea>
+          </mat-form-field>
+    
+          <br>
+          <button class="btn btn-success" [disabled]="otherForm.invalid"
+                type="submit">Enregistrer
+        </button>
+  
+        
+        </form>
+        <br>
+  
+      </div>
+      
+     
+    </div>
+  
+  </mat-card>
+  <br>
+  <br>
+  <br>
+  <br>
+  </div>
+  
+  
+  

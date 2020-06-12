@@ -5,8 +5,6 @@
       <div style="color :#3F51B5;">
           <h1>{{title}}</h1>
       </div>
-  
-
 
       <mat-form-field>
         <mat-label>Catégorie</mat-label>
@@ -37,7 +35,11 @@
       <p class="text-success" *ngIf="fileUploaded">Fichier chargé !</p>
       <br>
       <br>
+      <mat-checkbox #check [checked]="check" name="checked" (change)="handleCheckChange(check.checked)">Autre auteur(e)</mat-checkbox>
       <br>
+      <br>
+      <br>
+
       <button class="btn btn-success" [disabled]="poemForm.invalid"
               type="submit">Enregistrer
       </button>

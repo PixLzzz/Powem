@@ -20,6 +20,8 @@ import { environment } from '../environments/environment';
 import { AngularFireAuthModule } from "@angular/fire/auth";
 import { AuthService } from './auth.service';
 import {MatCardModule} from '@angular/material/card';
+import {MatCheckboxModule} from '@angular/material/checkbox';
+
 import {MatInputModule} from '@angular/material/input';
 import * as firebase from 'firebase';
 import { AddPoemComponent } from './add-poem/add-poem.component';
@@ -52,6 +54,9 @@ import { SkillHomeComponent } from './skill-home/skill-home.component';
 import { CKEditorModule } from 'ng2-ckeditor';
 import { ContactComponent } from './contact/contact.component';
 import { MailSnackbarComponent } from './mail-snackbar/mail-snackbar.component';
+import { OtherComponent } from './other/other.component';
+import { OtherListComponent } from './other-list/other-list.component';
+import { SingleOtherComponent } from './single-other/single-other.component';
 
 
 
@@ -79,7 +84,10 @@ import { MailSnackbarComponent } from './mail-snackbar/mail-snackbar.component';
     PoemHomeComponent,
     SkillHomeComponent,
     ContactComponent,
-    MailSnackbarComponent
+    MailSnackbarComponent,
+    OtherComponent,
+    OtherListComponent,
+    SingleOtherComponent
     
   ],
   imports: [
@@ -106,7 +114,8 @@ import { MailSnackbarComponent } from './mail-snackbar/mail-snackbar.component';
     MatProgressBarModule,
     MatGridListModule,
     CKEditorModule,
-    MatSnackBarModule
+    MatSnackBarModule,
+    MatCheckboxModule,
 
   ],
   providers: [AuthService,FirebaseService,SkillServiceService,AngularFireStorage,AngularFirestore,UploadService],

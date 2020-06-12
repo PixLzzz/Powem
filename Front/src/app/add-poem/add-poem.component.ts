@@ -6,6 +6,7 @@ import { FirebaseService } from '../firebase.service';
 import { Poem } from '../models/poem.model';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
+import { OtherService } from '../other.service';
 
 @Component({
   selector: 'app-add-poem',
@@ -15,7 +16,7 @@ import { Router } from '@angular/router';
 export class AddPoemComponent implements OnInit {
 
   poemForm: FormGroup;
-
+  checked = false;
   fileIsUploading = false;
   fileUrl: string;
   fileUploaded = false;
@@ -38,12 +39,13 @@ export class AddPoemComponent implements OnInit {
     {value: 'Tendresse', viewValue: 'Tendresse'}
   ];
 
-  constructor(private formBuilder: FormBuilder, private firebaseService: FirebaseService,
-    private router: Router){
+  constructor(private formBuilder: FormBuilder, private otherService: OtherService,
+    private router: Router, private firebaseService : FirebaseService){
     
   }
 
   ngOnInit(): void {
+    this.checked = false;
     this.initForm();
   }
 
@@ -78,13 +80,23 @@ export class AddPoemComponent implements OnInit {
     if(this.fileUrl && this.fileUrl !== '') {
       newPoem.photo = this.fileUrl;
     }
-    this.firebaseService.createNewPoem(newPoem);
-    this.router.navigate(['poem']);
+    if(this.checked){
+      this.otherService.createNewOther(newPoem);
+      this.router.navigate(['other']);
+    }else{
+      this.firebaseService.createNewPoem(newPoem);
+      this.router.navigate(['poem']);
+    }
   }
 
   detectFiles(event) {
     this.onUploadFile(event.target.files[0]);
-  }
+  } 
+
+  handleCheckChange(value: boolean) {
+    this.checked = value;
+    console.log(this.checked);
+}
 
 }
 

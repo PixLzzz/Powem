@@ -1,0 +1,84 @@
+.containerO{
+    width: 100%;
+    padding-top: 15%;
+}
+
+.leftPos {
+     width: 30%;
+     margin-left: 5%;
+    float: left;
+}
+.middlePos {
+    margin-right: 5%;
+    float: right;
+    width: 58%;
+}
+.example-fill-remaining-space {
+    /* This fills the remaining space, by using flexbox. 
+       Every toolbar row uses a flexbox row layout. */
+    flex: 1 1 auto;
+  }
+  /* Structure */
+
+  
+  .mat-form-field {
+    font-size: 14px;
+    width: 100%;
+  }
+  
+  a{
+     text-decoration: none; color: #3F51B5;
+     
+  }
+
+  .leftPos{
+    box-shadow: rgba(0, 0, 0, 0.3) 0px 4px 20px !important;
+  }
+
+
+
+  .parallaxPoems {
+    /* The image used */
+    background-image: url('../../../img/poems.jpg');
+  
+    /* Full height */
+    height: 50%; 
+
+    
+    /* Create the parallax scrolling effect */
+    background-attachment: fixed;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+  }
+
+    h1{
+
+        text-shadow: 1px 1px 2px black;
+        font-size: 32px !important;
+  }
+
+  .titlePoems{
+      position: absolute;
+      width: 100%;
+      margin-top: 8%;
+
+    text-align: center;
+      color: white;
+      
+      
+  }
+
+
+element.style {
+  width: 400px !important;
+}
+
+#cdk-overlay-0{
+  width: 400px !important;
+}
+
+
+.cdk-overlay-pane {
+  width: 400px !important;
+}
