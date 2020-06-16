@@ -36,6 +36,16 @@ export class SingleSkillComponent implements OnInit {
   fileIsUploading = false;
   fileUrl: string;
   fileUploaded = false;
+  audioIsUploading = false;
+  audioUrl: string;
+  audioUploaded = false;
+  startOffset = 0;
+  // Material Style Basic Audio Player Title and Audio URL
+  msbapTitle = 'Son';  
+  msbapDisplayTitle = false; 
+  msbapDisplayVolumeControls = true;  
+  autoPlay= true;
+  audioSrc="";
 
   constructor(private route: ActivatedRoute, private skillService: SkillServiceService,
               private router: Router,private formBuilder: FormBuilder,public dialog: MatDialog,private uploadService: UploadService, private auth : AuthService) {}
@@ -58,6 +68,7 @@ export class SingleSkillComponent implements OnInit {
           title: [this.skill.title, Validators.required],
           content: [this.skill.content, Validators.required]
         }); 
+        this.audioSrc = this.skill.audio;
       }
     );
 
@@ -101,37 +112,64 @@ export class SingleSkillComponent implements OnInit {
     if(this.fileUrl && this.fileUrl !== '') {
       newSkill.photo = this.fileUrl;
     }
-
-    // A post entry.
-    if(this.fileUrl && this.fileUrl !== ''){
+    if(this.audioUrl && this.audioUrl !== '') {
+      newSkill.audio = this.audioUrl;
+    }
+    
+     // A post entry.
+     if(this.fileUrl && this.fileUrl !== '' && this.audioUrl && this.audioUrl !== ''){
       var postDatas = {
         title: title,
         content: content,
         description : description,
-        photo : newSkill.photo
+        photo : newSkill.photo,
+        audio : newSkill.audio
       };
-    }else if(this.skill.photo){
+    }else if(this.skill.photo && this.skill.audio){
       var postDatasBis = {
         title: title,
         content: content,
         description : description,
-        photo : this.skill.photo
+        photo : this.skill.photo,
+        audio : this.skill.audio
       };
       
+    }else if(this.skill.photo && this.audioUrl && this.audioUrl !== ''){
+      var postDatasBis2 = {
+        title: title,
+        content: content,
+        description :description,
+        photo : this.skill.photo,
+        audio : newSkill.audio
+      };
+    }else if(this.fileUrl && this.fileUrl !== '' &&  this.skill.audio){
+      var postDatasBis3 = {
+        title: title,
+        content: content,
+        description :description,
+        photo : newSkill.photo,
+        audio : this.skill.audio
+      };
     }else{
       var postData = {
         title: title,
         content: content,
-        description : description
+        description: description
       }
     }
-      
+
+
     // Write the new post's data simultaneously in the posts list and the user's post list.
     var updates = {};
-    if(this.fileUrl && this.fileUrl !== ''){
+
+    if(this.fileUrl && this.fileUrl !== '' && this.audioUrl && this.audioUrl !== ''){
       updates['/Skills/' + id] = postDatas;
-    }else if(this.skill.photo){
+    }else if(this.skill.photo && this.skill.audio){
       updates['/Skills/' + id] = postDatasBis;
+    }else if(this.skill.photo && this.audioUrl && this.audioUrl !== ''){
+      updates['/Skills/' + id] = postDatasBis2;
+    }else if(this.fileUrl && this.fileUrl !== '' &&  this.skill.audio){
+      updates['/Skills/' + id] = postDatasBis3;
     }else{
       updates['/Skills/' + id] = postData;
     }
@@ -174,6 +212,11 @@ export class SingleSkillComponent implements OnInit {
   detectFiles(event) {
     this.onUploadFile(event.target.files[0]);
   }
+
+  detectAudio(event) {
+    this.onUploadAudio(event.target.files[0]);
+  }
+
   
 
   onUploadFile(file: File) {
@@ -183,6 +226,18 @@ export class SingleSkillComponent implements OnInit {
         this.fileUrl = url;
         this.fileIsUploading = false;
         this.fileUploaded = true;
+      }
+    );
+
+  }
+
+  onUploadAudio(file: File) {
+    this.audioIsUploading = true;
+    this.skillService.uploadAudio(file).then(
+      (url: string) => {
+        this.audioUrl = url;
+        this.audioIsUploading = false;
+        this.audioUploaded = true;
       }
     );
 
@@ -199,22 +254,42 @@ export class SingleSkillComponent implements OnInit {
     const content = this.skillForm.get('content').value;
     const id = this.route.snapshot.params['id'];
     const description = this.skill.description;
+    if(this.skill.audio){
+      const audio = this.skill.audio;
+    }
+
     const newSkill = new Skill();
     newSkill.title = title;
     newSkill.content = content;
     newSkill.description = description;
+    if(this.skill.audio){
+      newSkill.audio = this.skill.audio;
+    }
 
       var postData = {
         title: title,
         content: content,
         description : description
       }
+
+      if(this.skill.audio){
+        var postDatas = {
+          title: title,
+          content:content,
+          description : description,
+          audio: newSkill.audio
+        }
+      }
       
     // Write the new post's data simultaneously in the posts list and the user's post list.
     var updates = {};
 
-      updates['/Skills/' + id] = postData;
-  
+      if(this.skill.audio){
+        updates['/Skills/' + id] = postDatas;
+      }else{
+        updates['/Skills/' + id] = postData;
+      }
+
     firebase.database().ref().update(updates);
 
     this.skillService.removePics(this.skill)
@@ -222,5 +297,58 @@ export class SingleSkillComponent implements OnInit {
     this.onChange();
     this.fileUploaded = false;
   }
+
+  rmAudio(){
+    const title = this.skillForm.get('title').value;
+    const content = this.skillForm.get('content').value;
+    const id = this.route.snapshot.params['id'];
+    const description = this.skill.description;
+    if(this.skill.photo){
+      const photo = this.skill.photo;
+    }
+
+    const newSkill = new Skill();
+    newSkill.title = title;
+    newSkill.content = content;
+    newSkill.description = description;
+    if(this.skill.photo){
+      newSkill.photo = this.skill.photo;
+    }
+
+      var postData = {
+        title: title,
+        content: content,
+        description : description
+      }
+
+      if(this.skill.photo){
+        var postDatas = {
+          title: title,
+          content:content,
+          description : description,
+          photo: newSkill.photo
+        }
+      }
+      
+    // Write the new post's data simultaneously in the posts list and the user's post list.
+    var updates = {};
+
+      if(this.skill.photo){
+        updates['/Skills/' + id] = postDatas;
+      }else{
+        updates['/Skills/' + id] = postData;
+      }
+
+    firebase.database().ref().update(updates);
+
+    this.skillService.removeAudio(this.skill)
+    this.renew();
+    this.onChange();
+    this.fileUploaded = false;
+  }
+
+
+
+
 
 }

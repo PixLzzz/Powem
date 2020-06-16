@@ -57,7 +57,8 @@ import { MailSnackbarComponent } from './mail-snackbar/mail-snackbar.component';
 import { OtherComponent } from './other/other.component';
 import { OtherListComponent } from './other-list/other-list.component';
 import { SingleOtherComponent } from './single-other/single-other.component';
-
+import { NgxAudioPlayerModule } from 'ngx-audio-player';
+ 
 
 
     firebase.initializeApp(environment.firebase);
@@ -116,6 +117,7 @@ import { SingleOtherComponent } from './single-other/single-other.component';
     CKEditorModule,
     MatSnackBarModule,
     MatCheckboxModule,
+    NgxAudioPlayerModule.forRoot()
 
   ],
   providers: [AuthService,FirebaseService,SkillServiceService,AngularFireStorage,AngularFirestore,UploadService],

@@ -11,8 +11,13 @@
     <!--AFFICHAGE STANDARD-->
     <div *ngIf="isCheck==false" class="padd">
       <h1>{{ poem.title }}</h1>
-
+      <div class="audio" *ngIf="poem.audio">
+      <mat-basic-audio-player [audioUrl]="audioSrc" [title]="msbapTitle" [autoPlay]="false" [startOffset]="startOffset"
+      [displayTitle]="msbapDisplayTitle" [displayVolumeControls]="msbapDisplayVolumeControls" ></mat-basic-audio-player>
+    </div>
+    <br><br>
       <img style="max-width:400px;" *ngIf="poem.photo" [src]="poem.photo">
+      <br>
       <br>
       <pre class="contentCore">{{ poem.content }}</pre>
       <button mat-raised-button color="primary" (click)="onBack()">Retour</button> 
@@ -26,13 +31,22 @@
     <div *ngIf="isCheck==true">
 
       <br>
-          <button  mat-raised-button color="warn" (click)="rmPics()">Clear photo </button>
-          <br>
-          <br>
-      <h4>Ajouter une photo</h4>
+      <h4>Photo</h4>
       <input type="file" (change)="detectFiles($event)"
              class="filePics" accept="image/*">
       <p class="text-success" *ngIf="fileUploaded">Fichier chargé !</p>
+      <br>
+      <br>
+      <button  mat-raised-button color="warn" (click)="rmPics()">Clear Photo </button>
+          <br>
+          <br>
+      <h4>Audio</h4>
+      <input type="file" (change)="detectAudio($event)"
+             class="filePics" accept="audio/*">
+      <p class="text-success" *ngIf="audioUploaded">Fichier chargé !</p>
+      <br>
+      <br>
+      <button  mat-raised-button color="accent" (click)="rmAudio()">Clear Audio </button>
       <br>
       <br>
       <br>

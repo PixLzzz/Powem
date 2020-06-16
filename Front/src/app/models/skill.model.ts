@@ -3,4 +3,5 @@ export class Skill {
     public description: string;
     public content : string;
     public photo : string;
+    public audio : string;
     }

@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
 import { AngularFireDatabase } from '@angular/fire/database';
 import * as firebase from 'firebase';
 import { ActivatedRoute, Router } from '@angular/router';
@@ -22,6 +22,17 @@ export class SinglePoemComponent implements OnInit {
   fileIsUploading = false;
   fileUrl: string;
   fileUploaded = false;
+  audioIsUploading = false;
+  audioUrl: string;
+  audioUploaded = false;
+  startOffset = 0;
+  // Material Style Basic Audio Player Title and Audio URL
+  msbapTitle = 'Son';  
+  msbapDisplayTitle = false; 
+  msbapDisplayVolumeControls = true;  
+  autoPlay= true;
+  audioSrc="";
+
 
   constructor(private route: ActivatedRoute, private fireService: FirebaseService,
               private router: Router,private formBuilder: FormBuilder,public dialog: MatDialog) {}
@@ -36,8 +47,12 @@ export class SinglePoemComponent implements OnInit {
           title: [this.poem.title, Validators.required],
           content: [this.poem.content, Validators.required]
         }); 
+        console.log(this.poem)
+        this.audioSrc = this.poem.audio;
+
       }
     );
+    
   }
 
   onBack() {
@@ -72,26 +87,48 @@ export class SinglePoemComponent implements OnInit {
     if(this.fileUrl && this.fileUrl !== '') {
       newPoem.photo = this.fileUrl;
     }
+    if(this.audioUrl && this.audioUrl !== '') {
+      newPoem.audio = this.audioUrl;
+    }
+
 
 
     const id = this.route.snapshot.params['id'];
     
     // A post entry.
-    if(this.fileUrl && this.fileUrl !== ''){
+    if(this.fileUrl && this.fileUrl !== '' && this.audioUrl && this.audioUrl !== ''){
       var postDatas = {
         title: title,
         content: content,
         category: category,
-        photo : newPoem.photo
+        photo : newPoem.photo,
+        audio : newPoem.audio
       };
-    }else if(this.poem.photo){
+    }else if(this.poem.photo && this.poem.audio){
       var postDatasBis = {
         title: title,
         content: content,
         category :category,
-        photo : this.poem.photo
+        photo : this.poem.photo,
+        audio : this.poem.audio
       };
       
+    }else if(this.poem.photo && this.audioUrl && this.audioUrl !== ''){
+      var postDatasBis2 = {
+        title: title,
+        content: content,
+        category :category,
+        photo : this.poem.photo,
+        audio : newPoem.audio
+      };
+    }else if(this.fileUrl && this.fileUrl !== '' &&  this.poem.audio){
+      var postDatasBis3 = {
+        title: title,
+        content: content,
+        category :category,
+        photo : newPoem.photo,
+        audio : this.poem.audio
+      };
     }else{
       var postData = {
         title: title,
@@ -102,10 +139,14 @@ export class SinglePoemComponent implements OnInit {
       
     // Write the new post's data simultaneously in the posts list and the user's post list.
     var updates = {};
-    if(this.fileUrl && this.fileUrl !== ''){
+    if(this.fileUrl && this.fileUrl !== '' && this.audioUrl && this.audioUrl !== ''){
       updates['/Poems/' + id] = postDatas;
-    }else if(this.poem.photo){
+    }else if(this.poem.photo && this.poem.audio){
       updates['/Poems/' + id] = postDatasBis;
+    }else if(this.poem.photo && this.audioUrl && this.audioUrl !== ''){
+      updates['/Poems/' + id] = postDatasBis2;
+    }else if(this.fileUrl && this.fileUrl !== '' &&  this.poem.audio){
+      updates['/Poems/' + id] = postDatasBis3;
     }else{
       updates['/Poems/' + id] = postData;
     }
@@ -137,6 +178,9 @@ export class SinglePoemComponent implements OnInit {
   detectFiles(event) {
     this.onUploadFile(event.target.files[0]);
   }
+  detectAudio(event) {
+    this.onUploadAudio(event.target.files[0]);
+  }
 
 
   onUploadFile(file: File) {
@@ -151,15 +195,34 @@ export class SinglePoemComponent implements OnInit {
 
   }
 
+  onUploadAudio(file: File) {
+    this.audioIsUploading = true;
+    this.fireService.uploadAudio(file).then(
+      (url: string) => {
+        this.audioUrl = url;
+        this.audioIsUploading = false;
+        this.audioUploaded = true;
+      }
+    );
+
+  }
+
   rmPics(){
     const title = this.poemForm.get('title').value;
     const content = this.poemForm.get('content').value;
     const id = this.route.snapshot.params['id'];
     const category = this.poem.category;
+    if(this.poem.audio){
+      const audio = this.poem.audio;
+    }
+    
     const newPoem = new Poem();
     newPoem.title = title;
     newPoem.content = content;
     newPoem.category = category;
+    if(this.poem.audio){
+      newPoem.audio = this.poem.audio;
+    }
 
       var postData = {
         title: title,
@@ -167,11 +230,23 @@ export class SinglePoemComponent implements OnInit {
         category : category
       }
       
+      if(this.poem.audio){
+        var postDatas = {
+          title: title,
+          content:content,
+          category : category,
+          audio: newPoem.audio
+        }
+      }
     // Write the new post's data simultaneously in the posts list and the user's post list.
     var updates = {};
-
+    
+    if(this.poem.audio){
+      updates['/Poems/' + id] = postDatas;
+    }else{
       updates['/Poems/' + id] = postData;
-  
+    }
+
     firebase.database().ref().update(updates);
 
     this.fireService.removePics(this.poem)
@@ -180,6 +255,57 @@ export class SinglePoemComponent implements OnInit {
     this.fileUploaded = false;
 
   }
+
+  rmAudio(){
+    const title = this.poemForm.get('title').value;
+    const content = this.poemForm.get('content').value;
+    const id = this.route.snapshot.params['id'];
+    const category = this.poem.category;
+    if(this.poem.photo){
+      const photo = this.poem.photo;
+    }
+    
+    const newPoem = new Poem();
+    newPoem.title = title;
+    newPoem.content = content;
+    newPoem.category = category;
+    if(this.poem.photo){
+      newPoem.photo = this.poem.photo;
+    }
+    
+
+      var postData = {
+        title: title,
+        content: content,
+        category : category
+      }
+      
+      if(this.poem.photo){
+        var postDatas = {
+          title: title,
+          content:content,
+          category : category,
+          photo: newPoem.photo
+        }
+      }
+    // Write the new post's data simultaneously in the posts list and the user's post list.
+    var updates = {};
+    
+    if(this.poem.photo){
+      updates['/Poems/' + id] = postDatas;
+    }else{
+      updates['/Poems/' + id] = postData;
+    }
+    
+    firebase.database().ref().update(updates);
+
+    this.fireService.removeAudio(this.poem)
+    this.renew();
+    this.onChange();
+    this.fileUploaded = false;
+
+  }
+
 
 
     

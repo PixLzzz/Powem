@@ -137,6 +137,28 @@ export class SkillServiceService implements OnInit {
     );
 }
 
+uploadAudio(file: File) {
+  return new Promise(
+    (resolve, reject) => {
+      const almostUniqueFileName = Date.now().toString();
+      const upload = firebase.storage().ref()
+        .child('audioSkill/' + almostUniqueFileName + file.name).put(file);
+      upload.on(firebase.storage.TaskEvent.STATE_CHANGED,
+        () => {
+          console.log('Chargement…');
+        },
+        (error) => {
+          console.log('Erreur de chargement ! : ' + error);
+          reject();
+        },
+        () => {
+          resolve(upload.snapshot.ref.getDownloadURL());
+        }
+      );
+    }
+  );
+}
+
 
   removePics(skill : Skill){
     if(skill.photo) {
@@ -147,6 +169,20 @@ export class SkillServiceService implements OnInit {
         },
         (error) => {
           console.log('Could not remove photo! : ' + error);
+        }
+      );
+    }
+  }
+
+  removeAudio(skill : Skill){
+    if(skill.audio) {
+      const storageRef = firebase.storage().refFromURL(skill.audio);
+      storageRef.delete().then(
+        () => {
+          console.log('Audio removed!');
+        },
+        (error) => {
+          console.log('Could not remove audio! : ' + error);
         }
       );
     }

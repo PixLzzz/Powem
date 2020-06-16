@@ -94,3 +94,9 @@ button{
 .padd{
   padding: 5%;
 }
+
+
+mat-basic-audio-player{
+  float: right!important;
+  width: 40%!important;
+}

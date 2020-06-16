@@ -141,6 +141,29 @@ export class FirebaseService {
     );
 }
 
+uploadAudio(file: File) {
+  return new Promise(
+    (resolve, reject) => {
+      const almostUniqueFileName = Date.now().toString();
+      const upload = firebase.storage().ref()
+        .child('audio/' + almostUniqueFileName + file.name).put(file);
+      upload.on(firebase.storage.TaskEvent.STATE_CHANGED,
+        () => {
+          console.log('Chargement…');
+        },
+        (error) => {
+          console.log('Erreur de chargement ! : ' + error);
+          reject();
+        },
+        () => {
+          resolve(upload.snapshot.ref.getDownloadURL());
+        }
+      );
+    }
+  );
+}
+
+
 removePics(poem : Poem){
   if(poem.photo) {
     const storageRef = firebase.storage().refFromURL(poem.photo);
@@ -150,6 +173,20 @@ removePics(poem : Poem){
       },
       (error) => {
         console.log('Could not remove photo! : ' + error);
+      }
+    );
+  }
+}
+
+removeAudio(poem : Poem){
+  if(poem.audio) {
+    const storageRef = firebase.storage().refFromURL(poem.audio);
+    storageRef.delete().then(
+      () => {
+        console.log('Audio removed!');
+      },
+      (error) => {
+        console.log('Could not remove audio! : ' + error);
       }
     );
   }
