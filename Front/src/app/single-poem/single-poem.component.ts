@@ -88,7 +88,6 @@ export class SinglePoemComponent implements OnInit {
     newPoem.category = category;
     newPoem.content = content;
 
-    console.log(newPoem)
 
     if(this.poem.photo){
       newPoem.photo = this.poem.photo;
@@ -103,7 +102,6 @@ export class SinglePoemComponent implements OnInit {
     if(this.audioUrl && this.audioUrl !== '') {
       newPoem.audio = this.audioUrl;
     }
-
 
 
 
@@ -143,6 +141,7 @@ export class SinglePoemComponent implements OnInit {
       
     // Write the new post's data simultaneously in the posts list and the user's post list.
     var updates = {};
+    
     if(newPoem.photo && newPoem.audio){
       updates['/Poems/' + id] = postDatas;
     }else if(newPoem.photo){
