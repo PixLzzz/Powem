@@ -79,12 +79,14 @@
 <div class="rightPos">
 
   <div class="audio" *ngIf="skill.audio">
-    <br>
     <mat-basic-audio-player [audioUrl]="audioSrc" [title]="msbapTitle" [autoPlay]="false" [startOffset]="startOffset"
     [displayTitle]="msbapDisplayTitle" [displayVolumeControls]="msbapDisplayVolumeControls" ></mat-basic-audio-player>
-    <br><br>
+
   </div>
-  
+  <div *ngIf="skill.audio">
+    <br>
+
+  </div>
   <mat-card *ngIf="user">
     Ajouter un fichier :
     <br>

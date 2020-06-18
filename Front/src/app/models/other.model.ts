@@ -3,4 +3,5 @@ export class Other {
     public content: string;
     public category : string;
     public photo : string;
+    public audio : string;
     }

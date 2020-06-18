@@ -71,7 +71,8 @@ export class SingleSkillComponent implements OnInit {
         this.audioSrc = this.skill.audio;
       }
     );
-
+    this.audioUrl = "";
+    this.fileUrl = "";
   }
 
   onBack() {
@@ -103,52 +104,52 @@ export class SingleSkillComponent implements OnInit {
   updateSkill() {
     const title = this.skillForm.get('title').value;
     const content = this.skillForm.get('content').value;
-    const id = this.route.snapshot.params['id'];
     const description = this.skill.description;
+
     const newSkill = new Skill();
     newSkill.title = title;
     newSkill.content = content;
     newSkill.description = description;
+
+    if(this.skill.photo){
+      newSkill.photo = this.skill.photo;
+    }
+    if(this.skill.audio){
+      newSkill.audio = this.skill.audio;
+    }
+
     if(this.fileUrl && this.fileUrl !== '') {
       newSkill.photo = this.fileUrl;
     }
     if(this.audioUrl && this.audioUrl !== '') {
       newSkill.audio = this.audioUrl;
     }
-    
+
+    const id = this.route.snapshot.params['id'];
+
      // A post entry.
-     if(this.fileUrl && this.fileUrl !== '' && this.audioUrl && this.audioUrl !== ''){
+    if(newSkill.photo && newSkill.audio){
       var postDatas = {
         title: title,
         content: content,
-        description : description,
+        description: description,
         photo : newSkill.photo,
         audio : newSkill.audio
       };
-    }else if(this.skill.photo && this.skill.audio){
+    }else if(newSkill.photo){
       var postDatasBis = {
         title: title,
         content: content,
-        description : description,
-        photo : this.skill.photo,
-        audio : this.skill.audio
+        description :description,
+        photo : newSkill.photo
       };
       
-    }else if(this.skill.photo && this.audioUrl && this.audioUrl !== ''){
+    }else if(newSkill.audio){
       var postDatasBis2 = {
         title: title,
         content: content,
         description :description,
-        photo : this.skill.photo,
         audio : newSkill.audio
-      };
-    }else if(this.fileUrl && this.fileUrl !== '' &&  this.skill.audio){
-      var postDatasBis3 = {
-        title: title,
-        content: content,
-        description :description,
-        photo : newSkill.photo,
-        audio : this.skill.audio
       };
     }else{
       var postData = {
@@ -162,24 +163,28 @@ export class SingleSkillComponent implements OnInit {
     // Write the new post's data simultaneously in the posts list and the user's post list.
     var updates = {};
 
-    if(this.fileUrl && this.fileUrl !== '' && this.audioUrl && this.audioUrl !== ''){
+    if(newSkill.photo && newSkill.audio){
       updates['/Skills/' + id] = postDatas;
-    }else if(this.skill.photo && this.skill.audio){
+    }else if(newSkill.photo){
       updates['/Skills/' + id] = postDatasBis;
-    }else if(this.skill.photo && this.audioUrl && this.audioUrl !== ''){
+    }else if(newSkill.audio){
       updates['/Skills/' + id] = postDatasBis2;
-    }else if(this.fileUrl && this.fileUrl !== '' &&  this.skill.audio){
-      updates['/Skills/' + id] = postDatasBis3;
     }else{
       updates['/Skills/' + id] = postData;
     }
   
     firebase.database().ref().update(updates);
 
+    this.audioUrl= "";
+    this.fileUrl= "";
+    if(newSkill.audio){
+      this.audioSrc = newSkill.audio;
+    }
+
     this.renew();
     this.onChange();
     this.fileUploaded = false;
-
+    this.audioUploaded = false;
 
   }
 

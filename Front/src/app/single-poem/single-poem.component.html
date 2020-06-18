@@ -10,16 +10,28 @@
 
     <!--AFFICHAGE STANDARD-->
     <div *ngIf="isCheck==false" class="padd">
-      <h1>{{ poem.title }}</h1>
-      <div class="audio" *ngIf="poem.audio">
-      <mat-basic-audio-player [audioUrl]="audioSrc" [title]="msbapTitle" [autoPlay]="false" [startOffset]="startOffset"
-      [displayTitle]="msbapDisplayTitle" [displayVolumeControls]="msbapDisplayVolumeControls" ></mat-basic-audio-player>
-    </div>
-    <br><br>
-      <img style="max-width:400px;" *ngIf="poem.photo" [src]="poem.photo">
+      
+      <div *ngIf="poem.audio">
+        <div class="audio"> 
+        <mat-basic-audio-player [audioUrl]="audioSrc" [title]="msbapTitle" [autoPlay]="false" [startOffset]="startOffset"
+        [displayTitle]="msbapDisplayTitle" [displayVolumeControls]="msbapDisplayVolumeControls" ></mat-basic-audio-player>
+        </div>
+        <br><br>
+      </div>
+
+          <h1>{{ poem.title }}</h1>
+          
+      <div *ngIf="poem.photo">
+        <br>
+        <img style="max-width:400px;" [src]="poem.photo">
+        <br>
+      </div>
+      
       <br>
       <br>
       <pre class="contentCore">{{ poem.content }}</pre>
+      <br>
+      <br>
       <button mat-raised-button color="primary" (click)="onBack()">Retour</button> 
       <div class="modifyer">
       <!--<button mat-icon-button  style="color: crimson;" (click)="openDialog(poem)">

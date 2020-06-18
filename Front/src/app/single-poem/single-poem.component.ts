@@ -52,6 +52,9 @@ export class SinglePoemComponent implements OnInit {
 
       }
     );
+
+    this.audioUrl = "";
+    this.fileUrl = "";
     
   }
 
@@ -84,6 +87,16 @@ export class SinglePoemComponent implements OnInit {
     newPoem.title = title;
     newPoem.category = category;
     newPoem.content = content;
+
+    console.log(newPoem)
+
+    if(this.poem.photo){
+      newPoem.photo = this.poem.photo;
+    }
+    if(this.poem.audio){
+      newPoem.audio = this.poem.audio;
+    }
+
     if(this.fileUrl && this.fileUrl !== '') {
       newPoem.photo = this.fileUrl;
     }
@@ -93,10 +106,11 @@ export class SinglePoemComponent implements OnInit {
 
 
 
+
     const id = this.route.snapshot.params['id'];
     
     // A post entry.
-    if(this.fileUrl && this.fileUrl !== '' && this.audioUrl && this.audioUrl !== ''){
+    if(newPoem.photo && newPoem.audio){
       var postDatas = {
         title: title,
         content: content,
@@ -104,30 +118,20 @@ export class SinglePoemComponent implements OnInit {
         photo : newPoem.photo,
         audio : newPoem.audio
       };
-    }else if(this.poem.photo && this.poem.audio){
+    }else if(newPoem.photo){
       var postDatasBis = {
         title: title,
         content: content,
         category :category,
-        photo : this.poem.photo,
-        audio : this.poem.audio
+        photo : newPoem.photo
       };
       
-    }else if(this.poem.photo && this.audioUrl && this.audioUrl !== ''){
+    }else if(newPoem.audio){
       var postDatasBis2 = {
         title: title,
         content: content,
         category :category,
-        photo : this.poem.photo,
         audio : newPoem.audio
-      };
-    }else if(this.fileUrl && this.fileUrl !== '' &&  this.poem.audio){
-      var postDatasBis3 = {
-        title: title,
-        content: content,
-        category :category,
-        photo : newPoem.photo,
-        audio : this.poem.audio
       };
     }else{
       var postData = {
@@ -139,23 +143,28 @@ export class SinglePoemComponent implements OnInit {
       
     // Write the new post's data simultaneously in the posts list and the user's post list.
     var updates = {};
-    if(this.fileUrl && this.fileUrl !== '' && this.audioUrl && this.audioUrl !== ''){
+    if(newPoem.photo && newPoem.audio){
       updates['/Poems/' + id] = postDatas;
-    }else if(this.poem.photo && this.poem.audio){
+    }else if(newPoem.photo){
       updates['/Poems/' + id] = postDatasBis;
-    }else if(this.poem.photo && this.audioUrl && this.audioUrl !== ''){
+    }else if(newPoem.audio){
       updates['/Poems/' + id] = postDatasBis2;
-    }else if(this.fileUrl && this.fileUrl !== '' &&  this.poem.audio){
-      updates['/Poems/' + id] = postDatasBis3;
     }else{
       updates['/Poems/' + id] = postData;
     }
   
     firebase.database().ref().update(updates);
 
+    this.audioUrl= "";
+    this.fileUrl= "";
+    if(newPoem.audio){
+      this.audioSrc = newPoem.audio;
+    }
+    
     this.renew();
     this.onChange();
     this.fileUploaded = false;
+    this.audioUploaded = false;
 
 
   }
