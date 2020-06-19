@@ -1,7 +1,5 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { Poem } from '../models/poem.model';
 import { Subscription } from 'rxjs';
-import { FirebaseService } from '../firebase.service';
 import { Router } from '@angular/router';
 import { MatTableDataSource } from '@angular/material/table';
 import { database } from 'firebase';
@@ -17,9 +15,6 @@ import { OtherService } from '../other.service';
   styleUrls: ['./other-list.component.css']
 })
 export class OtherListComponent implements OnInit {
-
-  constructor(private otherService: OtherService, private router: Router,public dialog: MatDialog) {
-  }
   others: Other[];
   cats : String[];
   othersSubscription: Subscription;
@@ -29,6 +24,8 @@ export class OtherListComponent implements OnInit {
   onChange;
   user;
   @Input() selectedOption : any;
+  constructor(private otherService: OtherService, private router: Router,public dialog: MatDialog) {
+  }
 
 
   ngOnInit() {
@@ -57,11 +54,6 @@ export class OtherListComponent implements OnInit {
   console.log(this.selectedOption)
     this.otherService.emitOthers();
   }
-
-
-
-
-
 
   onNewOther() {
     this.router.navigate(['/addOther', 'new']);
