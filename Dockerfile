@@ -5,10 +5,8 @@ COPY Front/package.json Front/package-lock.json ./
 RUN npm install
 COPY Front/ .
 RUN npm run build
-RUN pwd ; ls -all *
-RUN ls -all dist/*
 
 ### STAGE 2: Run ###
 FROM nginx:alpine
 #COPY nginx.conf /etc/nginx/nginx.conf
-COPY --from=build /usr/src/app/dist/front /usr/share/nginx/html
+COPY --from=build /usr/src/app/dist/Front /usr/share/nginx/html
