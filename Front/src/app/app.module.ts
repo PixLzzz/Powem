@@ -58,7 +58,6 @@ import { OtherComponent } from './other/other.component';
 import { OtherListComponent } from './other-list/other-list.component';
 import { SingleOtherComponent } from './single-other/single-other.component';
 import { NgxAudioPlayerModule } from 'ngx-audio-player';
- 
 
 
     firebase.initializeApp(environment.firebase);
