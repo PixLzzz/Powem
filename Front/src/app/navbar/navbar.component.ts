@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { AuthService } from "../auth.service";
 import * as firebase from 'firebase/app';
 
 @Component({
@@ -8,34 +7,29 @@ import * as firebase from 'firebase/app';
   styleUrls: ['./navbar.component.css']
 })
 export class NavbarComponent implements OnInit {
-  isConnected : boolean;
-  currentUser = "";
-  isAdmin : boolean;
-  constructor() { }
+  isConnected = false;
+  menuOpen = false;
 
   ngOnInit(): void {
-    firebase.auth().onAuthStateChanged(
-      (user) => {
-        if(user) {
-          this.isConnected = true;
-          this.currentUser = firebase.auth().currentUser.email;
-          if(this.currentUser == "jlc@ogeu.com"){
-            this.isAdmin = true;
-          }else{
-            this.isAdmin = false;
-          }
-        } else {
-          this.isConnected = false;
-        }
-      }
-    );
+    firebase.auth().onAuthStateChanged((user) => {
+      this.isConnected = !!user;
+      this.menuOpen = false;
+    });
   }
-  logOut(){
-    firebase.auth().signOut().then(function() {
-      console.log("Sign-out successful.")
+
+  toggleMenu() {
+    this.menuOpen = !this.menuOpen;
+  }
+
+  closeMenu() {
+    this.menuOpen = false;
+  }
+
+  logOut() {
+    firebase.auth().signOut().then(() => {
+      this.isConnected = false;
+      this.menuOpen = false;
       window.location.reload();
-    }).catch(function(error) {
-      console.log("error")
     });
   }
 }

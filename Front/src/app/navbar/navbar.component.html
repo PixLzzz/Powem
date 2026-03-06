@@ -1,20 +1,45 @@
-<mat-toolbar color="primary">
-  <span routerLink="/home" routerLinkActive="active-link">Home</span>
-  <span routerLink="/poemHome" routerLinkActive="active-link">Poèmes</span>
-  <span routerLink="/poem" routerLinkActive="active-link">Liste de Poèmes</span>
-  <span routerLink="/other" routerLinkActive="active-link">Proses</span>
-  <span routerLink="/skillHome" routerLinkActive="active-link">Skills</span>
-  <span routerLink="/skillList" routerLinkActive="active-link">Liste de Skills</span>
-  <span routerLink="/contact" routerLinkActive="active-link">Contact</span>
+<mat-toolbar class="navbar">
+  <span class="brand" routerLink="/home" (click)="closeMenu()">Powem</span>
 
-  <!-- This fills the remaining space of the current row -->
-  <span class="example-fill-remaining-space"></span>
+  <nav class="desktop-nav">
+    <a routerLink="/home" routerLinkActive="nav-active" [routerLinkActiveOptions]="{exact:true}">Home</a>
+    <a routerLink="/poemHome" routerLinkActive="nav-active">Poèmes</a>
+    <a routerLink="/poem" routerLinkActive="nav-active">Liste</a>
+    <a routerLink="/other" routerLinkActive="nav-active">Proses</a>
+    <a routerLink="/skillHome" routerLinkActive="nav-active">Skills</a>
+    <a routerLink="/contact" routerLinkActive="nav-active">Contact</a>
+  </nav>
 
-  
-  <span *ngIf="!isConnected" routerLink="/login" routerLinkActive="active-link">Log In </span>
-  <span *ngIf="isConnected" routerLink="/addPoem" routerLinkActive="active-link">Ajouter Poème </span>
-  <span *ngIf="isConnected" routerLink="/addSkill" routerLinkActive="active-link">Ajouter Skill</span>&nbsp;
-  <span *ngIf="isConnected" (click)="logOut()">Log Out</span>
+  <span class="spacer"></span>
 
+  <div class="desktop-auth">
+    <a *ngIf="!isConnected" routerLink="/login" routerLinkActive="nav-active" class="auth-link">Connexion</a>
+    <ng-container *ngIf="isConnected">
+      <a routerLink="/addPoem" routerLinkActive="nav-active">+ Poème</a>
+      <a routerLink="/addSkill" routerLinkActive="nav-active">+ Skill</a>
+      <button mat-stroked-button (click)="logOut()" class="logout-btn">Déconnexion</button>
+    </ng-container>
+  </div>
+
+  <button mat-icon-button class="mobile-only hamburger" (click)="toggleMenu()" aria-label="Menu">
+    <mat-icon>{{ menuOpen ? 'close' : 'menu' }}</mat-icon>
+  </button>
 </mat-toolbar>
+
+<div class="mobile-menu" [class.open]="menuOpen">
+  <a routerLink="/home" routerLinkActive="nav-active" [routerLinkActiveOptions]="{exact:true}" (click)="closeMenu()">Home</a>
+  <a routerLink="/poemHome" routerLinkActive="nav-active" (click)="closeMenu()">Poèmes</a>
+  <a routerLink="/poem" routerLinkActive="nav-active" (click)="closeMenu()">Liste de Poèmes</a>
+  <a routerLink="/other" routerLinkActive="nav-active" (click)="closeMenu()">Proses</a>
+  <a routerLink="/skillHome" routerLinkActive="nav-active" (click)="closeMenu()">Skills</a>
+  <a routerLink="/contact" routerLinkActive="nav-active" (click)="closeMenu()">Contact</a>
+  <div class="mobile-divider"></div>
+  <a *ngIf="!isConnected" routerLink="/login" (click)="closeMenu()">Connexion</a>
+  <ng-container *ngIf="isConnected">
+    <a routerLink="/addPoem" (click)="closeMenu()">+ Ajouter Poème</a>
+    <a routerLink="/addSkill" (click)="closeMenu()">+ Ajouter Skill</a>
+    <a class="logout-mobile" (click)="logOut()">Déconnexion</a>
+  </ng-container>
+</div>
+
 <router-outlet></router-outlet>
