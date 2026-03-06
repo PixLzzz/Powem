@@ -116,7 +116,7 @@ import { NgxAudioPlayerModule } from 'ngx-audio-player';
     CKEditorModule,
     MatSnackBarModule,
     MatCheckboxModule,
-    NgxAudioPlayerModule.forRoot()
+    NgxAudioPlayerModule
 
   ],
   providers: [AuthService,FirebaseService,SkillServiceService,AngularFireStorage,AngularFirestore,UploadService],
