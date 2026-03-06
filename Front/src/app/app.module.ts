@@ -51,7 +51,6 @@ import { DialogSkillComponent } from './dialog-skill/dialog-skill.component';
 import { DialogFileComponent } from './dialog-file/dialog-file.component';
 import { PoemHomeComponent } from './poem-home/poem-home.component';
 import { SkillHomeComponent } from './skill-home/skill-home.component';
-import { CKEditorModule } from 'ng2-ckeditor';
 import { ContactComponent } from './contact/contact.component';
 import { MailSnackbarComponent } from './mail-snackbar/mail-snackbar.component';
 import { OtherComponent } from './other/other.component';
@@ -113,7 +112,6 @@ import { NgxAudioPlayerModule } from 'ngx-audio-player';
     HttpClientModule,
     MatProgressBarModule,
     MatGridListModule,
-    CKEditorModule,
     MatSnackBarModule,
     MatCheckboxModule,
     NgxAudioPlayerModule
