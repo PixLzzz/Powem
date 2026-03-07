@@ -1,28 +1,7 @@
-<div class="parallaxPoems">
-    <div class="titlePoems">
-      <h1>Ecrits en prose</h1>
-    </div>
-  <div class="containerO">
-     <!-- <div class="leftPos">
-        <mat-card>
-            <p>Filtrer par catégorie :</p>
-  
-            <mat-divider></mat-divider>
-            
-            <mat-selection-list #list [(ngModel)]="selectedOptions" (ngModelChange)="onNgModelChange($event)">
-              <mat-list-option *ngFor="let cat of categories" [value]="cat">
-                {{cat}}
-              </mat-list-option>
-          </mat-selection-list>
-  
-          </mat-card>
-      </div>
-       --> 
-      
-     <!--  <div class="middlePos">--> 
-              <app-other-list [selectedOption]="selectedOption"></app-other-list>
-              
-      <!-- </div> --> 
+<div class="other-hero">
+  <div class="other-hero-title">
+    <h1>Écrits en prose</h1>
   </div>
-  
-  </div>
+</div>
+
+<app-other-list [selectedOption]="selectedOption"></app-other-list>

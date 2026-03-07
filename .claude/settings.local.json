@@ -1,0 +1,16 @@
+{
+  "permissions": {
+    "allow": [
+      "mcp__Claude_Preview__preview_start",
+      "Bash(where wsl)",
+      "Bash(wsl --version)",
+      "Bash(where.exe wsl)",
+      "Bash(cmd /c \"where wsl\")",
+      "Bash(echo $SHELL)",
+      "Bash(node --version)",
+      "Bash(C:WindowsSystem32wsl.exe -- which npm)",
+      "Bash(C:WindowsSystem32wsl.exe -- which node)",
+      "Bash(C:WindowsSystem32wsl.exe -e which npm)"
+    ]
+  }
+}

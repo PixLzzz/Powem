@@ -1,86 +1,281 @@
-/* You can add global styles to this file, and also import other style files */
+/* ── Fonts ── */
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400;1,600&family=Montserrat:wght@300;400;500;600;700&display=swap');
 
-@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@200;300;400;700;800;900&display=swap');
-
-html, body { height: 100%; 
-    /*background-color: #eff1f3 !important;
-  */}
-body { margin: 0; }
-.dropzone { 
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    flex-direction: column; 
-    border: 2px dashed #f16624;
-    border-radius: 5px;
-    background: white;
-  }
-  
-  progress::-webkit-progress-value {
-    transition: width 0.1s ease;
-  }
-  .dropzone.hovering {
-    border: 2px solid #f16624;
-    color: #dadada !important;
+/* ── CSS Variables ── */
+:root {
+  --primary: #1e3a5f;
+  --primary-light: #2d5a8e;
+  --primary-dark: #12253d;
+  --accent: #c9a96e;
+  --accent-light: #e8d5b0;
+  --surface: #ffffff;
+  --background: #faf9f6;
+  --text: #1c1c1e;
+  --text-muted: #8a8a8e;
+  --border: rgba(0, 0, 0, 0.09);
+  --shadow: 0 2px 16px rgba(0, 0, 0, 0.07);
+  --shadow-hover: 0 8px 32px rgba(0, 0, 0, 0.13);
+  --radius: 12px;
+  --navbar-height: 64px;
 }
 
-.file-label {
-    font-size: 1.2em;
+/* ── Reset & Base ── */
+*, *::before, *::after {
+  box-sizing: border-box;
 }
 
-* { font-family: 'Montserrat'; }
-
-pre{
-  font-family: 'Montserrat';
-  font-weight: 300; 
-  font-size: medium;
-  color: rgb(44, 43, 43);
+html, body {
+  height: 100%;
+  margin: 0;
+  padding: 0;
 }
 
-.mat-cell{
-  font-size: medium;
+body {
+  font-family: 'Montserrat', sans-serif;
+  background: var(--background);
+  color: var(--text);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 }
 
-.mat-toolbar{
-  font-size: medium;
-
+/* ── Typography ── */
+pre {
+  font-family: 'Montserrat', sans-serif;
+  font-weight: 300;
+  font-size: 1rem;
+  color: var(--text);
+  line-height: 1.9;
+  white-space: pre-wrap;
+  word-break: break-word;
+  margin: 0;
 }
 
-.mat-typography h1{
-  font-family: 'Montserrat'; 
+h1, h2, h3 {
+  font-family: 'Playfair Display', serif;
+}
+
+/* ── Material overrides ── */
+.mat-toolbar {
+  font-size: 0.9rem;
+}
+
+.mat-cell {
+  font-size: 0.9rem;
+}
+
+.mat-typography h1 {
+  font-family: 'Playfair Display', serif;
   font-weight: 700;
 }
 
-.active-link{
-  color:white ;
-  background-color: #3f51b5;
-  border-radius: 5%;
-  padding-left: 1%;
-  padding-right: 1%;
-
+/* ── Buttons ── */
+.btn-primary-action {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  background: var(--primary);
+  color: white;
+  border: none;
+  border-radius: 50px;
+  padding: 10px 22px;
+  font-family: 'Montserrat', sans-serif;
+  font-size: 0.85rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: background 0.2s, transform 0.15s;
+  text-decoration: none;
+  white-space: nowrap;
 }
 
-
-.imgHome{
-  background-image: url("../img/sky.jpg");
-  background-position: center;
-  background-repeat: repeat!important; 
+.btn-primary-action:hover {
+  background: var(--primary-light);
+  transform: translateY(-1px);
 }
 
-body, html {
-  height: 100%;
+.btn-ghost {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  background: transparent;
+  color: var(--primary);
+  border: 1.5px solid var(--primary);
+  border-radius: 50px;
+  padding: 9px 20px;
+  font-family: 'Montserrat', sans-serif;
+  font-size: 0.85rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.2s;
 }
 
+.btn-ghost:hover {
+  background: var(--primary);
+  color: white;
+}
+
+/* ── Active nav link ── */
+.active-link {
+  color: var(--accent) !important;
+  font-weight: 600;
+}
+
+/* ── Parallax hero ── */
 .parallax {
-  /* The image used */
   background-image: url('../img/home.jpg');
-
-  /* Full height */
-  height: 40%; 
-
-  /* Create the parallax scrolling effect */
+  height: 45vh;
+  min-height: 260px;
   background-attachment: fixed;
   background-position: center;
   background-repeat: no-repeat;
   background-size: cover;
+}
+
+@media (max-width: 768px) {
+  .parallax {
+    background-attachment: scroll;
+    height: 35vh;
+    min-height: 200px;
+  }
+}
+
+/* ── Page wrapper utility ── */
+.page-content {
+  max-width: 860px;
+  margin: 0 auto;
+  padding: 48px 24px 72px;
+}
+
+@media (max-width: 600px) {
+  .page-content {
+    padding: 32px 16px 56px;
+  }
+}
+
+/* ── Section title utility ── */
+.section-title {
+  font-family: 'Playfair Display', serif;
+  font-size: clamp(1.6rem, 4vw, 2.2rem);
+  color: var(--text);
+  margin: 0 0 8px 0;
+  font-weight: 700;
+}
+
+.section-subtitle {
+  font-size: 0.9rem;
+  color: var(--text-muted);
+  margin: 0 0 40px 0;
+  font-weight: 400;
+}
+
+/* ── Divider ── */
+.ornament {
+  text-align: center;
+  color: var(--accent);
+  letter-spacing: 0.4em;
+  font-size: 0.8rem;
+  margin: 32px 0;
+}
+
+/* ── Card ── */
+.card {
+  background: var(--surface);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+  transition: box-shadow 0.25s;
+}
+
+.card:hover {
+  box-shadow: var(--shadow-hover);
+}
+
+/* ── Dropzone ── */
+.dropzone {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  border: 2px dashed #d0cec9;
+  border-radius: var(--radius);
+  background: #fff;
+  padding: 32px;
+  transition: border-color 0.2s;
+}
+
+.dropzone.hovering {
+  border-color: var(--primary);
+  color: var(--primary) !important;
+}
+
+progress::-webkit-progress-value {
+  transition: width 0.1s ease;
+}
+
+.file-label {
+  font-size: 1rem;
+}
+
+.imgHome {
+  background-image: url('../img/sky.jpg');
+  background-position: center;
+  background-repeat: repeat;
+}
+
+/* ── Search bar shared ── */
+.search-bar {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  background: var(--surface);
+  border: 1.5px solid var(--border);
+  border-radius: 50px;
+  padding: 10px 18px;
+  transition: border-color 0.2s, box-shadow 0.2s;
+}
+
+.search-bar:focus-within {
+  border-color: var(--primary);
+  box-shadow: 0 0 0 3px rgba(30, 58, 95, 0.08);
+}
+
+.search-bar mat-icon {
+  color: var(--text-muted);
+  font-size: 20px;
+  width: 20px;
+  height: 20px;
+  flex-shrink: 0;
+}
+
+.search-bar input {
+  border: none;
+  outline: none;
+  font-family: 'Montserrat', sans-serif;
+  font-size: 0.9rem;
+  color: var(--text);
+  background: transparent;
+  width: 100%;
+}
+
+.search-bar input::placeholder {
+  color: var(--text-muted);
+}
+
+/* ── Empty state ── */
+.empty-state {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 72px 0;
+  color: var(--text-muted);
+  gap: 12px;
+}
+
+.empty-state mat-icon {
+  font-size: 44px;
+  height: 44px;
+  width: 44px;
+}
+
+.empty-state p {
+  font-size: 0.95rem;
+  margin: 0;
 }

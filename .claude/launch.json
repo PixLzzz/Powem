@@ -1,0 +1,11 @@
+{
+  "version": "0.0.1",
+  "configurations": [
+    {
+      "name": "Angular Frontend (Powem)",
+      "runtimeExecutable": "C:\\Program Files\\Git\\bin\\bash.exe",
+      "runtimeArgs": ["-c", "cd '//wsl$/Ubuntu/home/pixl/Dev/Powem/Front' && wsl bash -c 'export NODE_OPTIONS=--openssl-legacy-provider && cd /home/pixl/Dev/Powem/Front && npm start 2>&1'"],
+      "port": 1400
+    }
+  ]
+}

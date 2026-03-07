@@ -1,17 +1,37 @@
+<div class="skills-page">
 
-<div class="mainContent">
-  <mat-grid-list cols="3" rowHeight="6:5">
-    <div class="eachSkills" *ngFor="let skill of skills; let i = index">
-    <mat-grid-tile class="singleSkill">
-      <div class="contentSkill">
-        <!--<div mat-card-avatar class="example-header-image"><mat-icon>contact_support</mat-icon></div>-->
-        <br>
-            <h1 (click)="onViewSkill(i)">{{skill.title}}</h1>
-            <p>{{skill.description}}</p>
-      </div>
-
-    </mat-grid-tile>
+  <!-- Header -->
+  <div class="skills-header">
+    <div>
+      <h1 class="skills-title">Carnets</h1>
+      <p class="skills-sub">{{ skills?.length || 0 }} fiche{{ (skills?.length || 0) !== 1 ? 's' : '' }}</p>
+    </div>
   </div>
-  </mat-grid-list>
+
+  <!-- Grid of skill cards -->
+  <div class="skills-grid" *ngIf="skills && skills.length > 0">
+    <div
+      class="skill-card"
+      *ngFor="let skill of skills; let i = index"
+      (click)="onViewSkill(i)">
+      <div class="skill-card-inner">
+        <div class="skill-icon">
+          <mat-icon>auto_stories</mat-icon>
+        </div>
+        <h2 class="skill-name">{{ skill.title }}</h2>
+        <p class="skill-desc" *ngIf="skill.description">{{ skill.description }}</p>
+      </div>
+      <div class="skill-card-footer">
+        <span class="read-link">Consulter</span>
+        <mat-icon class="read-arrow">arrow_forward</mat-icon>
+      </div>
+    </div>
+  </div>
+
+  <!-- Empty state -->
+  <div class="empty-state" *ngIf="!skills || skills.length === 0">
+    <mat-icon>library_books</mat-icon>
+    <p>Aucune fiche disponible</p>
+  </div>
 
 </div>

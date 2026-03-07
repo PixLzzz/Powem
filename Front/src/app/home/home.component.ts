@@ -23,21 +23,8 @@ export class HomeComponent implements OnInit {
   site: Home;
   siteForm: FormGroup;
   user;
-  /*
-  ckeConfig: any;
-  mycontent: string;
-  log: string = '';
-  @ViewChild("myckeditor") ckeditor: any;
-  */
 
   ngOnInit(): void {
-    /*
-    this.ckeConfig = {
-      allowedContent: false,
-      extraPlugins: 'divarea',
-      forcePasteAsPlainText: true
-    };
-    */
     this.user = firebase.auth().currentUser;
     this.site = new Home();
     this.fireService.getSingleSite().then(
@@ -50,16 +37,6 @@ export class HomeComponent implements OnInit {
       }
     );
   }
-/*
-  onNChange($event: any): void {
-    console.log("onChange");
-    //this.log += new Date() + "<br />";
-  }
-
-  onPaste($event: any): void {
-    console.log("onPaste");
-    //this.log += new Date() + "<br />";
-  }*/
 
   onChange(){
     this.isCheck = !(this.isCheck);

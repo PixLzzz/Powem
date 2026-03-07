@@ -51,13 +51,12 @@ import { DialogSkillComponent } from './dialog-skill/dialog-skill.component';
 import { DialogFileComponent } from './dialog-file/dialog-file.component';
 import { PoemHomeComponent } from './poem-home/poem-home.component';
 import { SkillHomeComponent } from './skill-home/skill-home.component';
-import { CKEditorModule } from 'ng2-ckeditor';
 import { ContactComponent } from './contact/contact.component';
 import { MailSnackbarComponent } from './mail-snackbar/mail-snackbar.component';
 import { OtherComponent } from './other/other.component';
 import { OtherListComponent } from './other-list/other-list.component';
 import { SingleOtherComponent } from './single-other/single-other.component';
-import { NgxAudioPlayerModule } from 'ngx-audio-player';
+// ngx-audio-player removed — using native HTML5 <audio> element
 
 
     firebase.initializeApp(environment.firebase);
@@ -113,11 +112,8 @@ import { NgxAudioPlayerModule } from 'ngx-audio-player';
     HttpClientModule,
     MatProgressBarModule,
     MatGridListModule,
-    CKEditorModule,
     MatSnackBarModule,
-    MatCheckboxModule,
-    NgxAudioPlayerModule.forRoot()
-
+    MatCheckboxModule
   ],
   providers: [AuthService,FirebaseService,SkillServiceService,AngularFireStorage,AngularFirestore,UploadService],
   bootstrap: [AppComponent]

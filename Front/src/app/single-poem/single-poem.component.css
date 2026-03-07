@@ -1,96 +1,91 @@
-mat-card{
-    margin-left: auto;
-    margin-right: auto;
-    width: 80%;
-    box-shadow: rgba(0, 0, 0, 0.3) 0px 4px 20px!important;
+.content {
+  padding-top: 80px;
+  padding-bottom: 64px;
+  background: #f8f9fc;
+  min-height: 100vh;
 }
 
-.content{
-    padding-top: 8%;
- background-size:100% auto;; width:auto;
-    background-image:url('../../../img/poem3.jpg');
-
-    
-
+mat-card {
+  max-width: 720px;
+  margin: 32px auto !important;
+  width: auto !important;
+  border-radius: 16px !important;
+  box-shadow: 0 4px 24px rgba(0,0,0,0.08) !important;
 }
-.filePics + label {
-  font-size: 1.25em;
+
+.padd {
+  padding: 32px;
+}
+
+h1 {
+  font-size: clamp(1.4rem, 4vw, 2rem) !important;
   font-weight: 700;
-  color: white;
-  background-color: black;
-  display: inline-block;
+  margin: 0 0 16px;
 }
 
-.filePics:focus + label,
-.filePics + label:hover {
-  background-color: red;
-}
-.contentCore{
-    font-size: 14px;
-}
-
-button:focus {outline:0;}
-
-h5{
-    float: left;
+h5 {
+  float: left;
+  color: #777;
+  font-weight: 500;
+  margin: 0;
 }
 
-.modifyer{
-float: right;
+.modifyer {
+  float: right;
 }
 
-.contentCore{
+.contentCore {
   white-space: pre-wrap;
+  font-size: 1rem;
+  line-height: 1.9;
 }
 
-mat-card{
+img {
+  max-width: 100%;
+  border-radius: 8px;
+}
 
-    margin-left: auto;
-    margin-right: auto;
-    width: 50%;
+.audio {
+  margin-bottom: 16px;
 }
 
 .example-form {
-    width: 100%;
-
-    font: 400 14px/20px Roboto, "Helvetica Neue", sans-serif;
-  }
-  
-  .example-full-width {
-    width: 100%;
-    font: 400 14px/20px Roboto, "Helvetica Neue", sans-serif;
-  }
-
-  .titleLimit{
-      width: 30%;
-      outline:0;
-  }
-
-.example-button-row button,
-.example-button-row a {
-  margin-right: 8px;
+  width: 100%;
 }
-button{
+
+.example-full-width {
+  width: 100%;
+}
+
+.titleLimit {
+  width: 100%;
+}
+
+button:focus {
   outline: 0;
 }
 
-.input-headline {
-    font-size: 28px;
-    line-height: 32px;
-    font-weight: 400;
+button {
+  outline: 0;
 }
 
-.example-fill-remaining-space {
-  /* This fills the remaining space, by using flexbox. 
-     Every toolbar row uses a flexbox row layout. */
-  flex: 1 1 auto;
+@media (max-width: 768px) {
+  mat-card {
+    margin: 16px !important;
+  }
+
+  .padd {
+    padding: 20px;
+  }
 }
 
-.toRight{
-  float: right!important;
-  margin-left: auto;
-}
+@media (max-width: 480px) {
+  mat-card {
+    margin: 0 !important;
+    border-radius: 0 !important;
+  }
 
-.padd{
-  padding: 5%;
+  .padd {
+    padding: 16px;
+  }
 }

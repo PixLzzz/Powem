@@ -79,8 +79,7 @@
 <div class="rightPos">
 
   <div class="audio" *ngIf="skill.audio">
-    <mat-basic-audio-player [audioUrl]="audioSrc" [title]="msbapTitle" [autoPlay]="false" [startOffset]="startOffset"
-    [displayTitle]="msbapDisplayTitle" [displayVolumeControls]="msbapDisplayVolumeControls" ></mat-basic-audio-player>
+    <audio [src]="audioSrc" controls preload="metadata" style="width:100%;border-radius:8px;"></audio>
 
   </div>
   <div *ngIf="skill.audio">
