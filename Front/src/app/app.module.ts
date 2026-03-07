@@ -56,7 +56,7 @@ import { MailSnackbarComponent } from './mail-snackbar/mail-snackbar.component';
 import { OtherComponent } from './other/other.component';
 import { OtherListComponent } from './other-list/other-list.component';
 import { SingleOtherComponent } from './single-other/single-other.component';
-import { NgxAudioPlayerModule } from 'ngx-audio-player';
+// ngx-audio-player removed — using native HTML5 <audio> element
 
 
     firebase.initializeApp(environment.firebase);
@@ -113,9 +113,7 @@ import { NgxAudioPlayerModule } from 'ngx-audio-player';
     MatProgressBarModule,
     MatGridListModule,
     MatSnackBarModule,
-    MatCheckboxModule,
-    NgxAudioPlayerModule
-
+    MatCheckboxModule
   ],
   providers: [AuthService,FirebaseService,SkillServiceService,AngularFireStorage,AngularFirestore,UploadService],
   bootstrap: [AppComponent]
