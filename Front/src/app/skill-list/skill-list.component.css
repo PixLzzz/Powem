@@ -1,7 +1,7 @@
 .skills-page {
   max-width: 1040px;
   margin: 0 auto;
-  padding: 48px 24px 80px;
+  padding: calc(var(--navbar-height, 64px) + 48px) 24px 80px;
 }
 
 /* ── Header ── */
@@ -137,7 +137,7 @@
 
 @media (max-width: 480px) {
   .skills-page {
-    padding: 32px 16px 60px;
+    padding: calc(var(--navbar-height, 64px) + 32px) 16px 60px;
   }
 
   .skills-grid {
