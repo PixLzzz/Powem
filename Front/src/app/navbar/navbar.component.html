@@ -4,9 +4,10 @@
   <nav class="desktop-nav">
     <a routerLink="/home" routerLinkActive="nav-active" [routerLinkActiveOptions]="{exact:true}">Home</a>
     <a routerLink="/poemHome" routerLinkActive="nav-active">Poèmes</a>
-    <a routerLink="/poem" routerLinkActive="nav-active">Liste</a>
-    <a routerLink="/other" routerLinkActive="nav-active">Proses</a>
+    <a routerLink="/poem" routerLinkActive="nav-active">Liste de Poèmes</a>
+    <a routerLink="/other" routerLinkActive="nav-active">Liste de Proses</a>
     <a routerLink="/skillHome" routerLinkActive="nav-active">Skills</a>
+    <a routerLink="/skillList" routerLinkActive="nav-active">Liste de Skills</a>
     <a routerLink="/contact" routerLinkActive="nav-active">Contact</a>
   </nav>
 
@@ -30,8 +31,9 @@
   <a routerLink="/home" routerLinkActive="nav-active" [routerLinkActiveOptions]="{exact:true}" (click)="closeMenu()">Home</a>
   <a routerLink="/poemHome" routerLinkActive="nav-active" (click)="closeMenu()">Poèmes</a>
   <a routerLink="/poem" routerLinkActive="nav-active" (click)="closeMenu()">Liste de Poèmes</a>
-  <a routerLink="/other" routerLinkActive="nav-active" (click)="closeMenu()">Proses</a>
+  <a routerLink="/other" routerLinkActive="nav-active" (click)="closeMenu()">Liste de Proses</a>
   <a routerLink="/skillHome" routerLinkActive="nav-active" (click)="closeMenu()">Skills</a>
+  <a routerLink="/skillList" routerLinkActive="nav-active" (click)="closeMenu()">Liste de Skills</a>
   <a routerLink="/contact" routerLinkActive="nav-active" (click)="closeMenu()">Contact</a>
   <div class="mobile-divider"></div>
   <a *ngIf="!isConnected" routerLink="/login" (click)="closeMenu()">Connexion</a>

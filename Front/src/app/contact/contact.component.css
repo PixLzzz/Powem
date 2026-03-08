@@ -1,7 +1,7 @@
 .contact-page {
   max-width: 680px;
   margin: 0 auto;
-  padding: 56px 24px 80px;
+  padding: calc(var(--navbar-height, 64px) + 56px) 24px 80px;
 }
 
 /* ── Header ── */
@@ -102,7 +102,7 @@ mat-form-field {
 /* ── Responsive ── */
 @media (max-width: 600px) {
   .contact-page {
-    padding: 40px 16px 60px;
+    padding: calc(var(--navbar-height, 64px) + 40px) 16px 60px;
   }
 
   .contact-card {
