@@ -1,28 +1,67 @@
-<div class="page-shell">
-  <div class="section-heading">
-    <h1>{{skillHome.title}}</h1>
-    <hr class="divider">
+<div class="knowledge-page">
+  <!-- Geometric background pattern -->
+  <div class="geo-pattern"></div>
+
+  <!-- Hero section -->
+  <div class="knowledge-hero">
+    <div class="ring-container">
+      <span class="ring"></span>
+      <span class="ring ring-2"></span>
+    </div>
+    <h1 class="knowledge-title">{{skillHome.title}}</h1>
+    <div class="title-accent">
+      <span class="accent-dot"></span>
+      <span class="accent-line"></span>
+      <span class="accent-dot"></span>
+    </div>
+
+    <!-- Three decorative icons -->
+    <div class="icon-row">
+      <div class="icon-node">
+        <span class="node-connector left"></span>
+        <div class="icon-circle">
+          <mat-icon>menu_book</mat-icon>
+        </div>
+        <span class="icon-label">Savoir</span>
+      </div>
+      <div class="icon-node">
+        <div class="icon-circle">
+          <mat-icon>lightbulb_outline</mat-icon>
+        </div>
+        <span class="icon-label">Idees</span>
+      </div>
+      <div class="icon-node">
+        <span class="node-connector right"></span>
+        <div class="icon-circle">
+          <mat-icon>explore</mat-icon>
+        </div>
+        <span class="icon-label">Exploration</span>
+      </div>
+    </div>
   </div>
 
-  <div *ngIf="user" class="edit-toggle">
-    <mat-slide-toggle [checked]="isCheck" (change)="onChange()">Modifier</mat-slide-toggle>
-  </div>
+  <!-- Content section -->
+  <div class="knowledge-content">
+    <div *ngIf="user" class="edit-toggle">
+      <mat-slide-toggle [checked]="isCheck" (change)="onChange()">Modifier</mat-slide-toggle>
+    </div>
 
-  <div *ngIf="isCheck==false">
-    <pre class="body-text">{{ skillHome.content }}</pre>
-  </div>
+    <div *ngIf="isCheck==false" class="content-card card">
+      <pre class="body-text">{{ skillHome.content }}</pre>
+    </div>
 
-  <div *ngIf="isCheck==true">
-    <form [formGroup]="skillHomeForm" (ngSubmit)="updateSkillHome()">
-      <mat-form-field appearance="outline" class="full-width">
-        <mat-label>Titre</mat-label>
-        <input matInput id="title" formControlName="title">
-      </mat-form-field>
-      <mat-form-field appearance="outline" class="full-width">
-        <mat-label>Contenu</mat-label>
-        <textarea matInput rows="20" id="content" formControlName="content"></textarea>
-      </mat-form-field>
-      <button class="pill-btn" [disabled]="skillHomeForm.invalid" type="submit">Enregistrer</button>
-    </form>
+    <div *ngIf="isCheck==true">
+      <form [formGroup]="skillHomeForm" (ngSubmit)="updateSkillHome()">
+        <mat-form-field appearance="outline" class="full-width">
+          <mat-label>Titre</mat-label>
+          <input matInput id="title" formControlName="title">
+        </mat-form-field>
+        <mat-form-field appearance="outline" class="full-width">
+          <mat-label>Contenu</mat-label>
+          <textarea matInput rows="20" id="content" formControlName="content"></textarea>
+        </mat-form-field>
+        <button class="pill-btn" [disabled]="skillHomeForm.invalid" type="submit">Enregistrer</button>
+      </form>
+    </div>
   </div>
 </div>

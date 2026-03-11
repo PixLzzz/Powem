@@ -1,7 +1,143 @@
+/* ══════════════════════════════════
+   POEM HOME — "Verse Canvas"
+   ══════════════════════════════════ */
+
+.verse-page {
+  padding: calc(var(--navbar-height, 60px) + 40px) 28px 80px;
+  max-width: 960px;
+  margin: 0 auto;
+  animation: fadeUp 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+
+/* ── Asymmetric layout ── */
+.verse-layout {
+  display: grid;
+  grid-template-columns: 72px 1fr;
+  gap: 0;
+  min-height: 70vh;
+}
+
+/* ── Left margin with rotated title ── */
+.verse-margin {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding-top: 8px;
+  border-right: 1px solid var(--border);
+  position: relative;
+}
+
+.margin-num {
+  font-family: var(--font-heading, 'Cormorant Garamond', serif);
+  font-size: 1.4rem;
+  font-weight: 300;
+  font-style: italic;
+  color: var(--accent, #8b6914);
+  margin-bottom: 20px;
+  opacity: 0.7;
+}
+
+.margin-title {
+  writing-mode: vertical-rl;
+  text-orientation: mixed;
+  font-family: var(--font-heading, 'Cormorant Garamond', serif);
+  font-size: 0.85rem;
+  font-weight: 500;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--text-muted, #8a8a8a);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-height: 400px;
+}
+
+/* ── Main content ── */
+.verse-main {
+  padding: 0 0 0 40px;
+  /* Ruled notebook background */
+  background-image: repeating-linear-gradient(
+    transparent,
+    transparent 31px,
+    rgba(139, 105, 20, 0.06) 31px,
+    rgba(139, 105, 20, 0.06) 32px
+  );
+  background-position: 0 0;
+}
+
+/* ── Header ── */
+.verse-header {
+  margin-bottom: 36px;
+  padding-top: 8px;
+}
+
+.verse-heading {
+  font-family: var(--font-heading, 'Cormorant Garamond', serif);
+  font-size: clamp(2rem, 5vw, 3.2rem);
+  font-weight: 500;
+  font-style: italic;
+  color: var(--text);
+  margin: 0 0 20px;
+  line-height: 1.15;
+  animation: slideIn 0.6s ease forwards;
+}
+
+@keyframes slideIn {
+  from { opacity: 0; transform: translateX(-20px); }
+  to { opacity: 1; transform: translateX(0); }
+}
+
+/* Ornamental divider */
+.verse-ornament {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  width: 100px;
+}
+
+.orn-line {
+  flex: 1;
+  height: 1px;
+  background: var(--accent, #8b6914);
+}
+
+.orn-diamond {
+  width: 6px;
+  height: 6px;
+  background: var(--accent, #8b6914);
+  transform: rotate(45deg);
+  flex-shrink: 0;
+}
+
+/* ── Edit toggle ── */
 .edit-toggle {
   display: flex;
   justify-content: flex-end;
   margin-bottom: 24px;
+}
+
+/* ── Content with guillemet ── */
+.verse-content {
+  position: relative;
+  animation: contentFade 0.8s 0.3s ease forwards;
+  opacity: 0;
+}
+
+@keyframes contentFade {
+  from { opacity: 0; transform: translateY(10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.guillemet {
+  font-family: var(--font-heading, 'Cormorant Garamond', serif);
+  font-size: 4rem;
+  font-weight: 300;
+  color: var(--accent, #8b6914);
+  opacity: 0.35;
+  line-height: 1;
+  display: block;
+  margin-bottom: -16px;
+  margin-left: -8px;
 }
 
 .body-text {
@@ -18,4 +154,27 @@
 .full-width {
   display: block;
   width: 100%;
+}
+
+/* ── Responsive ── */
+@media (max-width: 700px) {
+  .verse-page {
+    padding: calc(var(--navbar-height, 60px) + 28px) 18px 60px;
+  }
+
+  .verse-layout {
+    grid-template-columns: 1fr;
+  }
+
+  .verse-margin {
+    display: none;
+  }
+
+  .verse-main {
+    padding: 0;
+  }
+
+  .guillemet {
+    font-size: 3rem;
+  }
 }

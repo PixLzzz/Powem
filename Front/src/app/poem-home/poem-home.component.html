@@ -1,28 +1,44 @@
-<div class="page-shell">
-  <div class="section-heading">
-    <h1>{{poemHome.title}}</h1>
-    <hr class="divider">
-  </div>
+<div class="verse-page">
+  <div class="verse-layout">
+    <!-- Left margin: rotated title -->
+    <div class="verse-margin">
+      <span class="margin-num">01.</span>
+      <span class="margin-title">{{poemHome.title}}</span>
+    </div>
 
-  <div *ngIf="user" class="edit-toggle">
-    <mat-slide-toggle [checked]="isCheck" (change)="onChange()">Modifier</mat-slide-toggle>
-  </div>
+    <!-- Main content area -->
+    <div class="verse-main">
+      <div class="verse-header">
+        <h1 class="verse-heading">{{poemHome.title}}</h1>
+        <div class="verse-ornament">
+          <span class="orn-line"></span>
+          <span class="orn-diamond"></span>
+          <span class="orn-line"></span>
+        </div>
+      </div>
 
-  <div *ngIf="isCheck==false">
-    <pre class="body-text">{{ poemHome.content }}</pre>
-  </div>
+      <div *ngIf="user" class="edit-toggle">
+        <mat-slide-toggle [checked]="isCheck" (change)="onChange()">Modifier</mat-slide-toggle>
+      </div>
 
-  <div *ngIf="isCheck==true">
-    <form [formGroup]="poemHomeForm" (ngSubmit)="updatePoemHome()">
-      <mat-form-field appearance="outline" class="full-width">
-        <mat-label>Titre</mat-label>
-        <input matInput id="title" formControlName="title">
-      </mat-form-field>
-      <mat-form-field appearance="outline" class="full-width">
-        <mat-label>Contenu</mat-label>
-        <textarea matInput rows="20" id="content" formControlName="content"></textarea>
-      </mat-form-field>
-      <button class="pill-btn" [disabled]="poemHomeForm.invalid" type="submit">Enregistrer</button>
-    </form>
+      <div *ngIf="isCheck==false" class="verse-content">
+        <span class="guillemet">&laquo;</span>
+        <pre class="body-text">{{ poemHome.content }}</pre>
+      </div>
+
+      <div *ngIf="isCheck==true">
+        <form [formGroup]="poemHomeForm" (ngSubmit)="updatePoemHome()">
+          <mat-form-field appearance="outline" class="full-width">
+            <mat-label>Titre</mat-label>
+            <input matInput id="title" formControlName="title">
+          </mat-form-field>
+          <mat-form-field appearance="outline" class="full-width">
+            <mat-label>Contenu</mat-label>
+            <textarea matInput rows="20" id="content" formControlName="content"></textarea>
+          </mat-form-field>
+          <button class="pill-btn" [disabled]="poemHomeForm.invalid" type="submit">Enregistrer</button>
+        </form>
+      </div>
+    </div>
   </div>
 </div>
