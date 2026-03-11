@@ -21,7 +21,7 @@
           <mat-icon>{{ hide ? 'visibility_off' : 'visibility' }}</mat-icon>
         </button>
         <mat-error *ngIf="profileForm.get('password').hasError('required')">Mot de passe requis</mat-error>
-        <mat-error *ngIf="profileForm.get('password').hasError('minlength')">6 caractères minimum</mat-error>
+        <mat-error *ngIf="profileForm.get('password').hasError('minlength')">6 caracteres minimum</mat-error>
       </mat-form-field>
 
       <div class="error-message" *ngIf="errorMessage">
@@ -29,12 +29,7 @@
         <span>{{ errorMessage }}</span>
       </div>
 
-      <button
-        mat-raised-button
-        color="primary"
-        type="submit"
-        class="submit-btn"
-        [disabled]="profileForm.invalid">
+      <button class="pill-btn submit-btn" type="submit" [disabled]="profileForm.invalid">
         Se Connecter
       </button>
     </form>

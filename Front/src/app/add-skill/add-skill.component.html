@@ -1,46 +1,35 @@
-<div class="content">
+<div class="page-shell">
+  <div class="form-card card">
+    <div class="form-card-body">
+      <div class="section-heading">
+        <h1>{{title}}</h1>
+        <hr class="divider">
+      </div>
 
-<mat-card>
-    <div class="container-fluid">
-        <div style="color :#3F51B5;">
-            <h1>{{title}}</h1>
-        </div>
-    
-  
-        <form [formGroup]="skillForm" (ngSubmit)="onSaveSkill()">
-  
-  
-        <mat-form-field class="example-full-width titleLimit">
+      <form [formGroup]="skillForm" (ngSubmit)="onSaveSkill()">
+        <mat-form-field appearance="outline" class="full-width">
           <mat-label>Titre</mat-label>
-          <input type="text" matInput placeholder="Enter title..." id="title"  formControlName="title" >
+          <input type="text" matInput placeholder="Titre..." id="title" formControlName="title">
         </mat-form-field>
-        <br>
-        <mat-form-field class="example-full-width titleLimit">
+
+        <mat-form-field appearance="outline" class="field-desc">
           <mat-label>Description</mat-label>
-          <input type="text" matInput placeholder="Enter short descripiton" id="description"  formControlName="description" >
+          <input type="text" matInput placeholder="Description courte..." id="description" formControlName="description">
         </mat-form-field>
-  
-  
-        <mat-form-field class="example-full-width">
+
+        <mat-form-field appearance="outline" class="full-width">
           <mat-label>Contenu</mat-label>
-          <textarea matInput placeholder="Enter content.." id="content" formControlName="content"></textarea>
+          <textarea matInput placeholder="Contenu..." id="content" formControlName="content" rows="12"></textarea>
         </mat-form-field>
-  
+
         <h4>Ajouter une photo</h4>
-      <input type="file" (change)="detectFiles($event)"
-             class="filePics" accept="image/*">
-      <p class="text-success" *ngIf="fileUploaded">Fichier chargé !</p>
-      <br>
-      <br>
-      <br>
-        <button class="btn btn-success" [disabled]="skillForm.invalid"
-                type="submit">Enregistrer
-        </button>
-  
+        <input type="file" (change)="detectFiles($event)" class="file-input" accept="image/*">
+        <p class="text-success" *ngIf="fileUploaded">Fichier charge !</p>
+
+        <div style="margin-top:24px;">
+          <button class="pill-btn" [disabled]="skillForm.invalid" type="submit">Enregistrer</button>
+        </div>
       </form>
     </div>
-  
-    
-  </mat-card>
-   
+  </div>
 </div>

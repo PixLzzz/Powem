@@ -1,155 +1,117 @@
-.list-page {
-  max-width: 760px;
-  margin: 0 auto;
-  padding: 48px 24px 80px;
-}
-
-/* ── Header ── */
 .list-header {
   display: flex;
   align-items: flex-start;
   justify-content: space-between;
-  margin-bottom: 32px;
   gap: 16px;
 }
 
-.list-title {
-  font-family: 'Playfair Display', serif;
-  font-size: clamp(1.8rem, 4vw, 2.4rem);
-  color: var(--text);
-  margin: 0 0 4px 0;
-  font-weight: 700;
-  line-height: 1.1;
-}
-
-.list-sub {
-  font-size: 0.85rem;
-  color: var(--text-muted);
-  margin: 0;
-  font-weight: 400;
-  letter-spacing: 0.02em;
-}
-
-/* ── Search bar ── */
 .search-bar {
-  margin-bottom: 32px;
+  margin-bottom: 28px;
 }
 
-/* ── Entries list ── */
-.poem-entries {
+/* ── Entries ── */
+.entries {
   display: flex;
   flex-direction: column;
-  margin-top: 8px;
 }
 
-.poem-entry {
+.entry {
   display: flex;
   align-items: center;
-  gap: 18px;
-  padding: 18px 12px 18px 8px;
+  gap: 16px;
+  padding: 16px 12px;
   border-bottom: 1px solid var(--border);
   cursor: pointer;
-  transition: background 0.18s;
-  border-radius: 8px;
+  transition: background 0.2s, padding-left 0.2s;
+  border-radius: 6px;
 }
 
-.poem-entry:hover {
-  background: rgba(30, 58, 95, 0.04);
+.entry:hover {
+  background: var(--accent-tint, rgba(139, 105, 20, 0.06));
+  padding-left: 16px;
 }
 
-/* index number */
-.entry-idx {
-  font-family: 'Playfair Display', serif;
-  font-size: 0.78rem;
-  color: var(--accent);
-  min-width: 26px;
+.entry-num {
+  font-family: var(--font-heading, 'Cormorant Garamond', serif);
+  font-size: 0.85rem;
+  color: var(--accent, #8b6914);
+  min-width: 24px;
   text-align: right;
   font-style: italic;
   flex-shrink: 0;
-  letter-spacing: 0.04em;
+  opacity: 0.6;
 }
 
-/* main body */
 .entry-body {
   flex: 1;
   display: flex;
   flex-direction: column;
-  gap: 3px;
+  gap: 2px;
   min-width: 0;
 }
 
 .entry-title {
-  font-family: 'Playfair Display', serif;
-  font-size: 1.1rem;
-  color: var(--text);
+  font-family: var(--font-heading, 'Cormorant Garamond', serif);
+  font-size: 1.15rem;
   font-weight: 600;
-  transition: color 0.18s;
+  color: var(--text);
+  transition: color 0.2s;
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
 }
 
-.poem-entry:hover .entry-title {
-  color: var(--primary);
+.entry:hover .entry-title {
+  color: var(--accent, #8b6914);
 }
 
-.entry-category {
-  font-size: 0.72rem;
+.entry-tag {
+  font-size: 0.7rem;
   font-weight: 600;
   color: var(--text-muted);
   text-transform: uppercase;
   letter-spacing: 0.08em;
 }
 
-/* delete button */
 .delete-btn {
   color: transparent;
   flex-shrink: 0;
-  transition: color 0.18s;
-  width: 36px !important;
-  height: 36px !important;
-  line-height: 36px !important;
+  transition: color 0.2s;
+  width: 32px !important;
+  height: 32px !important;
+  line-height: 32px !important;
 }
 
-.poem-entry:hover .delete-btn {
+.entry:hover .delete-btn {
   color: #c62828;
 }
 
-/* right arrow */
-.entry-arrow {
+.entry-chevron {
   color: var(--border);
-  font-size: 20px;
-  height: 20px;
-  width: 20px;
+  font-size: 18px;
+  height: 18px;
+  width: 18px;
   flex-shrink: 0;
-  transition: color 0.18s, transform 0.18s;
+  transition: color 0.2s, transform 0.2s;
 }
 
-.poem-entry:hover .entry-arrow {
-  color: var(--primary-light);
+.entry:hover .entry-chevron {
+  color: var(--accent, #8b6914);
   transform: translateX(3px);
 }
 
 /* ── Responsive ── */
 @media (max-width: 600px) {
-  .list-page {
-    padding: 32px 16px 60px;
-  }
-
-  .list-title {
-    font-size: 1.8rem;
-  }
-
-  .poem-entry {
-    padding: 16px 8px 16px 4px;
+  .entry {
+    padding: 14px 8px;
     gap: 12px;
   }
 
-  .entry-idx {
+  .entry-num {
     display: none;
   }
 
   .entry-title {
-    font-size: 1rem;
+    font-size: 1.05rem;
   }
 }

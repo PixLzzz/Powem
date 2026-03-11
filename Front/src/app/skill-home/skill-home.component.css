@@ -1,76 +1,21 @@
-/* ── Hero ── */
-.parallaxSkillHome {
-  background-image: url('../../../img/skill.jpg');
-  height: 52vh;
-  min-height: 300px;
-  background-attachment: fixed;
-  background-position: center;
-  background-repeat: no-repeat;
-  background-size: cover;
-  position: relative;
-  display: flex;
-  align-items: flex-end;
-}
-
-@media (max-width: 768px) {
-  .parallaxSkillHome {
-    background-attachment: scroll;
-    height: 40vh;
-    min-height: 240px;
-  }
-}
-
-.titleSkillHome {
-  width: 100%;
-  padding: 28px 32px;
-  background: linear-gradient(transparent, rgba(0, 0, 0, 0.6));
-  text-align: center;
-  color: white;
-}
-
-h1 {
-  font-family: 'Playfair Display', serif;
-  font-size: clamp(1.8rem, 5vw, 3rem) !important;
-  font-weight: 700;
-  text-shadow: 0 2px 12px rgba(0, 0, 0, 0.4);
-  margin: 0;
-  letter-spacing: 0.01em;
-}
-
-/* ── Content area ── */
-.contentSite {
-  max-width: 760px;
-  margin: 0 auto;
-  padding: 48px 24px 80px;
-}
-
-.mat-form-field {
-  display: block;
-  width: 100% !important;
-}
-
-.contentCore {
-  white-space: pre-wrap;
-  width: 100%;
-  font-family: 'Montserrat', sans-serif;
-  font-weight: 300;
-  font-size: 1rem;
-  line-height: 1.9;
-  color: var(--text);
-}
-
-.modifyer {
+.edit-toggle {
   display: flex;
   justify-content: flex-end;
   margin-bottom: 24px;
 }
 
-@media (max-width: 600px) {
-  .contentSite {
-    padding: 32px 16px 60px;
-  }
+.body-text {
+  font-family: var(--font-body, 'Inter', sans-serif);
+  font-weight: 400;
+  font-size: 0.95rem;
+  color: var(--text-secondary, #555);
+  line-height: 1.85;
+  white-space: pre-wrap;
+  word-break: break-word;
+  margin: 0;
+}
 
-  .titleSkillHome {
-    padding: 20px 20px;
-  }
+.full-width {
+  display: block;
+  width: 100%;
 }

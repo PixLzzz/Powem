@@ -1,33 +1,30 @@
-<div class="list-page">
-
-  <!-- Header -->
+<div class="page-shell">
   <div class="list-header">
-    <div>
-      <h1 class="list-title">Proses</h1>
-      <p class="list-sub">{{ dataSource?.data?.length || 0 }} texte{{ (dataSource?.data?.length || 0) !== 1 ? 's' : '' }}</p>
+    <div class="section-heading">
+      <h1>Proses</h1>
+      <p class="subtitle">{{ dataSource?.data?.length || 0 }} texte{{ (dataSource?.data?.length || 0) !== 1 ? 's' : '' }}</p>
+      <hr class="divider">
     </div>
-    <button *ngIf="user" class="btn-primary-action" (click)="onNewOther()">
-      <mat-icon style="font-size:18px;height:18px;width:18px;">add</mat-icon>
+    <button *ngIf="user" class="pill-btn" (click)="onNewOther()">
+      <mat-icon style="font-size:16px;height:16px;width:16px;">add</mat-icon>
       Nouveau
     </button>
   </div>
 
-  <!-- Search -->
   <div class="search-bar">
     <mat-icon>search</mat-icon>
-    <input (keyup)="applyFilter($event.target.value)" placeholder="Rechercher un texte…" />
+    <input (keyup)="applyFilter($event.target.value)" placeholder="Rechercher..." />
   </div>
 
-  <!-- List -->
-  <div class="poem-entries" *ngIf="dataSource">
+  <div class="entries" *ngIf="dataSource">
     <div
-      class="poem-entry"
+      class="entry"
       *ngFor="let other of dataSource.filteredData; let i = index"
       (click)="onViewOther(dataSource.data.indexOf(other))">
-      <span class="entry-idx">{{ i + 1 < 10 ? '0' + (i + 1) : (i + 1) }}</span>
+      <span class="entry-num">{{ i + 1 < 10 ? '0' + (i + 1) : (i + 1) }}</span>
       <div class="entry-body">
         <span class="entry-title">{{ other.title }}</span>
-        <span class="entry-category" *ngIf="other.category">{{ other.category }}</span>
+        <span class="entry-tag" *ngIf="other.category">{{ other.category }}</span>
       </div>
       <button
         *ngIf="user"
@@ -36,20 +33,17 @@
         (click)="$event.stopPropagation(); openDialog(other)">
         <mat-icon>delete_outline</mat-icon>
       </button>
-      <mat-icon class="entry-arrow">chevron_right</mat-icon>
+      <mat-icon class="entry-chevron">chevron_right</mat-icon>
     </div>
 
-    <!-- Empty state -->
     <div class="empty-state" *ngIf="dataSource.filteredData.length === 0">
       <mat-icon>search_off</mat-icon>
-      <p>Aucun résultat pour cette recherche</p>
+      <p>Aucun resultat</p>
     </div>
   </div>
 
-  <!-- Loading -->
   <div class="empty-state" *ngIf="!dataSource">
     <mat-icon>hourglass_empty</mat-icon>
-    <p>Chargement…</p>
+    <p>Chargement...</p>
   </div>
-
 </div>

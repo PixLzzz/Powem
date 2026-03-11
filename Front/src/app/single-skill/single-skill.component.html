@@ -1,126 +1,89 @@
-<div class="container0">
-  <div class="leftPos">
-<mat-card>
-    <div>
-        <div *ngIf="user">
-           <div class="modifyer"><mat-slide-toggle [checked]="isCheck" (change)="onChange()">Modifier</mat-slide-toggle></div>
+<div class="page-shell page-shell--wide">
+  <div class="skill-layout">
+    <div class="skill-main card">
+      <div class="card-top">
+        <div *ngIf="user" class="edit-toggle">
+          <mat-slide-toggle [checked]="isCheck" (change)="onChange()">Modifier</mat-slide-toggle>
         </div>
-      
-        <!--AFFICHAGE STANDARD-->
-        
-        <div *ngIf="isCheck==false" class="padd">
-    
-          <h1>{{ skill.title }}</h1>
-          
-          <br><br>
-          <img style="max-width:400px;" *ngIf="skill.photo" [src]="skill.photo">
-      <br>
-      <br>
-          <pre class="contentCore">{{ skill.content }}</pre>
-          <br><br>
-          <button mat-raised-button color="primary" (click)="onBack()">Retour</button> 
-          
-          <div class="modifyer">
-          <button mat-icon-button  style="color: crimson;" (click)="openDialog()">
-            <mat-icon>delete</mat-icon>
-          </button>
-        </div>
-        </div>
-        <!--SI MODIFICATION-->
-        <div *ngIf="isCheck==true">
-          <br>
+      </div>
 
-          <h4>Photo</h4>
-      <input type="file" (change)="detectFiles($event)"
-             class="filePics" accept="image/*">
-      <p class="text-success" *ngIf="fileUploaded">Fichier chargé !</p>
-      <br>
-      <br>
-      <button  mat-raised-button color="warn" (click)="rmPics()">Clear Photo </button>
-          <br>
-          <br>
-      <h4>Audio</h4>
-      <input type="file" (change)="detectAudio($event)"
-             class="filePics" accept="audio/*">
-      <p class="text-success" *ngIf="audioUploaded">Fichier chargé !</p>
-      <br>
-      <br>
-      <button  mat-raised-button color="accent" (click)="rmAudio()">Clear Audio </button>
-      <br>
-          <br>
-          <br>
-          <form [formGroup]="skillForm" (ngSubmit)="updateSkill()" class="example-form">
-            <mat-form-field class="example-full-width titleLimit mat-headline">
-              <mat-label>Titre</mat-label>
-              <input matInput  id="title"  formControlName="title">
-            </mat-form-field>
-            <br>
-            <br>
-            <mat-form-field class="example-full-width">
-              <mat-label>Contenu</mat-label>
-              <textarea matInput rows="20" cols="60"  id="content" formControlName="content"></textarea>
-            </mat-form-field>
-      
-            <br>
-            <button class="btn btn-success" [disabled]="skillForm.invalid"
-                  type="submit">Enregistrer
-          </button>
-    
-          
-          </form>
-          <br>
-    
+      <div *ngIf="isCheck==false" class="card-body">
+        <h1 class="piece-title">{{ skill.title }}</h1>
+
+        <div *ngIf="skill.photo" class="photo-section">
+          <img [src]="skill.photo" alt="">
         </div>
-        
+
+        <pre class="body-text">{{ skill.content }}</pre>
+
+        <div class="card-actions">
+          <button class="ghost-btn" (click)="onBack()">
+            <mat-icon style="font-size:16px;height:16px;width:16px;">arrow_back</mat-icon>
+            Retour
+          </button>
+          <button *ngIf="user" mat-icon-button class="delete-btn" (click)="openDialog()">
+            <mat-icon>delete_outline</mat-icon>
+          </button>
+        </div>
+      </div>
+
+      <div *ngIf="isCheck==true" class="card-body">
+        <h4>Photo</h4>
+        <input type="file" (change)="detectFiles($event)" class="file-input" accept="image/*">
+        <p class="text-success" *ngIf="fileUploaded">Fichier charge !</p>
+        <button class="ghost-btn" style="margin: 12px 0;" (click)="rmPics()">Supprimer photo</button>
+
+        <h4>Audio</h4>
+        <input type="file" (change)="detectAudio($event)" class="file-input" accept="audio/*">
+        <p class="text-success" *ngIf="audioUploaded">Fichier charge !</p>
+        <button class="ghost-btn" style="margin: 12px 0;" (click)="rmAudio()">Supprimer audio</button>
+
+        <form [formGroup]="skillForm" (ngSubmit)="updateSkill()">
+          <mat-form-field appearance="outline" class="full-width">
+            <mat-label>Titre</mat-label>
+            <input matInput id="title" formControlName="title">
+          </mat-form-field>
+          <mat-form-field appearance="outline" class="full-width">
+            <mat-label>Contenu</mat-label>
+            <textarea matInput rows="20" id="content" formControlName="content"></textarea>
+          </mat-form-field>
+          <button class="pill-btn" [disabled]="skillForm.invalid" type="submit">Enregistrer</button>
+        </form>
+      </div>
     </div>
-    </mat-card>
+
+    <aside class="skill-sidebar">
+      <div *ngIf="skill.audio" class="sidebar-card card">
+        <div class="sidebar-card-body">
+          <h3 class="sidebar-title">Audio</h3>
+          <audio [src]="audioSrc" controls preload="metadata"></audio>
+        </div>
+      </div>
+
+      <div *ngIf="user" class="sidebar-card card">
+        <div class="sidebar-card-body">
+          <h3 class="sidebar-title">Ajouter un fichier</h3>
+          <app-upload-form [id]="id"></app-upload-form>
+        </div>
+      </div>
+
+      <div class="sidebar-card card">
+        <div class="sidebar-card-body">
+          <h3 class="sidebar-title">Fichiers</h3>
+          <div *ngIf="filess && filess.length > 0" class="files-list">
+            <div class="file-row" *ngFor="let f of filess">
+              <a [href]="f.url" target="_blank" rel="noopener" class="file-link">
+                <mat-icon class="file-icon">insert_drive_file</mat-icon>
+                <span>{{f.name}}</span>
+              </a>
+              <button *ngIf="user" mat-icon-button class="delete-btn-sm" (click)="openDialogFile(f.name)">
+                <mat-icon>close</mat-icon>
+              </button>
+            </div>
+          </div>
+          <p *ngIf="!filess || filess.length < 1" class="no-files">Aucun fichier</p>
+        </div>
+      </div>
+    </aside>
   </div>
- 
-<div class="rightPos">
-
-  <div class="audio" *ngIf="skill.audio">
-    <audio [src]="audioSrc" controls preload="metadata" style="width:100%;border-radius:8px;"></audio>
-
-  </div>
-  <div *ngIf="skill.audio">
-    <br>
-
-  </div>
-  <mat-card *ngIf="user">
-    Ajouter un fichier :
-    <br>
-    
-    <app-upload-form [id]="id"></app-upload-form>
-    </mat-card>
-  <br>
-    <mat-card>
-      <div class="containerFiles">
-      <div *ngIf="filess">
-
-        <div *ngFor="let f of filess">
-
-          <a [href]="f.url" target="_blank" rel="noopener">{{f.name}}   <button mat-icon-button  style="color: #3F51B5;">
-            <mat-icon>get_app</mat-icon>
-          </button></a> <button  *ngIf="user" mat-icon-button  style="color: crimson;" (click)="openDialogFile(f.name)">
-            <mat-icon>delete</mat-icon>
-          </button>
-      </div>
-
-      </div>
-      <div *ngIf="filess.length<1">
-
-        <a>No files yet</a>
-      </div>
-         
-
-      </div>
-           
-    </mat-card>
 </div>
-</div>
-
-    <br>
-    <br>
-    <br>
-    <br>
-    

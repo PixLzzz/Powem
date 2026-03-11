@@ -1,48 +1,64 @@
-.contentSite {
-  max-width: 800px;
-  margin: 0 auto;
-  padding: 48px 24px 64px;
-}
-
-.mat-form-field {
-  display: block;
-  width: 100% !important;
-}
-
-pre {
-  overflow: auto;
-  font-size: 1rem;
-  line-height: 1.9;
-}
-
-.contentCore {
-  white-space: pre-wrap;
-}
-
-.titleHome {
-  position: relative;
+/* ── Hero section ── */
+.home-hero {
+  padding: calc(var(--navbar-height, 60px) + 80px) 28px 0;
   text-align: center;
-  color: white;
-  margin-top: -80px;
-  padding-bottom: 24px;
-  background: linear-gradient(transparent, rgba(0,0,0,0.35));
+  animation: fadeUp 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94);
 }
 
-h1 {
-  text-shadow: 0 2px 8px rgba(0,0,0,0.4);
-  font-size: clamp(1.8rem, 5vw, 3rem) !important;
+.hero-title {
+  font-family: var(--font-heading, 'Cormorant Garamond', serif);
+  font-size: clamp(2.5rem, 7vw, 4.5rem);
+  font-weight: 400;
+  font-style: italic;
+  letter-spacing: -0.02em;
+  color: var(--text);
   margin: 0;
-  padding: 16px;
+  line-height: 1.1;
 }
 
-.modifyer {
+.hero-line {
+  width: 48px;
+  height: 2px;
+  background: var(--accent, #8b6914);
+  border: none;
+  margin: 28px auto 0;
+}
+
+/* ── Content area ── */
+.home-content {
+  max-width: 720px;
+  margin: 0 auto;
+  padding: 48px 28px 80px;
+}
+
+.edit-toggle {
   display: flex;
   justify-content: flex-end;
-  margin-bottom: 16px;
+  margin-bottom: 24px;
+}
+
+.body-text {
+  font-family: var(--font-body, 'Inter', sans-serif);
+  font-weight: 400;
+  font-size: 0.95rem;
+  color: var(--text-secondary, #555);
+  line-height: 1.85;
+  white-space: pre-wrap;
+  word-break: break-word;
+  margin: 0;
+}
+
+.full-width {
+  display: block;
+  width: 100%;
 }
 
 @media (max-width: 600px) {
-  .contentSite {
-    padding: 32px 16px 48px;
+  .home-hero {
+    padding: calc(var(--navbar-height, 60px) + 48px) 18px 0;
+  }
+
+  .home-content {
+    padding: 36px 18px 60px;
   }
 }

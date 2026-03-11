@@ -1,50 +1,28 @@
+<div class="home-hero">
+  <h1 class="hero-title">{{site.title}}</h1>
+  <hr class="hero-line">
+</div>
 
- 
-  <div class="parallax"></div>
-  <div class="titleHome">
-    <h1>{{site.title}}</h1>
+<div class="home-content">
+  <div *ngIf="user" class="edit-toggle">
+    <mat-slide-toggle [checked]="isCheck" (change)="onChange()">Modifier</mat-slide-toggle>
   </div>
-        <div class="contentSite">
-          
-            <div *ngIf="user">
-              <div class="modifyer"><mat-slide-toggle [checked]="isCheck" (change)="onChange()">Modifier</mat-slide-toggle></div>
-              <br>
-              <br>
-            </div>
-          
 
-            <!--AFFICHAGE STANDARD-->
-            <div *ngIf="isCheck==false">
-              <pre class="contentCore">{{ site.content }}</pre>
-              <br><br>
-            </div>
-            <!--SI MODIFICATION-->
-            <div *ngIf="isCheck==true">
-              
-              <form [formGroup]="siteForm" (ngSubmit)="updateSite()" class="example-form">
-                <mat-form-field class="example-full-width titleLimit mat-headline">
-                  <mat-label>Titre</mat-label>
-                  <input matInput  id="title"  formControlName="title">
-                </mat-form-field>
-                <br>
-                <br>
-                <mat-form-field class="example-full-width">
-                  <mat-label>Contenu</mat-label>
-                  <textarea matInput rows="20" cols="60"  id="content" formControlName="content"></textarea>
-                </mat-form-field>
-          
-                <br>
-                <button class="btn btn-success" [disabled]="siteForm.invalid"
-                      type="submit">Enregistrer
-              </button>
-        
-              
-              </form>
-              <br>
-        
-            </div>
-            
-           
-          </div>
-          <div class="parallax"></div>
-    
+  <div *ngIf="isCheck==false">
+    <pre class="body-text">{{ site.content }}</pre>
+  </div>
+
+  <div *ngIf="isCheck==true">
+    <form [formGroup]="siteForm" (ngSubmit)="updateSite()">
+      <mat-form-field appearance="outline" class="full-width">
+        <mat-label>Titre</mat-label>
+        <input matInput id="title" formControlName="title">
+      </mat-form-field>
+      <mat-form-field appearance="outline" class="full-width">
+        <mat-label>Contenu</mat-label>
+        <textarea matInput rows="20" id="content" formControlName="content"></textarea>
+      </mat-form-field>
+      <button class="pill-btn" [disabled]="siteForm.invalid" type="submit">Enregistrer</button>
+    </form>
+  </div>
+</div>

@@ -3,8 +3,8 @@
 
   <nav class="desktop-nav">
     <a routerLink="/home" routerLinkActive="nav-active" [routerLinkActiveOptions]="{exact:true}">Home</a>
-    <a routerLink="/poemHome" routerLinkActive="nav-active">Poèmes</a>
-    <a routerLink="/poem" routerLinkActive="nav-active">Liste de Poèmes</a>
+    <a routerLink="/poemHome" routerLinkActive="nav-active">Poemes</a>
+    <a routerLink="/poem" routerLinkActive="nav-active">Liste de Poemes</a>
     <a routerLink="/other" routerLinkActive="nav-active">Liste de Proses</a>
     <a routerLink="/skillHome" routerLinkActive="nav-active">Skills</a>
     <a routerLink="/skillList" routerLinkActive="nav-active">Liste de Skills</a>
@@ -16,9 +16,9 @@
   <div class="desktop-auth">
     <a *ngIf="!isConnected" routerLink="/login" routerLinkActive="nav-active" class="auth-link">Connexion</a>
     <ng-container *ngIf="isConnected">
-      <a routerLink="/addPoem" routerLinkActive="nav-active">+ Poème</a>
+      <a routerLink="/addPoem" routerLinkActive="nav-active">+ Poeme</a>
       <a routerLink="/addSkill" routerLinkActive="nav-active">+ Skill</a>
-      <button mat-stroked-button (click)="logOut()" class="logout-btn">Déconnexion</button>
+      <button mat-stroked-button (click)="logOut()" class="logout-btn">Deconnexion</button>
     </ng-container>
   </div>
 
@@ -27,21 +27,32 @@
   </button>
 </mat-toolbar>
 
+<div class="mobile-overlay" [class.open]="menuOpen" (click)="closeMenu()"></div>
 <div class="mobile-menu" [class.open]="menuOpen">
-  <a routerLink="/home" routerLinkActive="nav-active" [routerLinkActiveOptions]="{exact:true}" (click)="closeMenu()">Home</a>
-  <a routerLink="/poemHome" routerLinkActive="nav-active" (click)="closeMenu()">Poèmes</a>
-  <a routerLink="/poem" routerLinkActive="nav-active" (click)="closeMenu()">Liste de Poèmes</a>
-  <a routerLink="/other" routerLinkActive="nav-active" (click)="closeMenu()">Liste de Proses</a>
-  <a routerLink="/skillHome" routerLinkActive="nav-active" (click)="closeMenu()">Skills</a>
-  <a routerLink="/skillList" routerLinkActive="nav-active" (click)="closeMenu()">Liste de Skills</a>
-  <a routerLink="/contact" routerLinkActive="nav-active" (click)="closeMenu()">Contact</a>
+  <div class="mobile-menu-header">
+    <span class="mobile-brand">Powem</span>
+    <button mat-icon-button (click)="closeMenu()">
+      <mat-icon>close</mat-icon>
+    </button>
+  </div>
+  <nav class="mobile-nav">
+    <a routerLink="/home" routerLinkActive="nav-active" [routerLinkActiveOptions]="{exact:true}" (click)="closeMenu()">Home</a>
+    <a routerLink="/poemHome" routerLinkActive="nav-active" (click)="closeMenu()">Poemes</a>
+    <a routerLink="/poem" routerLinkActive="nav-active" (click)="closeMenu()">Liste de Poemes</a>
+    <a routerLink="/other" routerLinkActive="nav-active" (click)="closeMenu()">Liste de Proses</a>
+    <a routerLink="/skillHome" routerLinkActive="nav-active" (click)="closeMenu()">Skills</a>
+    <a routerLink="/skillList" routerLinkActive="nav-active" (click)="closeMenu()">Liste de Skills</a>
+    <a routerLink="/contact" routerLinkActive="nav-active" (click)="closeMenu()">Contact</a>
+  </nav>
   <div class="mobile-divider"></div>
-  <a *ngIf="!isConnected" routerLink="/login" (click)="closeMenu()">Connexion</a>
-  <ng-container *ngIf="isConnected">
-    <a routerLink="/addPoem" (click)="closeMenu()">+ Ajouter Poème</a>
-    <a routerLink="/addSkill" (click)="closeMenu()">+ Ajouter Skill</a>
-    <a class="logout-mobile" (click)="logOut()">Déconnexion</a>
-  </ng-container>
+  <nav class="mobile-nav mobile-nav--auth">
+    <a *ngIf="!isConnected" routerLink="/login" (click)="closeMenu()">Connexion</a>
+    <ng-container *ngIf="isConnected">
+      <a routerLink="/addPoem" (click)="closeMenu()">+ Ajouter Poeme</a>
+      <a routerLink="/addSkill" (click)="closeMenu()">+ Ajouter Skill</a>
+      <a class="logout-mobile" (click)="logOut()">Deconnexion</a>
+    </ng-container>
+  </nav>
 </div>
 
 <router-outlet></router-outlet>

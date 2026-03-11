@@ -10,7 +10,12 @@
       "Bash(node --version)",
       "Bash(C:WindowsSystem32wsl.exe -- which npm)",
       "Bash(C:WindowsSystem32wsl.exe -- which node)",
-      "Bash(C:WindowsSystem32wsl.exe -e which npm)"
+      "Bash(C:WindowsSystem32wsl.exe -e which npm)",
+      "Bash(wsl -e bash -c \"cd /home/pixl/Dev/Powem && git status\")",
+      "Bash(git -C \"//wsl$/Ubuntu/home/pixl/Dev/Powem\" status)",
+      "Bash(git -C \"\\\\\\\\wsl$\\\\Ubuntu\\\\home\\\\pixl\\\\Dev\\\\Powem\" log --oneline -5)",
+      "Bash(bash -c 'cd /mnt/c && ls')",
+      "Bash(dir \"\\\\\\\\wsl$\\\\Ubuntu\\\\home\\\\pixl\\\\Dev\\\\Powem\\\\.git\")"
     ]
   }
 }

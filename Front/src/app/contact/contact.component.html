@@ -1,13 +1,12 @@
-<div class="contact-page">
-
-  <div class="contact-header">
-    <h1 class="contact-title">Contact</h1>
-    <p class="contact-subtitle">Une remarque ? Une suggestion ? N'hésitez pas à m'écrire.</p>
+<div class="page-shell">
+  <div class="section-heading" style="text-align:center;">
+    <h1>Contact</h1>
+    <p class="subtitle">Une remarque ? Une suggestion ? N'hesitez pas a m'ecrire.</p>
+    <hr class="divider" style="margin-left:auto;margin-right:auto;">
   </div>
 
-  <div class="contact-card">
+  <div class="contact-card card">
     <form [formGroup]="form" (ngSubmit)="onSubmit()">
-
       <div class="form-row">
         <mat-form-field appearance="outline" class="field-half">
           <mat-label>Nom</mat-label>
@@ -24,17 +23,15 @@
 
       <mat-form-field appearance="outline" class="field-full">
         <mat-label>Message</mat-label>
-        <textarea matInput formControlName="message" placeholder="Votre message…" rows="7"></textarea>
+        <textarea matInput formControlName="message" placeholder="Votre message..." rows="7"></textarea>
       </mat-form-field>
 
       <div class="form-actions">
-        <button mat-flat-button class="submit-btn" type="submit" [disabled]="form.invalid">
-          <mat-icon>send</mat-icon>
+        <button class="pill-btn pill-btn--accent" type="submit" [disabled]="form.invalid">
+          <mat-icon style="font-size:16px;height:16px;width:16px;">send</mat-icon>
           Envoyer
         </button>
       </div>
-
     </form>
   </div>
-
 </div>

@@ -1,13 +1,13 @@
-<div class="content">
-
-<mat-card>
-  <div class="container-fluid">
-      <div style="color :#3F51B5;">
-          <h1>{{title}}</h1>
+<div class="page-shell">
+  <div class="form-card card">
+    <div class="form-card-body">
+      <div class="section-heading">
+        <h1>{{title}}</h1>
+        <hr class="divider">
       </div>
 
-      <mat-form-field>
-        <mat-label>Catégorie</mat-label>
+      <mat-form-field appearance="outline" class="field-category">
+        <mat-label>Categorie</mat-label>
         <mat-select required [(ngModel)]="selectedValue" name="category">
           <mat-option *ngFor="let cat of category" [value]="cat.value">
             {{cat.viewValue}}
@@ -16,38 +16,26 @@
       </mat-form-field>
 
       <form [formGroup]="poemForm" (ngSubmit)="onSavePoem()">
+        <mat-form-field appearance="outline" class="full-width">
+          <mat-label>Titre</mat-label>
+          <input type="text" matInput placeholder="Titre..." id="title" formControlName="title">
+        </mat-form-field>
 
+        <mat-form-field appearance="outline" class="full-width">
+          <mat-label>Contenu</mat-label>
+          <textarea matInput placeholder="Contenu..." id="content" formControlName="content" rows="12"></textarea>
+        </mat-form-field>
 
-      <mat-form-field class="example-full-width titleLimit">
-        <mat-label>Titre</mat-label>
-        <input type="text" matInput placeholder="Enter title..." id="title"  formControlName="title" >
-      </mat-form-field>
+        <h4>Ajouter une photo</h4>
+        <input type="file" (change)="detectFiles($event)" class="file-input" accept="image/*">
+        <p class="text-success" *ngIf="fileUploaded">Fichier charge !</p>
 
+        <div class="checkbox-row">
+          <mat-checkbox #check [checked]="checked" name="checked" (change)="handleCheckChange(check.checked)">Prose</mat-checkbox>
+        </div>
 
-      <mat-form-field class="example-full-width">
-        <mat-label>Contenu</mat-label>
-        <textarea matInput placeholder="Enter content.." id="content" formControlName="content"></textarea>
-      </mat-form-field>
-
-      <h4>Ajouter une photo</h4>
-      <input type="file" (change)="detectFiles($event)"
-             class="filePics" accept="image/*">
-      <p class="text-success" *ngIf="fileUploaded">Fichier chargé !</p>
-      <br>
-      <br>
-      <mat-checkbox #check [checked]="checked" name="checked" (change)="handleCheckChange(check.checked)">Prose</mat-checkbox>
-      <br>
-      <br>
-      <br>
-
-      <button class="btn btn-success" [disabled]="poemForm.invalid"
-              type="submit">Enregistrer
-      </button>
-
-    </form>
+        <button class="pill-btn" [disabled]="poemForm.invalid" type="submit">Enregistrer</button>
+      </form>
+    </div>
   </div>
-
-  
-</mat-card>
- 
 </div>

@@ -1,103 +1,206 @@
-mat-card {
-
-    margin-left: auto;
-    margin-right: auto;
-    box-shadow: rgba(0, 0, 0, 0.3) 0px 4px 20px!important;
-    box-shadow: rgba(0, 0, 0, 0.3) 0px 4px 20px!important;
-    margin: 2%;
-    background: rgb(255, 255, 255) !important;
+.skill-layout {
+  display: grid;
+  grid-template-columns: 1fr 300px;
+  gap: 24px;
+  align-items: start;
 }
 
-.container0{
-  width: 100%;
-  padding-top: 5%;
-}
-.leftPos {
-  width: 68%;
-  margin-left: 5%;
- float: left;
- margin-top: 3%;
-}
-.rightPos {
- margin-right: 5%;
- float: right;
- width: 20%;
- margin-top: 4%;
+.skill-main {
+  overflow: hidden;
 }
 
-.containerFiles{
-  width: 100%;
+.card-top {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  padding: 16px 32px;
+  border-bottom: 1px solid var(--border);
+  min-height: 56px;
 }
 
-
-.contentCore{
-    font-size: 14px;
+.edit-toggle {
+  margin-left: auto;
 }
 
-.contentCore{
+.card-body {
+  padding: 32px;
+}
+
+.piece-title {
+  font-family: var(--font-heading, 'Cormorant Garamond', serif);
+  font-size: clamp(1.5rem, 4vw, 2.2rem);
+  font-weight: 600;
+  margin: 0 0 24px;
+  line-height: 1.2;
+}
+
+.photo-section {
+  margin-bottom: 24px;
+}
+
+.photo-section img {
+  max-width: 100%;
+  max-height: 400px;
+  border-radius: var(--radius, 8px);
+  object-fit: cover;
+}
+
+.body-text {
+  font-family: var(--font-body, 'Inter', sans-serif);
+  font-weight: 400;
+  font-size: 0.95rem;
+  color: var(--text-secondary, #555);
+  line-height: 1.85;
   white-space: pre-wrap;
+  word-break: break-word;
+  margin: 0 0 32px;
 }
 
-button:focus {outline:0;}
-
-h5{
-    float: left;
+.card-actions {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding-top: 16px;
+  border-top: 1px solid var(--border);
 }
 
-.modifyer{
-float: right;
+.delete-btn {
+  color: #c62828;
 }
 
+.full-width {
+  display: block;
+  width: 100%;
+}
 
+.file-input {
+  display: block;
+  margin: 8px 0;
+  font-size: 0.85rem;
+}
 
-.example-form {
-    width: 100%;
+h4 {
+  font-family: var(--font-body, 'Inter', sans-serif);
+  font-size: 0.9rem;
+  font-weight: 600;
+  margin: 20px 0 8px;
+  color: var(--text);
+}
 
-    font: 400 14px/20px Roboto, "Helvetica Neue", sans-serif;
+.text-success {
+  color: #2e7d32;
+  font-size: 0.85rem;
+}
+
+.skill-sidebar {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.sidebar-card {
+  overflow: hidden;
+}
+
+.sidebar-card-body {
+  padding: 20px;
+}
+
+.sidebar-title {
+  font-family: var(--font-heading, 'Cormorant Garamond', serif);
+  font-size: 1.05rem;
+  font-weight: 600;
+  margin: 0 0 14px;
+  color: var(--text);
+}
+
+.sidebar-card-body audio {
+  width: 100%;
+  border-radius: 8px;
+}
+
+.files-list {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.file-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 6px 0;
+  border-bottom: 1px solid var(--border);
+}
+
+.file-row:last-child {
+  border-bottom: none;
+}
+
+.file-link {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  color: var(--text-secondary, #555);
+  text-decoration: none;
+  font-size: 0.85rem;
+  transition: color 0.2s;
+  min-width: 0;
+  flex: 1;
+}
+
+.file-link:hover {
+  color: var(--accent, #8b6914);
+}
+
+.file-link span {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.file-icon {
+  font-size: 18px;
+  height: 18px;
+  width: 18px;
+  flex-shrink: 0;
+  color: var(--accent, #8b6914);
+}
+
+.delete-btn-sm {
+  width: 28px !important;
+  height: 28px !important;
+  line-height: 28px !important;
+  color: var(--text-muted);
+  flex-shrink: 0;
+}
+
+.delete-btn-sm:hover {
+  color: #c62828;
+}
+
+.delete-btn-sm mat-icon {
+  font-size: 16px;
+  height: 16px;
+  width: 16px;
+}
+
+.no-files {
+  font-size: 0.85rem;
+  color: var(--text-muted);
+  margin: 0;
+}
+
+@media (max-width: 768px) {
+  .skill-layout {
+    grid-template-columns: 1fr;
   }
-  
-  .example-full-width {
-    width: 100%;
-    font: 400 14px/20px Roboto, "Helvetica Neue", sans-serif;
+
+  .card-top {
+    padding: 16px 20px;
   }
 
-
-.example-button-row button,
-.example-button-row a {
-  margin-right: 8px;
+  .card-body {
+    padding: 20px;
+  }
 }
-button{
-  outline: 0;
-}
-
-.input-headline {
-    font-size: 28px;
-    line-height: 32px;
-    font-weight: 400;
-}
-
-.example-fill-remaining-space {
-  /* This fills the remaining space, by using flexbox. 
-     Every toolbar row uses a flexbox row layout. */
-  flex: 1 1 auto;
-}
-
-
-
-ul,  
-li {  
-      margin: 0;  
-      padding: 0;  
-      list-style: none;  
-}
-
-.padd{
-  padding: 2%;
-}
-
-.audio{
-  margin: 2% !important;
-  background: rgb(255, 255, 255)!important;
-  box-shadow: rgba(0, 0, 0, 0.3) 0px 4px 20px!important;
-}
-

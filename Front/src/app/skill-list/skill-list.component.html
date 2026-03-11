@@ -1,20 +1,13 @@
-<div class="skills-page">
-
-  <!-- Header -->
-  <div class="skills-header">
-    <div>
-      <h1 class="skills-title">Liste de Skills</h1>
-      <p class="skills-sub">{{ skills?.length || 0 }} fiche{{ (skills?.length || 0) !== 1 ? 's' : '' }}</p>
-    </div>
+<div class="page-shell page-shell--wide">
+  <div class="section-heading">
+    <h1>Liste de Skills</h1>
+    <p class="subtitle">{{ skills?.length || 0 }} fiche{{ (skills?.length || 0) !== 1 ? 's' : '' }}</p>
+    <hr class="divider">
   </div>
 
-  <!-- Grid of skill cards -->
   <div class="skills-grid" *ngIf="skills && skills.length > 0">
-    <div
-      class="skill-card"
-      *ngFor="let skill of skills; let i = index"
-      (click)="onViewSkill(i)">
-      <div class="skill-card-inner">
+    <div class="skill-card card" *ngFor="let skill of skills; let i = index" (click)="onViewSkill(i)">
+      <div class="skill-card-body">
         <div class="skill-icon">
           <mat-icon>auto_stories</mat-icon>
         </div>
@@ -28,10 +21,8 @@
     </div>
   </div>
 
-  <!-- Empty state -->
   <div class="empty-state" *ngIf="!skills || skills.length === 0">
     <mat-icon>library_books</mat-icon>
     <p>Aucune fiche disponible</p>
   </div>
-
 </div>

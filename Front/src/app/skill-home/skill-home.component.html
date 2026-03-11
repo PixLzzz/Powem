@@ -1,35 +1,28 @@
-<div class="parallaxSkillHome">
-  <div class="titleSkillHome">
+<div class="page-shell">
+  <div class="section-heading">
     <h1>{{skillHome.title}}</h1>
-  </div>
-</div>
-
-<div class="contentSite">
-  <div *ngIf="user">
-    <div class="modifyer">
-      <mat-slide-toggle [checked]="isCheck" (change)="onChange()">Modifier</mat-slide-toggle>
-    </div>
+    <hr class="divider">
   </div>
 
-  <!--AFFICHAGE STANDARD-->
+  <div *ngIf="user" class="edit-toggle">
+    <mat-slide-toggle [checked]="isCheck" (change)="onChange()">Modifier</mat-slide-toggle>
+  </div>
+
   <div *ngIf="isCheck==false">
-    <pre class="contentCore">{{ skillHome.content }}</pre>
+    <pre class="body-text">{{ skillHome.content }}</pre>
   </div>
 
-  <!--SI MODIFICATION-->
   <div *ngIf="isCheck==true">
-    <form [formGroup]="skillHomeForm" (ngSubmit)="updateSkillHome()" class="example-form">
-      <mat-form-field class="example-full-width titleLimit mat-headline">
+    <form [formGroup]="skillHomeForm" (ngSubmit)="updateSkillHome()">
+      <mat-form-field appearance="outline" class="full-width">
         <mat-label>Titre</mat-label>
         <input matInput id="title" formControlName="title">
       </mat-form-field>
-      <br><br>
-      <mat-form-field class="example-full-width">
+      <mat-form-field appearance="outline" class="full-width">
         <mat-label>Contenu</mat-label>
-        <textarea matInput rows="20" cols="60" id="content" formControlName="content"></textarea>
+        <textarea matInput rows="20" id="content" formControlName="content"></textarea>
       </mat-form-field>
-      <br>
-      <button class="btn btn-success" [disabled]="skillHomeForm.invalid" type="submit">Enregistrer</button>
+      <button class="pill-btn" [disabled]="skillHomeForm.invalid" type="submit">Enregistrer</button>
     </form>
   </div>
 </div>
