@@ -2,7 +2,7 @@ import { Component, OnInit, Input, ChangeDetectorRef } from '@angular/core';
 import { AngularFireStorage, AngularFireUploadTask } from '@angular/fire/storage';
 import { AngularFirestore } from '@angular/fire/firestore';
 import { Observable } from 'rxjs';
-import { finalize, tap } from 'rxjs/operators';
+import { finalize } from 'rxjs/operators';
 import * as firebase from 'firebase';
 
 @Component({
@@ -34,7 +34,6 @@ export class UploadListComponent implements OnInit {
     // The storage path
     const fileName = `${this.file.name}`;    
     const path = 'test/'+id+ '/' +fileName;
-    console.log(path)
     // Reference to storage bucket
     const ref = this.storage.ref(path);
 
@@ -45,7 +44,6 @@ export class UploadListComponent implements OnInit {
     this.percentage = this.task.percentageChanges();
 
     this.snapshot   = this.task.snapshotChanges().pipe(
-      tap(console.log),
       // The file's download URL
       finalize( async() =>  {
         this.downloadURL = await ref.getDownloadURL().toPromise();

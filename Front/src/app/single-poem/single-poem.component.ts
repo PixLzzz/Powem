@@ -47,7 +47,6 @@ export class SinglePoemComponent implements OnInit {
           title: [this.poem.title, Validators.required],
           content: [this.poem.content, Validators.required]
         }); 
-        console.log(this.poem)
         this.audioSrc = this.poem.audio;
 
       }
@@ -175,10 +174,8 @@ export class SinglePoemComponent implements OnInit {
     });
 
     dialogRef.afterClosed().subscribe(result => {
-      console.log(result);
       if(result==1){
         this.deletePoem(poem);
-        console.log(poem)
       }
     });
   }

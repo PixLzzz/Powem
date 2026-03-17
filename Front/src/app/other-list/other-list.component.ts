@@ -41,7 +41,6 @@ export class OtherListComponent implements OnInit {
       (cats: String[]) => {
         this.dataSource = new MatTableDataSource(this.others);
         this.cats = cats;
-        console.log(cats);
         this.cats.forEach(x => {
           this.dataSource.filter = x.trim().toLowerCase();
         })
@@ -51,7 +50,6 @@ export class OtherListComponent implements OnInit {
    /* this.onChange = this.selectedOption.subscribe(() => {
       this.catFilter();
  })*/
-  console.log(this.selectedOption)
     this.otherService.emitOthers();
   }
 
@@ -80,8 +78,7 @@ export class OtherListComponent implements OnInit {
   catFilter(){
 
     this.dataSource.filter = this.selectedOption.trim().toLowerCase();
-    console.log(this.dataSource.filter);
-    
+
   }
 
   openDialog(other : Other): void {
@@ -91,7 +88,6 @@ export class OtherListComponent implements OnInit {
     });
 
     dialogRef.afterClosed().subscribe(result => {
-      console.log(result);
       if(result==1){
         this.onDeleteOther(other);
       }

@@ -29,7 +29,6 @@ export class PoemComponent implements OnInit {
     
     onNgModelChange($event){
       this.selectedOption=$event;
-      console.log(this.selectedOption)
       this.selectedOptions = this.selectedOption;
       this.firebaseService.emitCats(this.selectedOption)
     }

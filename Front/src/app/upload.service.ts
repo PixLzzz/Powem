@@ -30,18 +30,13 @@ export class UploadService implements OnInit{
     var desertRef = storageRef.child('test/'+ id + '/' + name);
 
     // Delete the file
-    desertRef.delete().then(function() {
-        console.log("gg")
-      }).catch(function(error) {
-        console.log(error)
-      });
+    desertRef.delete().catch(() => {});
   }
 
 
   async getDocs(id : number){
 
     this.files.splice(0,this.files.length);
-    console.log(this.files)
     var name = "";
     var storage = firebase.app().storage("gs://powem-98484.appspot.com");
       var storageRef = storage.ref();

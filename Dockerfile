@@ -8,5 +8,6 @@ RUN npm run build
 
 ### STAGE 2: Run ###
 FROM nginx:alpine
-#COPY nginx.conf /etc/nginx/nginx.conf
+COPY nginx.conf /etc/nginx/nginx.conf
 COPY --from=build /usr/src/app/dist/Front /usr/share/nginx/html
+USER nginx

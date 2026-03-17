@@ -30,7 +30,6 @@ export class OtherComponent implements OnInit {
     
     onNgModelChange($event){
       this.selectedOption=$event;
-      console.log(this.selectedOption)
       this.selectedOptions = this.selectedOption;
       this.otherService.emitCats(this.selectedOption)
     }

@@ -17,23 +17,36 @@ export class ContactComponent implements OnInit {
   }
   ngOnInit() {
   }
+
+  private escapeHtml(str: string): string {
+    return str
+      .replace(/&/g, '&amp;')
+      .replace(/</g, '&lt;')
+      .replace(/>/g, '&gt;')
+      .replace(/"/g, '&quot;')
+      .replace(/'/g, '&#039;');
+  }
+
   createForm() {
     this.form = this.fb.group({
-      name: ['', Validators.required],
-      email: ['', Validators.required],
-      message: ['', Validators.required],
+      name: ['', [Validators.required, Validators.maxLength(100)]],
+      email: ['', [Validators.required, Validators.email, Validators.maxLength(254)]],
+      message: ['', [Validators.required, Validators.maxLength(5000)]],
     });
   }
   onSubmit() {
     const {name, email, message} = this.form.value;
     const date = Date();
+    const safeName = this.escapeHtml(name);
+    const safeEmail = this.escapeHtml(email);
+    const safeMessage = this.escapeHtml(message);
     const html = `
-      <div>From: ${name}</div>
-      <div>Email: <a href="mailto:${email}">${email}</a></div>
+      <div>From: ${safeName}</div>
+      <div>Email: <a href="mailto:${safeEmail}">${safeEmail}</a></div>
       <div>Date: ${date}</div>
-      <div>Message: ${message}</div>
+      <div>Message: ${safeMessage}</div>
     `;
-    let formRequest = { name, email, message, date, html };
+    let formRequest = { name: safeName, email: safeEmail, message: safeMessage, date, html };
     this.af.list('/messages').push(formRequest);
     this.form.reset();
 

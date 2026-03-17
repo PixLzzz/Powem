@@ -19,7 +19,6 @@ const mailTransport = nodemailer.createTransport(`smtps://${gmailEmail}:${gmailP
 
 exports.sendContactMessage = functions.database.ref('/messages/{pushKey}').onWrite((change, context) =>{
     const snapshot = change.after.val();
-    console.log(snapshot)
   // Only send email for new messages.
     if (change.before.exists()) {
         return;
@@ -31,7 +30,5 @@ exports.sendContactMessage = functions.database.ref('/messages/{pushKey}').onWri
       subject: `Information Request from ${snapshot.name}`,
       html: snapshot.html
     };
-    return mailTransport.sendMail(mailOptions).then(() => {
-      return console.log('Mail sent to: jlccazenave@gmail.com')
-    });
+    return mailTransport.sendMail(mailOptions);
   });

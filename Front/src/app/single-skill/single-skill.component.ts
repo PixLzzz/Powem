@@ -194,7 +194,6 @@ export class SingleSkillComponent implements OnInit {
     });
 
     dialogRef.afterClosed().subscribe(result => {
-      console.log(result);
       if(result==1){
         this.deleteSkill(this.skill);
       }
@@ -207,7 +206,6 @@ export class SingleSkillComponent implements OnInit {
     });
 
     dialogRef.afterClosed().subscribe(result => {
-      console.log(result);
       if(result==1){
         this.deleteFile(name);
       }

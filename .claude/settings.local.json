@@ -15,7 +15,19 @@
       "Bash(git -C \"//wsl$/Ubuntu/home/pixl/Dev/Powem\" status)",
       "Bash(git -C \"\\\\\\\\wsl$\\\\Ubuntu\\\\home\\\\pixl\\\\Dev\\\\Powem\" log --oneline -5)",
       "Bash(bash -c 'cd /mnt/c && ls')",
-      "Bash(dir \"\\\\\\\\wsl$\\\\Ubuntu\\\\home\\\\pixl\\\\Dev\\\\Powem\\\\.git\")"
+      "Bash(dir \"\\\\\\\\wsl$\\\\Ubuntu\\\\home\\\\pixl\\\\Dev\\\\Powem\\\\.git\")",
+      "Bash(find /home/pixl/Dev/Powem -type f \\\\\\(-name package.json -o -name .env -o -name *.pem -o -name *.key \\\\\\))",
+      "Bash(npx ng:*)",
+      "Bash(./node_modules/.bin/ng build:*)",
+      "Bash(npm run:*)",
+      "Bash(node -e \"console.log\\(''''node works''''\\)\")",
+      "Bash(node node_modules/.bin/ng version)",
+      "Bash(command -v node)",
+      "Bash(git -C \"\\\\\\\\wsl$\\\\Ubuntu\\\\home\\\\pixl\\\\Dev\\\\Powem\" log --oneline -10)",
+      "Bash(wsl -e git -C /home/pixl/Dev/Powem log --oneline -10)",
+      "Bash(wsl bash:*)",
+      "Bash(wsl git:*)",
+      "Bash(wsl sh:*)"
     ]
   }
 }

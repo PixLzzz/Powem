@@ -37,10 +37,19 @@ export class SkillServiceService implements OnInit {
       );
   }
 
+  private sanitizeId(id: any): number {
+    const num = Number(id);
+    if (!Number.isInteger(num) || num < 0) {
+      throw new Error('Invalid ID');
+    }
+    return num;
+  }
+
   getSingleSkill(id: number) {
     return new Promise(
       (resolve, reject) => {
-        firebase.database().ref('/Skills/' + id).once('value').then(
+        const safeId = this.sanitizeId(id);
+        firebase.database().ref('/Skills/' + safeId).once('value').then(
           (data: DataSnapshot) => {
             resolve(data.val());
           }, (error) => {
@@ -52,7 +61,6 @@ export class SkillServiceService implements OnInit {
   }
 
   createNewSkill(newSkill: Skill) {
-    console.log(newSkill);
     this.skills.push(newSkill);
     this.saveSkills();
     this.emitSkills();
@@ -62,14 +70,7 @@ export class SkillServiceService implements OnInit {
     var cpt= 0;
     if(skill.photo) {
       const storageRef = firebase.storage().refFromURL(skill.photo);
-      storageRef.delete().then(
-        () => {
-          console.log('Photo removed!');
-        },
-        (error) => {
-          console.log('Could not remove photo! : ' + error);
-        }
-      );
+      storageRef.delete().catch(() => {});
     }
     const skillIndexToRemove = this.skills.findIndex(
       (skillEl) => {
@@ -90,11 +91,7 @@ export class SkillServiceService implements OnInit {
     var firstPage = await listRef.list({ maxResults: 100});
     // Use the result.
     firstPage.items.forEach(element => {
-      element.delete().then(function() {
-        console.log("gg")
-      }).catch(function(error) {
-        console.log(error)
-      });
+      element.delete().catch(() => {});
     });
     //this.reOrder(id);
   }
@@ -122,16 +119,9 @@ export class SkillServiceService implements OnInit {
         const upload = firebase.storage().ref()
           .child('imagesSkill/' + almostUniqueFileName + file.name).put(file);
         upload.on(firebase.storage.TaskEvent.STATE_CHANGED,
-          () => {
-            console.log('Chargement…');
-          },
-          (error) => {
-            console.log('Erreur de chargement ! : ' + error);
-            reject();
-          },
-          () => {
-            resolve(upload.snapshot.ref.getDownloadURL());
-          }
+          () => {},
+          (error) => { reject(error); },
+          () => { resolve(upload.snapshot.ref.getDownloadURL()); }
         );
       }
     );
@@ -144,16 +134,9 @@ uploadAudio(file: File) {
       const upload = firebase.storage().ref()
         .child('audioSkill/' + almostUniqueFileName + file.name).put(file);
       upload.on(firebase.storage.TaskEvent.STATE_CHANGED,
-        () => {
-          console.log('Chargement…');
-        },
-        (error) => {
-          console.log('Erreur de chargement ! : ' + error);
-          reject();
-        },
-        () => {
-          resolve(upload.snapshot.ref.getDownloadURL());
-        }
+        () => {},
+        (error) => { reject(error); },
+        () => { resolve(upload.snapshot.ref.getDownloadURL()); }
       );
     }
   );
@@ -163,28 +146,14 @@ uploadAudio(file: File) {
   removePics(skill : Skill){
     if(skill.photo) {
       const storageRef = firebase.storage().refFromURL(skill.photo);
-      storageRef.delete().then(
-        () => {
-          console.log('Photo removed!');
-        },
-        (error) => {
-          console.log('Could not remove photo! : ' + error);
-        }
-      );
+      storageRef.delete().catch(() => {});
     }
   }
 
   removeAudio(skill : Skill){
     if(skill.audio) {
       const storageRef = firebase.storage().refFromURL(skill.audio);
-      storageRef.delete().then(
-        () => {
-          console.log('Audio removed!');
-        },
-        (error) => {
-          console.log('Could not remove audio! : ' + error);
-        }
-      );
+      storageRef.delete().catch(() => {});
     }
   }
 

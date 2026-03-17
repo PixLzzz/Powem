@@ -1,24 +1,43 @@
 <div class="home-hero">
-  <!-- Decorative floating dots -->
-  <span class="dot dot-1"></span>
-  <span class="dot dot-2"></span>
-  <span class="dot dot-3"></span>
-  <span class="dot dot-4"></span>
-  <span class="dot dot-5"></span>
-
-  <!-- Giant quote watermark -->
-  <svg class="quote-watermark" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
-    <text x="50%" y="55%" dominant-baseline="middle" text-anchor="middle" font-family="'Cormorant Garamond', serif" font-size="280" font-style="italic" fill="currentColor">&ldquo;</text>
-  </svg>
-
-  <div class="hero-center">
-    <h1 class="hero-title">{{site.title}}</h1>
-    <span class="hero-underline"></span>
-    <p class="hero-sub">Poesie &middot; Prose &middot; Pensees</p>
+  <!-- Thin decorative frame -->
+  <div class="hero-frame">
+    <span class="frame-corner frame-tl"></span>
+    <span class="frame-corner frame-tr"></span>
+    <span class="frame-corner frame-bl"></span>
+    <span class="frame-corner frame-br"></span>
   </div>
 
-  <div class="scroll-hint">
-    <mat-icon class="scroll-chevron">expand_more</mat-icon>
+  <!-- Central content -->
+  <div class="hero-center">
+    <span class="hero-overline">Poesie &middot; Prose &middot; Pensees</span>
+    <h1 class="hero-title">{{site.title}}</h1>
+    <div class="hero-rule">
+      <span class="rule-line"></span>
+      <span class="rule-diamond"></span>
+      <span class="rule-line"></span>
+    </div>
+    <p class="hero-tagline">Un espace de partage, de mots et de savoirs</p>
+  </div>
+
+  <!-- Bottom navigation -->
+  <div class="hero-nav">
+    <a routerLink="/poem" class="hero-nav-item">
+      <span class="nav-num">01</span>
+      <span class="nav-label">Poemes</span>
+    </a>
+    <a routerLink="/other" class="hero-nav-item">
+      <span class="nav-num">02</span>
+      <span class="nav-label">Proses</span>
+    </a>
+    <a routerLink="/skillList" class="hero-nav-item">
+      <span class="nav-num">03</span>
+      <span class="nav-label">Skills</span>
+    </a>
+  </div>
+
+  <!-- Scroll cue -->
+  <div class="scroll-cue">
+    <span class="scroll-bar"></span>
   </div>
 </div>
 
@@ -27,8 +46,15 @@
     <mat-slide-toggle [checked]="isCheck" (change)="onChange()">Modifier</mat-slide-toggle>
   </div>
 
-  <div *ngIf="isCheck==false" class="content-card card">
-    <pre class="body-text drop-cap">{{ site.content }}</pre>
+  <div *ngIf="isCheck==false" class="content-section">
+    <div class="content-header">
+      <span class="section-num">01</span>
+      <div class="section-rule"></div>
+      <span class="section-label">Introduction</span>
+    </div>
+    <div class="content-card card">
+      <pre class="body-text drop-cap">{{ site.content }}</pre>
+    </div>
   </div>
 
   <div *ngIf="isCheck==true">

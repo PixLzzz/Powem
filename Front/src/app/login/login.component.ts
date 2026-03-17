@@ -27,7 +27,7 @@ export class LoginComponent implements OnInit {
       .then(() => {
         this.router.navigate(['']);
       }, err => {
-        this.errorMessage = err.message;
+        this.errorMessage = 'Identifiants incorrects.';
       });
   }
 }

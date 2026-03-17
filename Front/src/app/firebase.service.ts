@@ -25,7 +25,6 @@ export class FirebaseService {
 
   emitCats(cat){
     this.catSubject.next(cat);
-    console.log(cat);
   }
 
   savePoems() {
@@ -43,10 +42,19 @@ export class FirebaseService {
 
 
 
+  private sanitizeId(id: any): number {
+    const num = Number(id);
+    if (!Number.isInteger(num) || num < 0) {
+      throw new Error('Invalid ID');
+    }
+    return num;
+  }
+
   getSinglePoem(id: number) {
     return new Promise(
       (resolve, reject) => {
-        firebase.database().ref('/Poems/' + id).once('value').then(
+        const safeId = this.sanitizeId(id);
+        firebase.database().ref('/Poems/' + safeId).once('value').then(
           (data: DataSnapshot) => {
             resolve(data.val());
           }, (error) => {
@@ -58,7 +66,6 @@ export class FirebaseService {
   }
 
   createNewPoem(newPoem: Poem) {
-    console.log(newPoem);
     this.poems.push(newPoem);
     this.savePoems();
     this.emitPoems();
@@ -67,18 +74,10 @@ export class FirebaseService {
   removePoem(poem: Poem) {
     if(poem.photo) {
       const storageRef = firebase.storage().refFromURL(poem.photo);
-      storageRef.delete().then(
-        () => {
-          console.log('Photo removed!');
-        },
-        (error) => {
-          console.log('Could not remove photo! : ' + error);
-        }
-      );
+      storageRef.delete().catch(() => {});
     }
     const poemIndexToRemove = this.poems.findIndex(
       (poemEl) => {
-        console.log(poemEl)
         if(poemEl === poem) {
           return true;
         }
@@ -126,16 +125,9 @@ export class FirebaseService {
         const upload = firebase.storage().ref()
           .child('images/' + almostUniqueFileName + file.name).put(file);
         upload.on(firebase.storage.TaskEvent.STATE_CHANGED,
-          () => {
-            console.log('Chargement…');
-          },
-          (error) => {
-            console.log('Erreur de chargement ! : ' + error);
-            reject();
-          },
-          () => {
-            resolve(upload.snapshot.ref.getDownloadURL());
-          }
+          () => {},
+          (error) => { reject(error); },
+          () => { resolve(upload.snapshot.ref.getDownloadURL()); }
         );
       }
     );
@@ -148,16 +140,9 @@ uploadAudio(file: File) {
       const upload = firebase.storage().ref()
         .child('audio/' + almostUniqueFileName + file.name).put(file);
       upload.on(firebase.storage.TaskEvent.STATE_CHANGED,
-        () => {
-          console.log('Chargement…');
-        },
-        (error) => {
-          console.log('Erreur de chargement ! : ' + error);
-          reject();
-        },
-        () => {
-          resolve(upload.snapshot.ref.getDownloadURL());
-        }
+        () => {},
+        (error) => { reject(error); },
+        () => { resolve(upload.snapshot.ref.getDownloadURL()); }
       );
     }
   );
@@ -167,28 +152,14 @@ uploadAudio(file: File) {
 removePics(poem : Poem){
   if(poem.photo) {
     const storageRef = firebase.storage().refFromURL(poem.photo);
-    storageRef.delete().then(
-      () => {
-        console.log('Photo removed!');
-      },
-      (error) => {
-        console.log('Could not remove photo! : ' + error);
-      }
-    );
+    storageRef.delete().catch(() => {});
   }
 }
 
 removeAudio(poem : Poem){
   if(poem.audio) {
     const storageRef = firebase.storage().refFromURL(poem.audio);
-    storageRef.delete().then(
-      () => {
-        console.log('Audio removed!');
-      },
-      (error) => {
-        console.log('Could not remove audio! : ' + error);
-      }
-    );
+    storageRef.delete().catch(() => {});
   }
 }
 

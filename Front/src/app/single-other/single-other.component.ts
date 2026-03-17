@@ -174,10 +174,8 @@ export class SingleOtherComponent implements OnInit {
     });
 
     dialogRef.afterClosed().subscribe(result => {
-      console.log(result);
       if(result==1){
         this.deleteOther(other);
-        console.log(other)
       }
     });
   }

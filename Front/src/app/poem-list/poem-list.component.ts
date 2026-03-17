@@ -40,7 +40,6 @@ export class PoemListComponent implements OnInit {
       (cats: String[]) => {
         this.dataSource = new MatTableDataSource(this.poems);
         this.cats = cats;
-        console.log(cats);
         this.cats.forEach(x => {
           this.dataSource.filter = x.trim().toLowerCase();
         })
@@ -50,7 +49,6 @@ export class PoemListComponent implements OnInit {
    /* this.onChange = this.selectedOption.subscribe(() => {
       this.catFilter();
  })*/
-  console.log(this.selectedOption)
     this.firebaseService.emitPoems();
   }
 
@@ -79,8 +77,7 @@ export class PoemListComponent implements OnInit {
   catFilter(){
 
     this.dataSource.filter = this.selectedOption.trim().toLowerCase();
-    console.log(this.dataSource.filter);
-    
+
   }
 
   openDialog(poem : Poem): void {
@@ -90,7 +87,6 @@ export class PoemListComponent implements OnInit {
     });
 
     dialogRef.afterClosed().subscribe(result => {
-      console.log(result);
       if(result==1){
         this.onDeletePoem(poem);
       }

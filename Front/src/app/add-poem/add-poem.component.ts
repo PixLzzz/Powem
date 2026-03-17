@@ -72,7 +72,6 @@ export class AddPoemComponent implements OnInit {
     const title = this.poemForm.get('title').value;
     const content = this.poemForm.get('content').value;
     const category = this.selectedValue;
-    console.log(this.selectedValue);
     const newPoem = new Poem();
     newPoem.title = title;
     newPoem.category = category;
@@ -95,7 +94,6 @@ export class AddPoemComponent implements OnInit {
 
   handleCheckChange(value: boolean) {
     this.checked = value;
-    console.log(this.checked);
 }
 
 }
