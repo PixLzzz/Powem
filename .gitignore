@@ -146,4 +146,7 @@ temp/
 # Ignore all local history of files
 .history
 
+# Claude Code
+.claude/settings.local.json
+
 # End of https://www.gitignore.io/api/node,angular,visualstudiocode
