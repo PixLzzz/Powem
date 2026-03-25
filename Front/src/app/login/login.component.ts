@@ -23,7 +23,7 @@ export class LoginComponent implements OnInit {
 
   onSubmit() {
     if (this.profileForm.invalid) { return; }
-    AuthService.doLogin(this.profileForm.value)
+    AuthService.doLogin(this.profileForm.value as { email: string; password: string })
       .then(() => {
         this.router.navigate(['']);
       }, err => {

@@ -1,9 +1,9 @@
 import { Component, OnInit, Input, ChangeDetectorRef } from '@angular/core';
-import { AngularFireStorage, AngularFireUploadTask } from '@angular/fire/storage';
-import { AngularFirestore } from '@angular/fire/firestore';
+import { AngularFireStorage, AngularFireUploadTask } from '@angular/fire/compat/storage';
+import { AngularFirestore } from '@angular/fire/compat/firestore';
 import { Observable } from 'rxjs';
 import { finalize } from 'rxjs/operators';
-import * as firebase from 'firebase';
+import firebase from 'firebase/compat/app';
 
 @Component({
   selector: 'app-upload-list',
@@ -12,8 +12,8 @@ import * as firebase from 'firebase';
 })
 export class UploadListComponent implements OnInit {
 
-  @Input() file: File;
-  @Input() fileB: File;
+  @Input() file: File | any;
+  @Input() fileB: File | any;
 
   task: AngularFireUploadTask;
   @Input() id : number;

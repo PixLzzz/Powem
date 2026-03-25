@@ -14,16 +14,21 @@ import { HttpClientModule } from '@angular/common/http';
 import { FormsModule,ReactiveFormsModule } from '@angular/forms'
 import {MatSnackBarModule} from '@angular/material/snack-bar';
 // Firebase services + enviorment module
-import { AngularFireModule } from 'angularfire2';
-import { AngularFireDatabaseModule } from "@angular/fire/database";
+import firebase from 'firebase/compat/app';
+import { AngularFireModule } from '@angular/fire/compat';
+import { AngularFireDatabaseModule } from '@angular/fire/compat/database';
 import { environment } from '../environments/environment';
-import { AngularFireAuthModule } from "@angular/fire/auth";
+import { AngularFireAuthModule } from '@angular/fire/compat/auth';
+
+// Initialize Firebase for direct SDK usage (firebase.database(), firebase.auth(), etc.)
+if (!firebase.apps.length) {
+  firebase.initializeApp(environment.firebase);
+}
 import { AuthService } from './auth.service';
 import {MatCardModule} from '@angular/material/card';
 import {MatCheckboxModule} from '@angular/material/checkbox';
 
 import {MatInputModule} from '@angular/material/input';
-import * as firebase from 'firebase';
 import { AddPoemComponent } from './add-poem/add-poem.component';
 import {MatButtonModule} from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
@@ -44,8 +49,8 @@ import { UploadService } from './upload.service';
 import { UploadListComponent } from './uploads/upload-list/upload-list.component';
 import { UploadFormComponent } from './uploads/upload-form/upload-form.component';
 import { DropzoneDirective } from './dropzone.directive';
-import { AngularFirestore } from '@angular/fire/firestore';
-import { AngularFireStorage } from '@angular/fire/storage';
+import { AngularFirestore } from '@angular/fire/compat/firestore';
+import { AngularFireStorage } from '@angular/fire/compat/storage';
 import { PoemComponent } from './poem/poem.component';
 import { DialogSkillComponent } from './dialog-skill/dialog-skill.component';
 import { DialogFileComponent } from './dialog-file/dialog-file.component';
@@ -58,8 +63,6 @@ import { OtherListComponent } from './other-list/other-list.component';
 import { SingleOtherComponent } from './single-other/single-other.component';
 // ngx-audio-player removed — using native HTML5 <audio> element
 
-
-    firebase.initializeApp(environment.firebase);
 
 @NgModule({
   declarations: [

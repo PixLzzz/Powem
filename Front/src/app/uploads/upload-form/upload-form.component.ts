@@ -1,6 +1,6 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { AngularFireStorage } from '@angular/fire/storage';
-import * as firebase from 'firebase';
+import { AngularFireStorage } from '@angular/fire/compat/storage';
+import firebase from 'firebase/compat/app';
 
 @Component({
   selector: 'app-upload-form',
@@ -8,7 +8,7 @@ import * as firebase from 'firebase';
   styleUrls: ['./upload-form.component.css']
 })
 export class UploadFormComponent implements OnInit{
-  filesBis : String[] = [];
+  filesBis : any[] = [];
   @Input() id : number;
   constructor (){
     

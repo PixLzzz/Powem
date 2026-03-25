@@ -13,7 +13,7 @@
 
   <div class="search-bar">
     <mat-icon>search</mat-icon>
-    <input (keyup)="applyFilter($event.target.value)" placeholder="Rechercher..." />
+    <input (keyup)="applyFilter($any($event.target).value)" placeholder="Rechercher..." />
   </div>
 
   <div class="entries" *ngIf="dataSource">

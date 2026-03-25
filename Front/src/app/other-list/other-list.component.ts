@@ -2,10 +2,9 @@ import { Component, OnInit, Input } from '@angular/core';
 import { Subscription } from 'rxjs';
 import { Router } from '@angular/router';
 import { MatTableDataSource } from '@angular/material/table';
-import { database } from 'firebase';
 import { DialogComponent } from '../dialog/dialog.component';
 import { MatDialog } from '@angular/material/dialog';
-import * as firebase from 'firebase';
+import firebase from 'firebase/compat/app';
 import { Other } from '../models/other.model';
 import { OtherService } from '../other.service';
 

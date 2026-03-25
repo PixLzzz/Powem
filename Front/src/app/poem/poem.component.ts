@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { AngularFireDatabase } from '@angular/fire/database';
+import { AngularFireDatabase } from '@angular/fire/compat/database';
 import { Router } from '@angular/router';
-import * as firebase from 'firebase';
+import firebase from 'firebase/compat/app';
 import { FirebaseService } from '../firebase.service';
 
 @Component({

@@ -293,12 +293,12 @@ progress::-webkit-progress-value {
   }
 }
 
-/* ── Angular Material Overrides ── */
+/* ── Angular Material Overrides (MDC-based, Material 17) ── */
 .mat-toolbar {
   font-size: 0.88rem;
 }
 
-.mat-cell {
+.mat-mdc-cell {
   font-size: 0.88rem;
 }
 
@@ -307,29 +307,44 @@ progress::-webkit-progress-value {
   font-weight: 600;
 }
 
-/* Material form field styling */
-.mat-form-field-appearance-outline .mat-form-field-outline {
-  color: var(--border-strong) !important;
+/* Material form field styling (MDC) */
+.mat-mdc-form-field-subscript-wrapper {
+  margin-bottom: 4px;
 }
 
-.mat-form-field-appearance-outline.mat-focused .mat-form-field-outline-thick {
+.mdc-text-field--outlined:not(.mdc-text-field--disabled) .mdc-notched-outline__leading,
+.mdc-text-field--outlined:not(.mdc-text-field--disabled) .mdc-notched-outline__notch,
+.mdc-text-field--outlined:not(.mdc-text-field--disabled) .mdc-notched-outline__trailing {
+  border-color: var(--border-strong) !important;
+}
+
+.mdc-text-field--outlined:not(.mdc-text-field--disabled).mdc-text-field--focused .mdc-notched-outline__leading,
+.mdc-text-field--outlined:not(.mdc-text-field--disabled).mdc-text-field--focused .mdc-notched-outline__notch,
+.mdc-text-field--outlined:not(.mdc-text-field--disabled).mdc-text-field--focused .mdc-notched-outline__trailing {
+  border-color: var(--accent) !important;
+}
+
+.mat-mdc-form-field.mat-focused .mat-mdc-floating-label {
   color: var(--accent) !important;
 }
 
-.mat-form-field-appearance-outline.mat-focused .mat-form-field-label {
-  color: var(--accent) !important;
+.mat-mdc-raised-button.mat-primary {
+  --mdc-protected-button-container-color: var(--primary);
+  --mdc-protected-button-label-text-color: #fff;
 }
 
-.mat-raised-button.mat-primary {
-  background-color: var(--primary) !important;
-}
-
-.mat-slide-toggle.mat-checked .mat-slide-toggle-bar {
+/* Slide toggle (MDC) */
+.mat-mdc-slide-toggle.mat-mdc-slide-toggle-checked .mdc-switch__track::after {
   background-color: rgba(139, 105, 20, 0.4) !important;
 }
 
-.mat-slide-toggle.mat-checked .mat-slide-toggle-thumb {
+.mat-mdc-slide-toggle.mat-mdc-slide-toggle-checked .mdc-switch__handle::after {
   background-color: var(--accent) !important;
+}
+
+/* Legacy selectors kept for compat */
+.mat-raised-button.mat-primary {
+  background-color: var(--primary) !important;
 }
 
 /* ── Scrollbar ── */

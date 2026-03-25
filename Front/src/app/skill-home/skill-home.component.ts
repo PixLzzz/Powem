@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { SkillServiceService } from '../skill-service.service';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Skill } from '../models/skill.model';
-import * as firebase from 'firebase';
+import firebase from 'firebase/compat/app';
 import { AuthService } from '../auth.service';
 import { Home } from '../models/home.model';
 

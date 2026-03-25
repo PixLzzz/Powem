@@ -1,10 +1,10 @@
 import { Injectable, OnInit } from '@angular/core';
 import { HttpClient, HttpEvent, HttpErrorResponse, HttpEventType } from  '@angular/common/http';  
 import { map } from  'rxjs/operators';
-import * as firebase from 'firebase';
+import firebase from 'firebase/compat/app';
+import 'firebase/compat/storage';
 import { Subject } from 'rxjs';
-import { DataSnapshot } from '@angular/fire/database/interfaces';
-import { AngularFirestore } from '@angular/fire/firestore';
+import { AngularFirestore } from '@angular/fire/compat/firestore';
 import { Files } from './models/files.model';
 
 @Injectable({

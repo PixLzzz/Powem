@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
-import { AngularFireDatabase } from 'angularfire2/database';
+import { AngularFireDatabase } from '@angular/fire/compat/database';
 import { MailSnackbarComponent } from '../mail-snackbar/mail-snackbar.component';
 import { MatSnackBar } from '@angular/material/snack-bar';
 

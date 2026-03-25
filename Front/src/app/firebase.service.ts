@@ -1,8 +1,10 @@
 import { Injectable } from '@angular/core';
 import { Subject } from 'rxjs';
 import { Poem } from 'src/app/models/poem.model'
-import * as firebase from 'firebase';
-import { DataSnapshot } from '@angular/fire/database/interfaces';
+import firebase from 'firebase/compat/app';
+import 'firebase/compat/database';
+import 'firebase/compat/storage';
+import { DataSnapshot } from '@angular/fire/compat/database/interfaces';
 import { Observable } from 'rxjs';
 import {HttpClientModule, HttpClient} from '@angular/common/http'
 

@@ -4,7 +4,7 @@ import { Skill } from '../models/skill.model';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { MatDialog } from '@angular/material/dialog';
-import * as firebase from 'firebase';
+import firebase from 'firebase/compat/app';
 
 import { ViewChild, ElementRef  } from '@angular/core';
 import { HttpEventType, HttpErrorResponse } from '@angular/common/http';

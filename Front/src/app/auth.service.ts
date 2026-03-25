@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
-import * as firebase from 'firebase/app';
-import { AngularFireAuth } from '@angular/fire/auth';
+import firebase from 'firebase/compat/app';
+import { AngularFireAuth } from '@angular/fire/compat/auth';
 import { Router, CanActivate } from '@angular/router';
 import { Observable } from 'rxjs';
 

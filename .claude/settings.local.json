@@ -27,7 +27,10 @@
       "Bash(wsl -e git -C /home/pixl/Dev/Powem log --oneline -10)",
       "Bash(wsl bash:*)",
       "Bash(wsl git:*)",
-      "Bash(wsl sh:*)"
+      "Bash(wsl sh:*)",
+      "Bash(rm -rf node_modules package-lock.json)",
+      "Bash(npm install:*)",
+      "Bash(dir \"\\\\wsl$\\\\Ubuntu\\\\home\\\\pixl\\\\Dev\\\\Powem\\\\Front\\\\node_modules\\\\@angular\\\\core\")"
     ]
   }
 }
