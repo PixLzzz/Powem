@@ -10,7 +10,7 @@ import { AddSkillComponent } from './add-skill/add-skill.component';
 import { SkillListComponent } from './skill-list/skill-list.component';
 import {MatGridListModule} from '@angular/material/grid-list';
 import {MatProgressBarModule} from '@angular/material/progress-bar';
-import { HttpClientModule } from '@angular/common/http';
+import { provideHttpClient, withInterceptorsFromDi } from '@angular/common/http';
 import { FormsModule,ReactiveFormsModule } from '@angular/forms'
 import {MatSnackBarModule} from '@angular/material/snack-bar';
 // Firebase services + enviorment module
@@ -65,61 +65,53 @@ import { SingleOtherComponent } from './single-other/single-other.component';
 // ngx-audio-player removed — using native HTML5 <audio> element
 
 
-@NgModule({
-  declarations: [
-    AppComponent,
-    LoginComponent,
-    HomeComponent,
-    NavbarComponent,
-    AddPoemComponent,
-    SinglePoemComponent,
-    PoemListComponent,
-    DialogComponent,
-    AddSkillComponent,
-    SkillListComponent,
-    SingleSkillComponent,
-    UploadListComponent,
-    UploadFormComponent,
-    DropzoneDirective,
-    PoemComponent,
-    DialogSkillComponent,
-    DialogFileComponent,
-    PoemHomeComponent,
-    SkillHomeComponent,
-    ContactComponent,
-    MailSnackbarComponent,
-    OtherComponent,
-    OtherListComponent,
-    SingleOtherComponent
-    
-  ],
-  imports: [
-    AngularFireModule.initializeApp(environment.firebase),
-    AngularFireDatabaseModule,
-    MatSelectModule,
-    BrowserAnimationsModule,
-    MatListModule,
-    MatTableModule,
-    AngularFireAuthModule,
-    BrowserModule,
-    FormsModule, 
-    AppRoutingModule,
-    MatToolbarModule,
-    ReactiveFormsModule,
-    MatCardModule,
-    MatInputModule,
-    MatButtonModule,
-    MatIconModule,
-    MatDividerModule,
-    MatSlideToggleModule,
-    MatDialogModule,
-    HttpClientModule,
-    MatProgressBarModule,
-    MatGridListModule,
-    MatSnackBarModule,
-    MatCheckboxModule
-  ],
-  providers: [AuthService,FirebaseService,SkillServiceService,AngularFirestore,UploadService],
-  bootstrap: [AppComponent]
-})
+@NgModule({ declarations: [
+        AppComponent,
+        LoginComponent,
+        HomeComponent,
+        NavbarComponent,
+        AddPoemComponent,
+        SinglePoemComponent,
+        PoemListComponent,
+        DialogComponent,
+        AddSkillComponent,
+        SkillListComponent,
+        SingleSkillComponent,
+        UploadListComponent,
+        UploadFormComponent,
+        DropzoneDirective,
+        PoemComponent,
+        DialogSkillComponent,
+        DialogFileComponent,
+        PoemHomeComponent,
+        SkillHomeComponent,
+        ContactComponent,
+        MailSnackbarComponent,
+        OtherComponent,
+        OtherListComponent,
+        SingleOtherComponent
+    ],
+    bootstrap: [AppComponent], imports: [AngularFireModule.initializeApp(environment.firebase),
+        AngularFireDatabaseModule,
+        MatSelectModule,
+        BrowserAnimationsModule,
+        MatListModule,
+        MatTableModule,
+        AngularFireAuthModule,
+        BrowserModule,
+        FormsModule,
+        AppRoutingModule,
+        MatToolbarModule,
+        ReactiveFormsModule,
+        MatCardModule,
+        MatInputModule,
+        MatButtonModule,
+        MatIconModule,
+        MatDividerModule,
+        MatSlideToggleModule,
+        MatDialogModule,
+        MatProgressBarModule,
+        MatGridListModule,
+        MatSnackBarModule,
+        MatCheckboxModule], providers: [AuthService, FirebaseService, SkillServiceService, AngularFirestore, UploadService, provideHttpClient(withInterceptorsFromDi())] })
 export class AppModule { }

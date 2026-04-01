@@ -4,9 +4,10 @@ import { Skill } from '../models/skill.model';
 import { Files } from '../models/files.model';
 
 @Component({
-  selector: 'app-dialog-file',
-  templateUrl: './dialog-file.component.html',
-  styleUrls: ['./dialog-file.component.css']
+    selector: 'app-dialog-file',
+    templateUrl: './dialog-file.component.html',
+    styleUrls: ['./dialog-file.component.css'],
+    standalone: false
 })
 export class DialogFileComponent {
 

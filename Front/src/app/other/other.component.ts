@@ -6,9 +6,10 @@ import { FirebaseService } from '../firebase.service';
 import { OtherService } from '../other.service';
 
 @Component({
-  selector: 'app-other',
-  templateUrl: './other.component.html',
-  styleUrls: ['./other.component.css']
+    selector: 'app-other',
+    templateUrl: './other.component.html',
+    styleUrls: ['./other.component.css'],
+    standalone: false
 })
 export class OtherComponent implements OnInit {
 

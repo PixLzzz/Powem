@@ -7,9 +7,10 @@ import { AuthService } from '../auth.service';
 import { Home } from '../models/home.model';
 
 @Component({
-  selector: 'app-skill-home',
-  templateUrl: './skill-home.component.html',
-  styleUrls: ['./skill-home.component.css']
+    selector: 'app-skill-home',
+    templateUrl: './skill-home.component.html',
+    styleUrls: ['./skill-home.component.css'],
+    standalone: false
 })
 export class SkillHomeComponent implements OnInit {
 

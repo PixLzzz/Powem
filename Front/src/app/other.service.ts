@@ -5,7 +5,7 @@ import firebase from 'firebase/compat/app';
 import 'firebase/compat/database';
 import { DataSnapshot } from '@angular/fire/compat/database/interfaces';
 import { Observable } from 'rxjs';
-import {HttpClientModule, HttpClient} from '@angular/common/http'
+import { HttpClient } from '@angular/common/http'
 import { CloudinaryService } from './cloudinary.service';
 import { Other } from './models/other.model';
 

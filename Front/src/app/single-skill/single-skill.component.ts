@@ -20,9 +20,10 @@ import { AuthService } from '../auth.service';
 
 
 @Component({
-  selector: 'app-single-skill',
-  templateUrl: './single-skill.component.html',
-  styleUrls: ['./single-skill.component.css']
+    selector: 'app-single-skill',
+    templateUrl: './single-skill.component.html',
+    styleUrls: ['./single-skill.component.css'],
+    standalone: false
 })
 export class SingleSkillComponent implements OnInit {
   @ViewChild("fileUpload", {static: false}) fileUpload: ElementRef;files  = [];  

@@ -6,9 +6,10 @@ import firebase from 'firebase/compat/app';
 import { Home } from '../models/home.model';
 
 @Component({
-  selector: 'app-poem-home',
-  templateUrl: './poem-home.component.html',
-  styleUrls: ['./poem-home.component.css']
+    selector: 'app-poem-home',
+    templateUrl: './poem-home.component.html',
+    styleUrls: ['./poem-home.component.css'],
+    standalone: false
 })
 export class PoemHomeComponent implements OnInit {
 

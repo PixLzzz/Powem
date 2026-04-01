@@ -9,9 +9,10 @@ import { Other } from '../models/other.model';
 import { OtherService } from '../other.service';
 
 @Component({
-  selector: 'app-other-list',
-  templateUrl: './other-list.component.html',
-  styleUrls: ['./other-list.component.css']
+    selector: 'app-other-list',
+    templateUrl: './other-list.component.html',
+    styleUrls: ['./other-list.component.css'],
+    standalone: false
 })
 export class OtherListComponent implements OnInit {
   others: Other[];

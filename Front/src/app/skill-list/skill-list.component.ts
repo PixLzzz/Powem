@@ -8,9 +8,10 @@ import { MatTableDataSource } from '@angular/material/table';
 import { DialogComponent } from '../dialog/dialog.component';
 
 @Component({
-  selector: 'app-skill-list',
-  templateUrl: './skill-list.component.html',
-  styleUrls: ['./skill-list.component.css']
+    selector: 'app-skill-list',
+    templateUrl: './skill-list.component.html',
+    styleUrls: ['./skill-list.component.css'],
+    standalone: false
 })
 export class SkillListComponent implements OnInit {
 

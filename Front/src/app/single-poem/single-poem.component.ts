@@ -9,9 +9,10 @@ import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { DialogComponent } from '../dialog/dialog.component';
 import { MatDialog } from '@angular/material/dialog';
 @Component({
-  selector: 'app-single-poem',
-  templateUrl: './single-poem.component.html',
-  styleUrls: ['./single-poem.component.css']
+    selector: 'app-single-poem',
+    templateUrl: './single-poem.component.html',
+    styleUrls: ['./single-poem.component.css'],
+    standalone: false
 })
 export class SinglePoemComponent implements OnInit { 
   poem: Poem;

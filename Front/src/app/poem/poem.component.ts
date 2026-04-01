@@ -5,9 +5,10 @@ import firebase from 'firebase/compat/app';
 import { FirebaseService } from '../firebase.service';
 
 @Component({
-  selector: 'app-poem',
-  templateUrl: './poem.component.html',
-  styleUrls: ['./poem.component.css']
+    selector: 'app-poem',
+    templateUrl: './poem.component.html',
+    styleUrls: ['./poem.component.css'],
+    standalone: false
 })
 export class PoemComponent implements OnInit {
 

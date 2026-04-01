@@ -3,9 +3,10 @@ import {AngularFireDatabase} from '@angular/fire/compat/database';
 import { Observable } from 'rxjs'; 
 
 @Component({
-  selector: 'app-root',
-  templateUrl: './app.component.html',
-  styleUrls: ['./app.component.css']
+    selector: 'app-root',
+    templateUrl: './app.component.html',
+    styleUrls: ['./app.component.css'],
+    standalone: false
 })
 export class AppComponent {
 }

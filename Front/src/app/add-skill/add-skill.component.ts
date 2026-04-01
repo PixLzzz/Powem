@@ -8,9 +8,10 @@ import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 
 @Component({
-  selector: 'app-add-skill',
-  templateUrl: './add-skill.component.html',
-  styleUrls: ['./add-skill.component.css']
+    selector: 'app-add-skill',
+    templateUrl: './add-skill.component.html',
+    styleUrls: ['./add-skill.component.css'],
+    standalone: false
 })
 export class AddSkillComponent implements OnInit {
 

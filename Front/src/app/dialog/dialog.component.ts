@@ -4,9 +4,10 @@ import { Poem } from '../models/poem.model';
 
 
 @Component({
-  selector: 'app-dialog',
-  templateUrl: './dialog.component.html',
-  styleUrls: ['./dialog.component.css']
+    selector: 'app-dialog',
+    templateUrl: './dialog.component.html',
+    styleUrls: ['./dialog.component.css'],
+    standalone: false
 })
 export class DialogComponent {
   poem : Poem;

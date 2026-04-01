@@ -12,9 +12,10 @@ import { Other } from '../models/other.model';
 import { OtherService } from '../other.service';
 
 @Component({
-  selector: 'app-single-other',
-  templateUrl: './single-other.component.html',
-  styleUrls: ['./single-other.component.css']
+    selector: 'app-single-other',
+    templateUrl: './single-other.component.html',
+    styleUrls: ['./single-other.component.css'],
+    standalone: false
 })
 export class SingleOtherComponent implements OnInit {
 

@@ -1,9 +1,10 @@
 import { Component, OnInit, Input } from '@angular/core';
 
 @Component({
-  selector: 'app-upload-form',
-  templateUrl: './upload-form.component.html',
-  styleUrls: ['./upload-form.component.css']
+    selector: 'app-upload-form',
+    templateUrl: './upload-form.component.html',
+    styleUrls: ['./upload-form.component.css'],
+    standalone: false
 })
 export class UploadFormComponent implements OnInit{
   filesBis : any[] = [];

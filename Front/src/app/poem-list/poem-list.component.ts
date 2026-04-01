@@ -9,9 +9,10 @@ import { MatDialog } from '@angular/material/dialog';
 import firebase from 'firebase/compat/app';
 
 @Component({
-  selector: 'app-poem-list',
-  templateUrl: './poem-list.component.html',
-  styleUrls: ['./poem-list.component.css']
+    selector: 'app-poem-list',
+    templateUrl: './poem-list.component.html',
+    styleUrls: ['./poem-list.component.css'],
+    standalone: false
 })
 export class PoemListComponent implements OnInit {
   poems: Poem[];

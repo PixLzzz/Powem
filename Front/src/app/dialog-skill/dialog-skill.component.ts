@@ -3,9 +3,10 @@ import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { Skill } from '../models/skill.model';
 
 @Component({
-  selector: 'app-dialog-skill',
-  templateUrl: './dialog-skill.component.html',
-  styleUrls: ['./dialog-skill.component.css']
+    selector: 'app-dialog-skill',
+    templateUrl: './dialog-skill.component.html',
+    styleUrls: ['./dialog-skill.component.css'],
+    standalone: false
 })
 export class DialogSkillComponent {
 

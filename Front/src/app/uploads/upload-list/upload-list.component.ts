@@ -4,9 +4,10 @@ import { Observable, of } from 'rxjs';
 import { CloudinaryService } from '../../cloudinary.service';
 
 @Component({
-  selector: 'app-upload-list',
-  templateUrl: './upload-list.component.html',
-  styleUrls: ['./upload-list.component.css']
+    selector: 'app-upload-list',
+    templateUrl: './upload-list.component.html',
+    styleUrls: ['./upload-list.component.css'],
+    standalone: false
 })
 export class UploadListComponent implements OnInit {
 

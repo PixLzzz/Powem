@@ -9,9 +9,10 @@ import { Router } from '@angular/router';
 import { OtherService } from '../other.service';
 
 @Component({
-  selector: 'app-add-poem',
-  templateUrl: './add-poem.component.html',
-  styleUrls: ['./add-poem.component.css']
+    selector: 'app-add-poem',
+    templateUrl: './add-poem.component.html',
+    styleUrls: ['./add-poem.component.css'],
+    standalone: false
 })
 export class AddPoemComponent implements OnInit {
 
