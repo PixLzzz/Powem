@@ -3,8 +3,8 @@ import { Subject } from 'rxjs';
 import { Skill } from './models/skill.model';
 import firebase from 'firebase/compat/app';
 import 'firebase/compat/database';
-import 'firebase/compat/storage';
 import { DataSnapshot } from '@angular/fire/compat/database/interfaces';
+import { CloudinaryService } from './cloudinary.service';
 
 @Injectable({
   providedIn: 'root'
@@ -16,7 +16,7 @@ export class SkillServiceService implements OnInit {
   skills: Array<Skill> = [];
   skillsSubject = new Subject<Skill[]>();
 
-  constructor() {
+  constructor(private cloudinary: CloudinaryService) {
     this.getSkills();
    }
   ngOnInit() {
@@ -68,15 +68,14 @@ export class SkillServiceService implements OnInit {
     this.emitSkills();
   }
 
-  async removeSkill(skill: Skill,id) {
-    var cpt= 0;
-    if(skill.photo) {
-      const storageRef = firebase.storage().refFromURL(skill.photo);
-      storageRef.delete().catch(() => {});
+  async removeSkill(skill: Skill, id) {
+    if (skill.photo) {
+      const publicId = this.cloudinary.extractPublicId(skill.photo);
+      this.cloudinary.deleteFile(publicId).catch(() => {});
     }
     const skillIndexToRemove = this.skills.findIndex(
       (skillEl) => {
-        if(skillEl === skill) {
+        if (skillEl === skill) {
           return true;
         }
       }
@@ -84,18 +83,6 @@ export class SkillServiceService implements OnInit {
     this.skills.splice(skillIndexToRemove, 1);
     this.saveSkills();
     this.emitSkills();
-
-    var storage = firebase.app().storage("gs://powem-98484.appspot.com");
-    var storageRef = storage.ref();
-      var listRef = storageRef.child('test/'+ id);
-
-    // Delete the file
-    var firstPage = await listRef.list({ maxResults: 100});
-    // Use the result.
-    firstPage.items.forEach(element => {
-      element.delete().catch(() => {});
-    });
-    //this.reOrder(id);
   }
 
   getSingleSkillHome(){
@@ -115,47 +102,24 @@ export class SkillServiceService implements OnInit {
 
 
   uploadFile(file: File) {
-    return new Promise(
-      (resolve, reject) => {
-        const almostUniqueFileName = Date.now().toString();
-        const upload = firebase.storage().ref()
-          .child('imagesSkill/' + almostUniqueFileName + file.name).put(file);
-        upload.on(firebase.storage.TaskEvent.STATE_CHANGED,
-          () => {},
-          (error) => { reject(error); },
-          () => { resolve(upload.snapshot.ref.getDownloadURL()); }
-        );
-      }
-    );
-}
+    return this.cloudinary.uploadFile(file, 'imagesSkill');
+  }
 
-uploadAudio(file: File) {
-  return new Promise(
-    (resolve, reject) => {
-      const almostUniqueFileName = Date.now().toString();
-      const upload = firebase.storage().ref()
-        .child('audioSkill/' + almostUniqueFileName + file.name).put(file);
-      upload.on(firebase.storage.TaskEvent.STATE_CHANGED,
-        () => {},
-        (error) => { reject(error); },
-        () => { resolve(upload.snapshot.ref.getDownloadURL()); }
-      );
-    }
-  );
-}
+  uploadAudio(file: File) {
+    return this.cloudinary.uploadFile(file, 'audioSkill');
+  }
 
-
-  removePics(skill : Skill){
-    if(skill.photo) {
-      const storageRef = firebase.storage().refFromURL(skill.photo);
-      storageRef.delete().catch(() => {});
+  removePics(skill: Skill) {
+    if (skill.photo) {
+      const publicId = this.cloudinary.extractPublicId(skill.photo);
+      this.cloudinary.deleteFile(publicId).catch(() => {});
     }
   }
 
-  removeAudio(skill : Skill){
-    if(skill.audio) {
-      const storageRef = firebase.storage().refFromURL(skill.audio);
-      storageRef.delete().catch(() => {});
+  removeAudio(skill: Skill) {
+    if (skill.audio) {
+      const publicId = this.cloudinary.extractPublicId(skill.audio);
+      this.cloudinary.deleteFile(publicId).catch(() => {});
     }
   }
 

@@ -1,71 +1,38 @@
-import { Injectable, OnInit } from '@angular/core';
-import { HttpClient, HttpEvent, HttpErrorResponse, HttpEventType } from  '@angular/common/http';  
-import { map } from  'rxjs/operators';
-import firebase from 'firebase/compat/app';
-import 'firebase/compat/storage';
+import { Injectable } from '@angular/core';
 import { Subject } from 'rxjs';
 import { AngularFirestore } from '@angular/fire/compat/firestore';
 import { Files } from './models/files.model';
+import { CloudinaryService } from './cloudinary.service';
 
 @Injectable({
   providedIn: 'root'
 })
-export class UploadService implements OnInit{
- 
+export class UploadService {
   cpt = 0;
   files: Array<Files> = [];
-  constructor(private db: AngularFirestore) {
-    
-   }
-   
-  ngOnInit(){
-    
 
-  }
-
+  constructor(private db: AngularFirestore, private cloudinary: CloudinaryService) {}
 
   async removeFile(name: string, id: number) {
-    var storage = firebase.app().storage("gs://powem-98484.appspot.com");
-    var storageRef = storage.ref();
-    var desertRef = storageRef.child('test/'+ id + '/' + name);
-
-    // Delete the file
-    desertRef.delete().catch(() => {});
+    const publicId = `test/${id}/${name}`;
+    this.cloudinary.deleteFile(publicId).catch(() => {});
   }
 
+  async getDocs(id: number) {
+    this.files.splice(0, this.files.length);
+    // Query Firestore for files uploaded to this skill's folder
+    const snapshot = await this.db.collection('files', ref =>
+      ref.where('path', '>=', `test/${id}/`).where('path', '<=', `test/${id}/\uf8ff`)
+    ).get().toPromise();
 
-  async getDocs(id : number){
-
-    this.files.splice(0,this.files.length);
-    var name = "";
-    var storage = firebase.app().storage("gs://powem-98484.appspot.com");
-      var storageRef = storage.ref();
-        var listRef = storageRef.child('test/'+ id);
-        // Fetch the first page of 100.
-        var firstPage = await listRef.list({ maxResults: 100});
-        // Use the result.
-        firstPage.items.forEach(element => {
-          
-          
-        var urls =  element.getDownloadURL().then((url) => {
-          name = element.name;
-          var buff = new Files(name,url) ;
-          this.files.push(buff);
-          
-        });
-        });
-        
-        if (firstPage.nextPageToken) {
-          var secondPage = await listRef.list({
-            maxResults: 100,
-            pageToken: firstPage.nextPageToken,
-          });
-          // processItems(secondPage.items)
-          // processPrefixes(secondPage.prefixes)
+    if (snapshot) {
+      snapshot.docs.forEach(doc => {
+        const data = doc.data() as any;
+        if (data.downloadURL) {
+          const name = data.path ? data.path.split('/').pop() : 'file';
+          this.files.push(new Files(name, data.downloadURL));
         }
-  
-  };
-    
+      });
+    }
   }
-
-
+}

@@ -15,10 +15,13 @@ import { FormsModule,ReactiveFormsModule } from '@angular/forms'
 import {MatSnackBarModule} from '@angular/material/snack-bar';
 // Firebase services + enviorment module
 import firebase from 'firebase/compat/app';
+import 'firebase/compat/auth';
+import 'firebase/compat/database';
 import { AngularFireModule } from '@angular/fire/compat';
 import { AngularFireDatabaseModule } from '@angular/fire/compat/database';
-import { environment } from '../environments/environment';
 import { AngularFireAuthModule } from '@angular/fire/compat/auth';
+import { AngularFirestore } from '@angular/fire/compat/firestore';
+import { environment } from '../environments/environment';
 
 // Initialize Firebase for direct SDK usage (firebase.database(), firebase.auth(), etc.)
 if (!firebase.apps.length) {
@@ -49,8 +52,6 @@ import { UploadService } from './upload.service';
 import { UploadListComponent } from './uploads/upload-list/upload-list.component';
 import { UploadFormComponent } from './uploads/upload-form/upload-form.component';
 import { DropzoneDirective } from './dropzone.directive';
-import { AngularFirestore } from '@angular/fire/compat/firestore';
-import { AngularFireStorage } from '@angular/fire/compat/storage';
 import { PoemComponent } from './poem/poem.component';
 import { DialogSkillComponent } from './dialog-skill/dialog-skill.component';
 import { DialogFileComponent } from './dialog-file/dialog-file.component';
@@ -118,7 +119,7 @@ import { SingleOtherComponent } from './single-other/single-other.component';
     MatSnackBarModule,
     MatCheckboxModule
   ],
-  providers: [AuthService,FirebaseService,SkillServiceService,AngularFireStorage,AngularFirestore,UploadService],
+  providers: [AuthService,FirebaseService,SkillServiceService,AngularFirestore,UploadService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

@@ -1,6 +1,4 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { AngularFireStorage } from '@angular/fire/compat/storage';
-import firebase from 'firebase/compat/app';
 
 @Component({
   selector: 'app-upload-form',
@@ -11,28 +9,22 @@ export class UploadFormComponent implements OnInit{
   filesBis : any[] = [];
   @Input() id : number;
   constructor (){
-    
+
   }
   ngOnInit(){
   }
-    
-  isHovering: boolean;
 
+  isHovering: boolean;
 
   files: File[] = [];
 
-  toggleHover(event: boolean) {
+  toggleHover(event: any) {
     this.isHovering = event;
   }
 
-  onDrop(files: FileList) {
+  onDrop(files: any) {
     for (let i = 0; i < files.length; i++) {
       this.files.push(files.item(i));
     }
   }
-
-
-
-
-
 }

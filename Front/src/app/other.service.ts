@@ -3,10 +3,10 @@ import { Subject } from 'rxjs';
 import { Poem } from 'src/app/models/poem.model'
 import firebase from 'firebase/compat/app';
 import 'firebase/compat/database';
-import 'firebase/compat/storage';
 import { DataSnapshot } from '@angular/fire/compat/database/interfaces';
 import { Observable } from 'rxjs';
 import {HttpClientModule, HttpClient} from '@angular/common/http'
+import { CloudinaryService } from './cloudinary.service';
 import { Other } from './models/other.model';
 
 @Injectable({
@@ -20,7 +20,7 @@ export class OtherService {
   cats : Array<String> = [];
   catSubject = new Subject<String[]>();
 
-  constructor(private http: HttpClient,) {
+  constructor(private http: HttpClient, private cloudinary: CloudinaryService) {
     this.getOthers();
    }
 
@@ -78,8 +78,8 @@ export class OtherService {
 
   removeOther(other: Other) {
     if(other.photo) {
-      const storageRef = firebase.storage().refFromURL(other.photo);
-      storageRef.delete().catch(() => {});
+      const publicId = this.cloudinary.extractPublicId(other.photo);
+      this.cloudinary.deleteFile(publicId).catch(() => {});
     }
     const otherIndexToRemove = this.others.findIndex(
       (otherEl) => {
@@ -97,50 +97,26 @@ export class OtherService {
   
 
   uploadFile(file: File) {
-    return new Promise(
-      (resolve, reject) => {
-        const almostUniqueFileName = Date.now().toString();
-        const upload = firebase.storage().ref()
-          .child('images/' + almostUniqueFileName + file.name).put(file);
-        upload.on(firebase.storage.TaskEvent.STATE_CHANGED,
-          () => {},
-          (error) => { reject(error); },
-          () => { resolve(upload.snapshot.ref.getDownloadURL()); }
-        );
-      }
-    );
-}
+    return this.cloudinary.uploadFile(file, 'imagesOther');
+  }
 
-uploadAudio(file: File) {
-  return new Promise(
-    (resolve, reject) => {
-      const almostUniqueFileName = Date.now().toString();
-      const upload = firebase.storage().ref()
-        .child('audio/' + almostUniqueFileName + file.name).put(file);
-      upload.on(firebase.storage.TaskEvent.STATE_CHANGED,
-        () => {},
-        (error) => { reject(error); },
-        () => { resolve(upload.snapshot.ref.getDownloadURL()); }
-      );
+  uploadAudio(file: File) {
+    return this.cloudinary.uploadFile(file, 'audioOther');
+  }
+
+  removePics(other: Other) {
+    if (other.photo) {
+      const publicId = this.cloudinary.extractPublicId(other.photo);
+      this.cloudinary.deleteFile(publicId).catch(() => {});
     }
-  );
-}
-
-
-removePics(other : Other){
-  if(other.photo) {
-    const storageRef = firebase.storage().refFromURL(other.photo);
-    storageRef.delete().catch(() => {});
   }
-}
 
-
-removeAudio(other : Other){
-  if(other.audio) {
-    const storageRef = firebase.storage().refFromURL(other.audio);
-    storageRef.delete().catch(() => {});
+  removeAudio(other: Other) {
+    if (other.audio) {
+      const publicId = this.cloudinary.extractPublicId(other.audio);
+      this.cloudinary.deleteFile(publicId).catch(() => {});
+    }
   }
-}
 
 
 

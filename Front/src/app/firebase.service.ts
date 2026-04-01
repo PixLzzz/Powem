@@ -3,10 +3,10 @@ import { Subject } from 'rxjs';
 import { Poem } from 'src/app/models/poem.model'
 import firebase from 'firebase/compat/app';
 import 'firebase/compat/database';
-import 'firebase/compat/storage';
 import { DataSnapshot } from '@angular/fire/compat/database/interfaces';
 import { Observable } from 'rxjs';
 import {HttpClientModule, HttpClient} from '@angular/common/http'
+import { CloudinaryService } from './cloudinary.service';
 
 @Injectable({
   providedIn: 'root'
@@ -17,7 +17,7 @@ export class FirebaseService {
   cats : Array<String> = [];
   catSubject = new Subject<String[]>();
 
-  constructor(private http: HttpClient,) {
+  constructor(private http: HttpClient, private cloudinary: CloudinaryService) {
     this.getPoems();
    }
 
@@ -75,8 +75,8 @@ export class FirebaseService {
 
   removePoem(poem: Poem) {
     if(poem.photo) {
-      const storageRef = firebase.storage().refFromURL(poem.photo);
-      storageRef.delete().catch(() => {});
+      const publicId = this.cloudinary.extractPublicId(poem.photo);
+      this.cloudinary.deleteFile(publicId).catch(() => {});
     }
     const poemIndexToRemove = this.poems.findIndex(
       (poemEl) => {
@@ -121,49 +121,26 @@ export class FirebaseService {
   
 
   uploadFile(file: File) {
-    return new Promise(
-      (resolve, reject) => {
-        const almostUniqueFileName = Date.now().toString();
-        const upload = firebase.storage().ref()
-          .child('images/' + almostUniqueFileName + file.name).put(file);
-        upload.on(firebase.storage.TaskEvent.STATE_CHANGED,
-          () => {},
-          (error) => { reject(error); },
-          () => { resolve(upload.snapshot.ref.getDownloadURL()); }
-        );
-      }
-    );
-}
+    return this.cloudinary.uploadFile(file, 'images');
+  }
 
-uploadAudio(file: File) {
-  return new Promise(
-    (resolve, reject) => {
-      const almostUniqueFileName = Date.now().toString();
-      const upload = firebase.storage().ref()
-        .child('audio/' + almostUniqueFileName + file.name).put(file);
-      upload.on(firebase.storage.TaskEvent.STATE_CHANGED,
-        () => {},
-        (error) => { reject(error); },
-        () => { resolve(upload.snapshot.ref.getDownloadURL()); }
-      );
+  uploadAudio(file: File) {
+    return this.cloudinary.uploadFile(file, 'audio');
+  }
+
+  removePics(poem: Poem) {
+    if (poem.photo) {
+      const publicId = this.cloudinary.extractPublicId(poem.photo);
+      this.cloudinary.deleteFile(publicId).catch(() => {});
     }
-  );
-}
-
-
-removePics(poem : Poem){
-  if(poem.photo) {
-    const storageRef = firebase.storage().refFromURL(poem.photo);
-    storageRef.delete().catch(() => {});
   }
-}
 
-removeAudio(poem : Poem){
-  if(poem.audio) {
-    const storageRef = firebase.storage().refFromURL(poem.audio);
-    storageRef.delete().catch(() => {});
+  removeAudio(poem: Poem) {
+    if (poem.audio) {
+      const publicId = this.cloudinary.extractPublicId(poem.audio);
+      this.cloudinary.deleteFile(publicId).catch(() => {});
+    }
   }
-}
 
 
 }

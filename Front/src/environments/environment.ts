@@ -4,6 +4,10 @@
 
 export const environment = {
   production: false,
+  cloudinary: {
+    cloudName: 'dorasgvxy',
+    uploadPreset: 'powemsite'
+  },
   firebase : {
     apiKey: "AIzaSyD0fOhkgmgalNdCh35AzApAb5rT7q5nTk0",
     authDomain: "powem-98484.firebaseapp.com",

@@ -1,9 +1,7 @@
-import { Component, OnInit, Input, ChangeDetectorRef } from '@angular/core';
-import { AngularFireStorage, AngularFireUploadTask } from '@angular/fire/compat/storage';
+import { Component, OnInit, Input } from '@angular/core';
 import { AngularFirestore } from '@angular/fire/compat/firestore';
-import { Observable } from 'rxjs';
-import { finalize } from 'rxjs/operators';
-import firebase from 'firebase/compat/app';
+import { Observable, of } from 'rxjs';
+import { CloudinaryService } from '../../cloudinary.service';
 
 @Component({
   selector: 'app-upload-list',
@@ -14,70 +12,30 @@ export class UploadListComponent implements OnInit {
 
   @Input() file: File | any;
   @Input() fileB: File | any;
+  @Input() id: number;
 
-  task: AngularFireUploadTask;
-  @Input() id : number;
   percentage: Observable<number>;
-  snapshot: Observable<any>;
   downloadURL: string;
+  uploading = true;
 
-  constructor(private storage: AngularFireStorage, private db: AngularFirestore) { }
+  constructor(private cloudinary: CloudinaryService, private db: AngularFirestore) { }
 
   ngOnInit() {
     this.startUpload(this.id);
-   this.allFiles();
-
   }
 
   startUpload(id) {
+    const folder = 'test/' + id;
+    const { progress$, result } = this.cloudinary.uploadFileWithProgress(this.file, folder);
 
-    // The storage path
-    const fileName = `${this.file.name}`;    
-    const path = 'test/'+id+ '/' +fileName;
-    // Reference to storage bucket
-    const ref = this.storage.ref(path);
+    this.percentage = progress$;
 
-    // The main task
-    this.task = this.storage.upload(path, this.file);
-
-    // Progress monitoring
-    this.percentage = this.task.percentageChanges();
-
-    this.snapshot   = this.task.snapshotChanges().pipe(
-      // The file's download URL
-      finalize( async() =>  {
-        this.downloadURL = await ref.getDownloadURL().toPromise();
-        this.db.collection('files').add( { downloadURL: this.downloadURL, path });
-      }),
-    );
+    result.then(res => {
+      this.downloadURL = res.secure_url;
+      this.uploading = false;
+      this.db.collection('files').add({ downloadURL: this.downloadURL, path: folder + '/' + this.file.name });
+    }).catch(() => {
+      this.uploading = false;
+    });
   }
-
-  isActive(snapshot) {
-    return snapshot.state === 'running' && snapshot.bytesTransferred < snapshot.totalBytes;
-  }
-
-  allFiles(){
-    // Get a reference to the storage service, which is used to create references in your storage bucket
-var storage = firebase.storage();
-
-// Create a storage reference from our storage service
-var storageRef = storage.ref();
-// Create a reference under which you want to list
-var listRef = storageRef.child('test/');
-
-// Find all the prefixes and items.
-listRef.listAll().then(function(res) {
-  res.prefixes.forEach(function(folderRef) {
-    // All the prefixes under listRef.
-    // You may call listAll() recursively on them.
-  });
-  res.items.forEach(function(itemRef) {
-    // All the items under listRef.
-  });
-}).catch(function(error) {
-  // Uh-oh, an error occurred!
-});
-  }
-  
-  
 }
