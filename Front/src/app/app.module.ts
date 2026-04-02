@@ -20,7 +20,6 @@ import 'firebase/compat/database';
 import { AngularFireModule } from '@angular/fire/compat';
 import { AngularFireDatabaseModule } from '@angular/fire/compat/database';
 import { AngularFireAuthModule } from '@angular/fire/compat/auth';
-import { AngularFirestore } from '@angular/fire/compat/firestore';
 import { environment } from '../environments/environment';
 
 // Initialize Firebase for direct SDK usage (firebase.database(), firebase.auth(), etc.)
@@ -113,5 +112,5 @@ import { SingleOtherComponent } from './single-other/single-other.component';
         MatProgressBarModule,
         MatGridListModule,
         MatSnackBarModule,
-        MatCheckboxModule], providers: [AuthService, FirebaseService, SkillServiceService, AngularFirestore, UploadService, provideHttpClient(withInterceptorsFromDi())] })
+        MatCheckboxModule], providers: [AuthService, FirebaseService, SkillServiceService, UploadService, provideHttpClient(withInterceptorsFromDi())] })
 export class AppModule { }

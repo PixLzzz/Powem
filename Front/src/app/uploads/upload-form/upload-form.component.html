@@ -6,8 +6,10 @@
      [class.hovering]="isHovering">
 
      <h3>Déplacez un fichier</h3>
-     <p>Drag and Drop a File</p>
+     <p>ou</p>
 </div>
+<input type="file" #fileInput (change)="onFileSelected($event)" style="display:none">
+<button class="pill-btn" style="margin: 8px 0;" (click)="fileInput.click()">Choisir un fichier</button>
 <br>
 <h3>Uploads</h3>
 

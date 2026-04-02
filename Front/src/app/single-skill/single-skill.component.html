@@ -60,7 +60,7 @@
         </div>
       </div>
 
-      <div *ngIf="user" class="sidebar-card card">
+      <div *ngIf="user && isCheck" class="sidebar-card card">
         <div class="sidebar-card-body">
           <h3 class="sidebar-title">Ajouter un fichier</h3>
           <app-upload-form [id]="id"></app-upload-form>
@@ -76,8 +76,8 @@
                 <mat-icon class="file-icon">insert_drive_file</mat-icon>
                 <span>{{f.name}}</span>
               </a>
-              <button *ngIf="user" mat-icon-button class="delete-btn-sm" (click)="openDialogFile(f.name)">
-                <mat-icon>close</mat-icon>
+              <button *ngIf="user && isCheck" mat-raised-button color="warn" class="delete-file-btn" (click)="openDialogFile(f.name)">
+                <mat-icon>delete</mat-icon> Supprimer
               </button>
             </div>
           </div>

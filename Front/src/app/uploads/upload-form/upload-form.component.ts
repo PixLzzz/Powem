@@ -28,4 +28,11 @@ export class UploadFormComponent implements OnInit{
       this.files.push(files.item(i));
     }
   }
+
+  onFileSelected(event: any) {
+    const selectedFiles = event.target.files;
+    for (let i = 0; i < selectedFiles.length; i++) {
+      this.files.push(selectedFiles[i]);
+    }
+  }
 }

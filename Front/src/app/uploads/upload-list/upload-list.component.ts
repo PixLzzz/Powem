@@ -1,7 +1,7 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { AngularFirestore } from '@angular/fire/compat/firestore';
-import { Observable, of } from 'rxjs';
+import { Observable } from 'rxjs';
 import { CloudinaryService } from '../../cloudinary.service';
+import { UploadService } from '../../upload.service';
 
 @Component({
     selector: 'app-upload-list',
@@ -19,7 +19,7 @@ export class UploadListComponent implements OnInit {
   downloadURL: string;
   uploading = true;
 
-  constructor(private cloudinary: CloudinaryService, private db: AngularFirestore) { }
+  constructor(private cloudinary: CloudinaryService, private uploadService: UploadService) { }
 
   ngOnInit() {
     this.startUpload(this.id);
@@ -34,7 +34,7 @@ export class UploadListComponent implements OnInit {
     result.then(res => {
       this.downloadURL = res.secure_url;
       this.uploading = false;
-      this.db.collection('files').add({ downloadURL: this.downloadURL, path: folder + '/' + this.file.name });
+      this.uploadService.saveFile(id, this.file.name, this.downloadURL);
     }).catch(() => {
       this.uploading = false;
     });

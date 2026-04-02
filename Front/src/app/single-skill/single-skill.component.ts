@@ -57,9 +57,10 @@ export class SingleSkillComponent implements OnInit {
     }
     this.user = this.auth.afAuth.user;
     var tempId = this.route.snapshot.paramMap.get("id");
-    this.getDocuments(tempId);
     this.id = +tempId;
-    this.filess = this.uploadService.files;
+    this.getDocuments(this.id).then(files => {
+      this.filess = files;
+    });
     this.skill = new Skill();
     const id = this.route.snapshot.params['id'];
     this.skillService.getSingleSkill(+id).then(
@@ -95,11 +96,9 @@ export class SingleSkillComponent implements OnInit {
     this.skillService.removeSkill(skill,this.id);
     this.router.navigate(['skillList']);
   }
-  deleteFile(name : string){
-    this.uploadService.removeFile(name,this.id);
-    this.getDocuments(this.id);
-    this.filess = this.uploadService.files;
-
+  async deleteFile(name: string) {
+    await this.uploadService.removeFile(name, this.id);
+    this.filess = await this.getDocuments(this.id);
   }
 
   updateSkill() {
@@ -186,6 +185,9 @@ export class SingleSkillComponent implements OnInit {
     this.onChange();
     this.fileUploaded = false;
     this.audioUploaded = false;
+    this.getDocuments(this.id).then(files => {
+      this.filess = files;
+    });
 
   }
 
@@ -248,8 +250,8 @@ export class SingleSkillComponent implements OnInit {
   }
 
 
-  getDocuments(id){
-    this.uploadService.getDocs(id);
+  getDocuments(id: number) {
+    return this.uploadService.getDocs(id);
   }
 
 
