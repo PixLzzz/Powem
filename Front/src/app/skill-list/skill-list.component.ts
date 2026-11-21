@@ -38,7 +38,7 @@ export class SkillListComponent implements OnInit {
   }
 
   onNewSkill() {
-    this.router.navigate(['/addSkill', 'new']);
+    this.router.navigate(['/addSkill']);
   }
 
   onDeleteSkill(skill : Skill){

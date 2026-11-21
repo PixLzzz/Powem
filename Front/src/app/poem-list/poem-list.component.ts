@@ -23,12 +23,14 @@ export class PoemListComponent implements OnInit {
   dataSource ;
   onChange;
   user;
+  private authUnsubscribe: () => void;
   @Input() selectedOption : any;
   constructor(private firebaseService: FirebaseService, private router: Router,public dialog: MatDialog) {
   }
 
   ngOnInit() {
     this.user = firebase.auth().currentUser;
+    this.authUnsubscribe = firebase.auth().onAuthStateChanged((u) => { this.user = u; });
     this.poemsSubscription = this.firebaseService.poemsSubject.subscribe(
       (poems: Poem[]) => {
         this.poems = poems;
@@ -53,7 +55,7 @@ export class PoemListComponent implements OnInit {
   }
 
   onNewPoem() {
-    this.router.navigate(['/addPoem', 'new']);
+    this.router.navigate(['/addPoem']);
   }
 
   onDeletePoem(poem : Poem){
@@ -65,6 +67,7 @@ export class PoemListComponent implements OnInit {
   }
   
   ngOnDestroy() {
+    if (this.authUnsubscribe) { this.authUnsubscribe(); }
     this.poemsSubscription.unsubscribe();
   }
 
