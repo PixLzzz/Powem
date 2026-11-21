@@ -5,7 +5,7 @@ import firebase from 'firebase/compat/app';
 import { FirebaseService } from '../firebase.service';
 import { Poem } from '../models/poem.model';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { OtherService } from '../other.service';
 
 @Component({
@@ -41,12 +41,12 @@ export class AddPoemComponent implements OnInit {
   ];
 
   constructor(private formBuilder: FormBuilder, private otherService: OtherService,
-    private router: Router, private firebaseService : FirebaseService){
-    
+    private router: Router, private route: ActivatedRoute, private firebaseService : FirebaseService){
+
   }
 
   ngOnInit(): void {
-    this.checked = false;
+    this.checked = this.route.snapshot.queryParamMap.get('prose') === 'true';
     this.initForm();
   }
 
@@ -75,7 +75,7 @@ export class AddPoemComponent implements OnInit {
     const category = this.selectedValue;
     const newPoem = new Poem();
     newPoem.title = title;
-    newPoem.category = category;
+    newPoem.category = category || '';
     newPoem.content = content;
     if(this.fileUrl && this.fileUrl !== '') {
       newPoem.photo = this.fileUrl;

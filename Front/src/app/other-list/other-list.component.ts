@@ -23,6 +23,7 @@ export class OtherListComponent implements OnInit {
   dataSource ;
   onChange;
   user;
+  private authUnsubscribe: () => void;
   @Input() selectedOption : any;
   constructor(private otherService: OtherService, private router: Router,public dialog: MatDialog) {
   }
@@ -30,6 +31,7 @@ export class OtherListComponent implements OnInit {
 
   ngOnInit() {
     this.user = firebase.auth().currentUser;
+    this.authUnsubscribe = firebase.auth().onAuthStateChanged((u) => { this.user = u; });
     this.othersSubscription = this.otherService.othersSubject.subscribe(
       (others: Other[]) => {
         this.others = others;
@@ -54,7 +56,7 @@ export class OtherListComponent implements OnInit {
   }
 
   onNewOther() {
-    this.router.navigate(['/addOther', 'new']);
+    this.router.navigate(['/addPoem'], { queryParams: { prose: 'true' } });
   }
 
   onDeleteOther(other : Other){
@@ -66,6 +68,7 @@ export class OtherListComponent implements OnInit {
   }
   
   ngOnDestroy() {
+    if (this.authUnsubscribe) { this.authUnsubscribe(); }
     this.othersSubscription.unsubscribe();
   }
 
